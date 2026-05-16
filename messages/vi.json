@@ -1,0 +1,61 @@
+{
+  "Navbar": {
+    "home": "Trang chủ",
+    "pets": "Thú cưng",
+    "community": "Tin cộng đồng",
+    "blog": "Bài viết",
+    "login": "Đăng nhập",
+    "register": "Đăng ký"
+  },
+  "Hero": {
+    "badge": "Tin cậy & Uy tín",
+    "title": "Mái ấm yêu thương cho <italic>Mọi đôi chân</italic>",
+    "italic": "Mọi đôi chân",
+    "description": "Chào mừng bạn đến với PawsHome, nơi mỗi cái vẫy đuôi đều tìm thấy hạnh phúc. Hãy gia nhập cộng đồng những người yêu động vật tận tâm cứu hộ và chăm sóc thú cưng.",
+    "adoptButton": "Nhận nuôi thú cưng",
+    "communityButton": "Tin cộng đồng",
+    "statsAdopted": "Thú cưng đã được nhận nuôi",
+    "statsMembers": "Thành viên",
+    "floatingBadgeTitle": "Hỗ trợ cộng đồng",
+    "floatingBadgeDesc": "Luôn sẵn sàng giúp đỡ"
+  },
+  "Home": {
+    "noticeBoardTitle": "Bảng tin cộng đồng",
+    "noticeBoardDesc": "Các tin tức mới nhất về thú cưng bị lạc và tìm thấy từ các thành viên.",
+    "viewAllPosts": "Xem tất cả tin đăng",
+    "meetResidentsTitle": "Gặp gỡ những người bạn nhỏ",
+    "meetResidentsDesc": "Những linh hồn bé nhỏ này đang tìm kiếm một mái ấm vĩnh viễn. Mỗi bé đều đã được kiểm tra sức khỏe và sẵn sàng gia nhập gia đình bạn.",
+    "findCompanion": "Tìm người bạn hoàn hảo",
+    "blogCornerTitle": "Góc giáo dục & <italic>Chuyện thú cưng</italic>",
+    "blogCornerItalic": "Chuyện thú cưng",
+    "blogCornerDesc": "Tìm hiểu về cách chăm sóc, dinh dưỡng cho thú cưng và đọc những câu chuyện cảm động từ cộng đồng của chúng tôi.",
+    "readBlog": "Đọc bài viết",
+    "articleBadge": "Bài viết",
+    "adoptionStoryBadge": "Câu chuyện nhận nuôi",
+    "readMore": "Đọc thêm"
+  },
+  "Footer": {
+    "desc": "Cung cấp một cộng đồng ấm áp và đáng tin cậy cho những người yêu thú cưng, người nhận nuôi và chủ sở hữu kể từ năm 2024.",
+    "quickLinks": "Liên kết nhanh",
+    "home": "Trang chủ",
+    "findPet": "Tìm thú cưng",
+    "communityPosts": "Tin cộng đồng",
+    "petBlog": "Blog thú cưng",
+    "community": "Cộng đồng",
+    "adoptionProcess": "Quy trình nhận nuôi",
+    "volunteer": "Tình nguyện viên",
+    "contactUs": "Liên hệ với chúng tôi",
+    "faq": "Câu hỏi thường gặp",
+    "newsletter": "Bản tin",
+    "newsletterDesc": "Cập nhật những thông tin mới nhất về những người bạn nhỏ và những câu chuyện của chúng tôi.",
+    "newsletterPlaceholder": "Email của bạn",
+    "newsletterButton": "Tham gia",
+    "copyright": "© 2024 PawsHome. Bảo lưu mọi quyền. Người bạn đồng hành tin cậy của bạn.",
+    "privacy": "Chính sách bảo mật",
+    "terms": "Điều khoản dịch vụ"
+  },
+  "PostTypes": {
+    "LOST": "Bị lạc",
+    "FOUND": "Tìm thấy"
+  }
+}

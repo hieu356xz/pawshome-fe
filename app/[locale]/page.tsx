@@ -1,14 +1,19 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+import { Link } from "@/lib/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/home/Hero";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { PostCard } from "@/components/shared/PostCard";
 import { PetCard } from "@/components/shared/PetCard";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function Home() {
+  const t = useTranslations("Home");
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -21,14 +26,14 @@ export default function Home() {
           <div className="container mx-auto px-4 md:px-8">
             <div className="flex justify-between items-end mb-12">
               <div className="space-y-4">
-                <h2 className="text-4xl">Community Notice Board</h2>
-                <p className="text-muted-foreground">Recent lost, found, and adoption posts from our members.</p>
+                <h2 className="text-4xl">{t("noticeBoardTitle")}</h2>
+                <p className="text-muted-foreground">{t("noticeBoardDesc")}</p>
               </div>
               <Link 
-                href="/pet-posts" 
+                href="/community-posts" 
                 className={cn(buttonVariants({ variant: "link" }), "text-primary font-bold group flex items-center")}
               >
-                View All Posts <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                {t("viewAllPosts")} <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
 
@@ -62,9 +67,9 @@ export default function Home() {
         <section className="py-24">
           <div className="container mx-auto px-4 md:px-8">
             <div className="text-center space-y-4 mb-16">
-              <h2 className="text-5xl">Meet Our Residents</h2>
+              <h2 className="text-5xl">{t("meetResidentsTitle")}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                These beautiful souls are looking for a forever home. Each one has been health-checked and is ready to join your family.
+                {t("meetResidentsDesc")}
               </p>
             </div>
 
@@ -105,7 +110,7 @@ export default function Home() {
 
             <div className="mt-16 text-center">
               <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-md h-14 px-10 text-lg">
-                Find Your Perfect Companion
+                {t("findCompanion")}
               </Button>
             </div>
           </div>
@@ -116,27 +121,31 @@ export default function Home() {
           <div className="container mx-auto px-4 md:px-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-12">
               <div className="flex-1 space-y-6">
-                <h2 className="text-5xl leading-tight">Educational Corner & <span className="text-accent italic">Pet Stories</span></h2>
+                <h2 className="text-5xl leading-tight">
+                  {t.rich("blogCornerTitle", {
+                    italic: (chunks) => <span className="text-accent italic">{chunks}</span>
+                  })}
+                </h2>
                 <p className="text-primary-foreground/80 text-lg">
-                  Learn about pet care, nutrition, and read heartwarming stories of adoption from our community members.
+                  {t("blogCornerDesc")}
                 </p>
                 <Button variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                  Read Our Blog
+                  {t("readBlog")}
                 </Button>
               </div>
               <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
                  <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20">
-                    <p className="text-xs font-bold uppercase tracking-widest text-accent mb-4">Article</p>
+                    <p className="text-xs font-bold uppercase tracking-widest text-accent mb-4">{t("articleBadge")}</p>
                     <h4 className="text-xl font-serif mb-4 line-clamp-2">How to prepare your home for a new puppy</h4>
                     <Link href="/blog/1" className="text-sm font-bold flex items-center hover:underline">
-                      Read More <ArrowRight className="ml-2 h-4 w-4" />
+                      {t("readMore")} <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                  </div>
                  <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 mt-8 sm:mt-0">
-                    <p className="text-xs font-bold uppercase tracking-widest text-accent mb-4">Adoption Story</p>
+                    <p className="text-xs font-bold uppercase tracking-widest text-accent mb-4">{t("adoptionStoryBadge")}</p>
                     <h4 className="text-xl font-serif mb-4 line-clamp-2">Mochi&apos;s journey from the streets to a warm bed</h4>
                     <Link href="/blog/2" className="text-sm font-bold flex items-center hover:underline">
-                      Read More <ArrowRight className="ml-2 h-4 w-4" />
+                      {t("readMore")} <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                  </div>
               </div>

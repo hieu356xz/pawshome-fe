@@ -1,4 +1,8 @@
+"use client";
+
 import { MapPin, Calendar, Tag } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 interface PostCardProps {
   type: "LOST" | "FOUND";
@@ -10,6 +14,7 @@ interface PostCardProps {
 }
 
 export function PostCard({ type, title, description, location, time, imageUrl }: PostCardProps) {
+  const t = useTranslations("PostTypes");
   const typeColors = {
     LOST: "bg-red-500",
     FOUND: "bg-green-500",
@@ -29,8 +34,14 @@ export function PostCard({ type, title, description, location, time, imageUrl }:
             <Tag className="h-8 w-8 text-primary/20" />
           </div>
         )}
-        <div className={`absolute top-4 left-4 ${typeColors[type]} text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm`}>
-          {type}
+        <div 
+          suppressHydrationWarning
+          className={cn(
+            "absolute top-4 left-4 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm z-20",
+            typeColors[type]
+          )}
+        >
+          {t(type)}
         </div>
       </div>
       <div className="p-6 space-y-3">
