@@ -5,8 +5,8 @@ import { ApiResponse } from '@/types/common';
 export const authService = {
   login: async (data: LoginDto): Promise<ApiResponse<AuthResponse>> => {
     const response = await apiClient.post('/auth/login', data);
-    if (response.data.accessToken) {
-      localStorage.setItem('access_token', response.data.accessToken);
+    if (response.data.tokens?.accessToken) {
+      localStorage.setItem('access_token', response.data.tokens.accessToken);
     }
     return response;
   },

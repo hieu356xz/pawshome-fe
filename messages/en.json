@@ -54,6 +54,24 @@
     "privacy": "Privacy Policy",
     "terms": "Terms of Service"
   },
+  "Auth": {
+    "loginTitle": "Welcome Back",
+    "loginDesc": "Sign in to your account to continue",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "emailPlaceholder": "example@email.com",
+    "passwordPlaceholder": "••••••••",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "loginButton": "Sign In",
+    "noAccount": "Don't have an account?",
+    "registerNow": "Register now",
+    "loginSuccess": "Logged in successfully!",
+    "loginError": "Login failed. Please check your credentials.",
+    "submitting": "Processing...",
+    "loginWithGoogle": "Login with Google",
+    "orContinueWith": "Or continue with"
+  },
   "PostTypes": {
     "LOST": "Lost",
     "FOUND": "Found"
