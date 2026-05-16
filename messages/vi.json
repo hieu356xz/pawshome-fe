@@ -181,5 +181,24 @@
     "loadingPermissions": "Đang tải quyền hạn...",
     "actions": "Thao tác",
     "roles": "vai trò"
+  },
+  "PermissionManagement": {
+    "title": "Quản lý quyền hạn",
+    "managePermissionsDesc": "Quản lý các hành động chi tiết có thể thực hiện trên hệ thống.",
+    "addPermission": "Thêm quyền hạn",
+    "createPermission": "Tạo quyền hạn mới",
+    "editPermission": "Chỉnh sửa quyền hạn",
+    "updatePermission": "Cập nhật quyền hạn",
+    "backToPermissions": "Quay lại danh sách",
+    "permissionKey": "Mã quyền hạn",
+    "description": "Mô tả",
+    "resource": "Tài nguyên",
+    "action": "Hành động",
+    "assignable": "Có thể gán",
+    "searchPermissions": "Tìm kiếm theo mã hoặc mô tả...",
+    "noPermissionsFound": "Không tìm thấy quyền hạn nào.",
+    "deletePermission": "Xóa quyền hạn",
+    "generalInfo": "Thông tin chung",
+    "permissions": "quyền hạn"
   }
 }

@@ -181,5 +181,24 @@
     "loadingPermissions": "Loading permissions...",
     "actions": "Actions",
     "roles": "roles"
+  },
+  "PermissionManagement": {
+    "title": "Permission Management",
+    "managePermissionsDesc": "Manage fine-grained actions and access control strings.",
+    "addPermission": "Add Permission",
+    "createPermission": "Create New Permission",
+    "editPermission": "Edit Permission",
+    "updatePermission": "Update Permission",
+    "backToPermissions": "Back to Permissions",
+    "permissionKey": "Permission Key",
+    "description": "Description",
+    "resource": "Resource",
+    "action": "Action",
+    "assignable": "Assignable",
+    "searchPermissions": "Search by key or description...",
+    "noPermissionsFound": "No permissions found.",
+    "deletePermission": "Delete Permission",
+    "generalInfo": "General Information",
+    "permissions": "permissions"
   }
 }
