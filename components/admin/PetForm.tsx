@@ -25,7 +25,10 @@ import {
   Scale,
   Palette,
   Hash,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Syringe,
+  Scissors,
+  Stethoscope
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -35,6 +38,7 @@ import { AdminFormSection } from "./form/AdminFormSection";
 import { AdminFormHeader } from "./form/AdminFormHeader";
 import { AdminFormSelect } from "./form/AdminFormSelect";
 import { AdminFormTextArea } from "./form/AdminFormTextArea";
+import { AdminFormSwitch } from "./form/AdminFormSwitch";
 import { AdminPetGallery } from "./AdminPetGallery";
 
 interface PetFormProps {
@@ -62,7 +66,10 @@ export function PetForm({ initialData, isEdit = false }: PetFormProps) {
     color: initialData?.color || "",
     weight: initialData?.weight || 0,
     intakeDate: initialData?.intakeDate ? new Date(initialData.intakeDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
-    description: initialData?.description || ""
+    description: initialData?.description || "",
+    isVaccinated: initialData?.isVaccinated || false,
+    isNeutered: initialData?.isNeutered || false,
+    healthSummary: initialData?.healthSummary || ""
   });
 
   useEffect(() => {
@@ -226,6 +233,21 @@ export function PetForm({ initialData, isEdit = false }: PetFormProps) {
             />
           </AdminFormSection>
 
+          {/* Health Summary */}
+          <AdminFormSection 
+            title={t("healthSummary")} 
+            icon={<Stethoscope size={20} />}
+          >
+            <AdminFormTextArea 
+              id="healthSummary"
+              label={t("healthSummary")}
+              placeholder="Provide a summary of medical history, allergies, or special needs..."
+              icon={<Activity size={18} />}
+              value={formData.healthSummary}
+              onChange={e => setFormData({...formData, healthSummary: e.target.value})}
+            />
+          </AdminFormSection>
+
           {/* Media / Photos */}
           <AdminFormSection 
             title={t("media")} 
@@ -266,6 +288,24 @@ export function PetForm({ initialData, isEdit = false }: PetFormProps) {
               onChange={e => setFormData({...formData, adoptionStatus: e.target.value as AdoptionStatus})}
               required
             />
+
+            <div className="grid grid-cols-1 gap-4">
+              <AdminFormSwitch 
+                id="isVaccinated"
+                label={t("isVaccinated")}
+                icon={<Syringe size={18} />}
+                checked={formData.isVaccinated}
+                onCheckedChange={checked => setFormData({...formData, isVaccinated: checked})}
+              />
+
+              <AdminFormSwitch 
+                id="isNeutered"
+                label={t("isNeutered")}
+                icon={<Scissors size={18} />}
+                checked={formData.isNeutered}
+                onCheckedChange={checked => setFormData({...formData, isNeutered: checked})}
+              />
+            </div>
 
             <div className="grid grid-cols-1 gap-6">
               <AdminFormField 

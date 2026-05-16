@@ -302,6 +302,9 @@
     "healthAndAdoption": "Sức khỏe & Nhận nuôi",
     "media": "Hình ảnh",
     "medicalRecords": "Hồ sơ y tế",
+    "isVaccinated": "Đã tiêm phòng",
+    "isNeutered": "Đã triệt sản",
+    "healthSummary": "Tóm tắt sức khỏe",
     "pets": "thú cưng",
     "Genders": {
       "male": "Đực",

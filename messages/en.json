@@ -302,6 +302,9 @@
     "healthAndAdoption": "Health & Adoption",
     "media": "Media",
     "medicalRecords": "Medical Records",
+    "isVaccinated": "Is Vaccinated",
+    "isNeutered": "Is Neutered",
+    "healthSummary": "Health Summary",
     "pets": "pets",
     "Genders": {
       "male": "Male",
