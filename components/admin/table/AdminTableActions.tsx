@@ -48,6 +48,22 @@ export function AdminTableActions({
             </>
           );
 
+          if (action.href) {
+            return (
+              <DropdownMenuItem key={index} className="p-0 cursor-pointer">
+                <Link
+                  href={action.href}
+                  className={cn(
+                    "rounded-xl cursor-pointer flex items-center gap-2 py-2.5 px-3 focus:bg-orange-50 focus:text-orange-600 transition-colors",
+                    action.variant === "danger" &&
+                      "text-red-500 focus:bg-red-50 focus:text-red-600",
+                  )}>
+                  {content}
+                </Link>
+              </DropdownMenuItem>
+            );
+          }
+
           return (
             <DropdownMenuItem
               key={index}
