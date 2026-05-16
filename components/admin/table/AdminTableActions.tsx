@@ -1,7 +1,14 @@
 "use client";
 
 import React from "react";
-import { MoreHorizontal, Eye, Edit2, Trash2 } from "lucide-react";
+import {
+  MoreHorizontal,
+  Eye,
+  Edit2,
+  Trash2,
+  UserX,
+  UserCheck,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -61,7 +68,8 @@ export function AdminTableActions({
                     "rounded-xl cursor-pointer flex items-center gap-2 py-2.5 px-3 focus:bg-orange-50 focus:text-orange-600 transition-colors w-full",
                     action.variant === "danger" &&
                       "text-red-500 focus:bg-red-50 focus:text-red-600",
-                    action.disabled && "opacity-50 cursor-not-allowed pointer-events-none",
+                    action.disabled &&
+                      "opacity-50 cursor-not-allowed pointer-events-none",
                   )}>
                   {content}
                 </Link>
@@ -78,7 +86,8 @@ export function AdminTableActions({
                 "rounded-xl cursor-pointer flex items-center gap-2 py-2.5 px-3 focus:bg-orange-50 focus:text-orange-600 transition-colors",
                 action.variant === "danger" &&
                   "text-red-500 focus:bg-red-50 focus:text-red-600",
-                action.disabled && "opacity-50 cursor-not-allowed pointer-events-none",
+                action.disabled &&
+                  "opacity-50 cursor-not-allowed pointer-events-none",
               )}>
               {content}
             </DropdownMenuItem>
@@ -96,4 +105,6 @@ export const TableActionIcons = {
   View: <Eye size={16} />,
   Edit: <Edit2 size={16} />,
   Delete: <Trash2 size={16} />,
+  Ban: <UserX size={16} />,
+  Unban: <UserCheck size={16} />,
 };

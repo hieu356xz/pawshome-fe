@@ -44,4 +44,12 @@ export const userService = {
   deleteUser: async (id: string): Promise<ApiResponse<void>> => {
     return apiClient.delete(`/user/${id}`);
   },
+
+  banUser: async (id: string, reason?: string): Promise<ApiResponse<void>> => {
+    return apiClient.post(`/user/${id}/ban`, { reason });
+  },
+
+  unbanUser: async (id: string): Promise<ApiResponse<void>> => {
+    return apiClient.post(`/user/${id}/unban`);
+  },
 };

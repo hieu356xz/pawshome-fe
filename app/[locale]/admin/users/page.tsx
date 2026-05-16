@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl";
 import { userService } from "@/services/user.service";
 import { User } from "@/types/auth";
 import { Search, UserPlus, Shield } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/lib/navigation";
 import { adminService } from "@/services/admin.service";
@@ -46,15 +45,18 @@ export default function UserManagementPage() {
     totalItems: 0,
   });
 
-  const [deleteModal, setDeleteModal] = useState<{
+  const [actionModal, setActionModal] = useState<{
     isOpen: boolean;
     userId: string | null;
+    type: "delete" | "ban" | "unban";
   }>({
     isOpen: false,
     userId: null,
+    type: "delete",
   });
 
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [banReason, setBanReason] = useState("");
 
   useEffect(() => {
     fetchUsers();
@@ -97,23 +99,31 @@ export default function UserManagementPage() {
     }
   };
 
-  const handleDeleteUser = (id: string) => {
-    setDeleteModal({ isOpen: true, userId: id });
+  const handleAction = (type: "delete" | "ban" | "unban", id: string) => {
+    setActionModal({ isOpen: true, userId: id, type });
   };
 
-  const confirmDelete = async () => {
-    if (!deleteModal.userId) return;
+  const confirmAction = async () => {
+    if (!actionModal.userId) return;
 
-    setIsDeleting(true);
+    setIsProcessing(true);
     try {
-      await userService.deleteUser(deleteModal.userId);
-      toast.success(tCommon("actionSuccess") || "User deleted successfully");
-      setDeleteModal({ isOpen: false, userId: null });
+      if (actionModal.type === "delete") {
+        await userService.deleteUser(actionModal.userId);
+      } else if (actionModal.type === "ban") {
+        await userService.banUser(actionModal.userId, banReason);
+      } else if (actionModal.type === "unban") {
+        await userService.unbanUser(actionModal.userId);
+      }
+
+      toast.success(tCommon("actionSuccess") || "Action successful");
+      setActionModal({ ...actionModal, isOpen: false, userId: null });
+      setBanReason("");
       fetchUsers();
     } catch (error) {
-      console.error("Delete failed:", error);
+      console.error("Action failed:", error);
     } finally {
-      setIsDeleting(false);
+      setIsProcessing(false);
     }
   };
 
@@ -213,10 +223,23 @@ export default function UserManagementPage() {
               disabled: user.isDeleted,
             },
             {
+              label: user.status === "banned" ? t("unbanUser") : t("banUser"),
+              icon:
+                user.status === "banned"
+                  ? TableActionIcons.Unban
+                  : TableActionIcons.Ban,
+              onClick: () =>
+                handleAction(
+                  user.status === "banned" ? "unban" : "ban",
+                  user.id,
+                ),
+              disabled: user.isDeleted,
+            },
+            {
               label: t("deleteUser"),
               icon: TableActionIcons.Delete,
               variant: "danger",
-              onClick: () => handleDeleteUser(user.id),
+              onClick: () => handleAction("delete", user.id),
               disabled: user.isDeleted,
             },
           ]}
@@ -296,16 +319,50 @@ export default function UserManagementPage() {
       </div>
 
       <ConfirmModal
-        isOpen={deleteModal.isOpen}
-        onClose={() => setDeleteModal({ isOpen: false, userId: null })}
-        onConfirm={confirmDelete}
-        title={tCommon("delete")}
-        message={t("deleteConfirm")}
-        confirmText={tCommon("delete")}
+        isOpen={actionModal.isOpen}
+        onClose={() => {
+          setActionModal({ ...actionModal, isOpen: false });
+          setBanReason("");
+        }}
+        onConfirm={confirmAction}
+        title={
+          actionModal.type === "delete"
+            ? tCommon("delete")
+            : actionModal.type === "ban"
+              ? t("banUser")
+              : t("unbanUser")
+        }
+        message={
+          actionModal.type === "delete"
+            ? t("deleteConfirm")
+            : actionModal.type === "ban"
+              ? t("banConfirm")
+              : t("unbanConfirm")
+        }
+        confirmText={
+          actionModal.type === "delete"
+            ? tCommon("delete")
+            : actionModal.type === "ban"
+              ? t("banUser")
+              : t("unbanUser")
+        }
         cancelText={tCommon("cancel")}
-        variant="danger"
-        isLoading={isDeleting}
-      />
+        variant={actionModal.type === "unban" ? "default" : "danger"}
+        isLoading={isProcessing}>
+        {actionModal.type === "ban" && (
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-700">
+              {t("banReason")}
+            </label>
+            <Input
+              placeholder={t("banReasonPlaceholder")}
+              value={banReason}
+              onChange={(e) => setBanReason(e.target.value)}
+              className="rounded-xl border-gray-200"
+            />
+          </div>
+        )}
+      </ConfirmModal>
     </div>
   );
 }

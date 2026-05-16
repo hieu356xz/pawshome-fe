@@ -13,8 +13,9 @@ interface ConfirmModalProps {
   message: string;
   confirmText?: string;
   cancelText?: string;
-  variant?: "danger" | "warning" | "info";
+  variant?: "danger" | "warning" | "info" | "default";
   isLoading?: boolean;
+  children?: React.ReactNode;
 }
 
 export function ConfirmModal({
@@ -27,6 +28,7 @@ export function ConfirmModal({
   cancelText = "Cancel",
   variant = "danger",
   isLoading = false,
+  children,
 }: ConfirmModalProps) {
   if (!isOpen) return null;
 
@@ -42,7 +44,8 @@ export function ConfirmModal({
               "w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm",
               variant === "danger" ? "bg-red-50 text-red-500" : 
               variant === "warning" ? "bg-amber-50 text-amber-500" : 
-              "bg-blue-50 text-blue-500"
+              variant === "info" ? "bg-blue-50 text-blue-500" :
+              "bg-gray-50 text-gray-500"
             )}>
               <AlertTriangle size={28} />
             </div>
@@ -56,6 +59,7 @@ export function ConfirmModal({
           
           <h3 className="text-2xl font-bold text-gray-900 mb-3 tracking-tight">{title}</h3>
           <p className="text-gray-500 leading-relaxed text-balance">{message}</p>
+          {children && <div className="mt-4">{children}</div>}
         </div>
         
         <div className="p-6 bg-gray-50/50 flex items-center gap-3 border-t border-gray-50">
@@ -73,7 +77,8 @@ export function ConfirmModal({
               "flex-1 rounded-2xl h-12 font-bold text-white shadow-lg transition-all",
               variant === "danger" ? "bg-red-500 hover:bg-red-600 shadow-red-100" : 
               variant === "warning" ? "bg-amber-500 hover:bg-amber-600 shadow-amber-100" : 
-              "bg-blue-500 hover:bg-blue-600 shadow-blue-100"
+              variant === "info" ? "bg-blue-500 hover:bg-blue-600 shadow-blue-100" :
+              "bg-gray-900 hover:bg-black shadow-gray-100"
             )}
             disabled={isLoading}
           >
