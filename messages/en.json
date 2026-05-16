@@ -232,5 +232,52 @@
     "noSpeciesFound": "No species found.",
     "deleteSpecies": "Delete Species",
     "species": "species"
+  },
+  "PetManagement": {
+    "title": "Pet Management",
+    "managePetsDesc": "Manage profiles, health records, and adoption status of pets.",
+    "addPet": "Add Pet",
+    "createPet": "Create New Profile",
+    "editPet": "Edit Profile",
+    "updatePet": "Update Profile",
+    "backToPets": "Back to Pets",
+    "petName": "Pet Name",
+    "petCode": "Pet Code",
+    "species": "Species",
+    "breed": "Breed",
+    "gender": "Gender",
+    "ageGroup": "Age Group",
+    "status": "Status",
+    "color": "Color",
+    "weight": "Weight (kg)",
+    "intakeDate": "Intake Date",
+    "description": "Description / Bio",
+    "searchPets": "Search by name or pet code...",
+    "noPetsFound": "No pets found.",
+    "deletePet": "Delete Profile",
+    "generalInfo": "General Information",
+    "healthAndAdoption": "Health & Adoption",
+    "media": "Media",
+    "medicalRecords": "Medical Records",
+    "pets": "pets",
+    "Genders": {
+      "male": "Male",
+      "female": "Female",
+      "unknown": "Unknown"
+    },
+    "AgeGroups": {
+      "newborn": "Newborn",
+      "young": "Young",
+      "adult": "Adult",
+      "senior": "Senior"
+    },
+    "AdoptionStatuses": {
+      "new_intake": "New Intake",
+      "seeking": "Seeking Home",
+      "pending": "Pending",
+      "foster": "Foster Care",
+      "adopted": "Adopted",
+      "permanent_foster": "Permanent Foster"
+    }
   }
 }

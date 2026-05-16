@@ -232,5 +232,52 @@
     "noSpeciesFound": "Không tìm thấy loài nào.",
     "deleteSpecies": "Xóa loài",
     "species": "loài"
+  },
+  "PetManagement": {
+    "title": "Quản lý thú cưng",
+    "managePetsDesc": "Quản lý hồ sơ, sức khỏe và trạng thái nhận nuôi của thú cưng.",
+    "addPet": "Thêm thú cưng",
+    "createPet": "Tạo hồ sơ mới",
+    "editPet": "Chỉnh sửa hồ sơ",
+    "updatePet": "Cập nhật hồ sơ",
+    "backToPets": "Quay lại danh sách",
+    "petName": "Tên thú cưng",
+    "petCode": "Mã định danh",
+    "species": "Loài",
+    "breed": "Giống",
+    "gender": "Giới tính",
+    "ageGroup": "Độ tuổi",
+    "status": "Trạng thái",
+    "color": "Màu sắc",
+    "weight": "Cân nặng (kg)",
+    "intakeDate": "Ngày tiếp nhận",
+    "description": "Mô tả / Tiểu sử",
+    "searchPets": "Tìm kiếm theo tên hoặc mã thú cưng...",
+    "noPetsFound": "Không tìm thấy thú cưng nào.",
+    "deletePet": "Xóa hồ sơ",
+    "generalInfo": "Thông tin chung",
+    "healthAndAdoption": "Sức khỏe & Nhận nuôi",
+    "media": "Hình ảnh",
+    "medicalRecords": "Hồ sơ y tế",
+    "pets": "thú cưng",
+    "Genders": {
+      "male": "Đực",
+      "female": "Cái",
+      "unknown": "Chưa rõ"
+    },
+    "AgeGroups": {
+      "newborn": "Sơ sinh",
+      "young": "Trẻ",
+      "adult": "Trưởng thành",
+      "senior": "Già"
+    },
+    "AdoptionStatuses": {
+      "new_intake": "Mới tiếp nhận",
+      "seeking": "Đang tìm chủ",
+      "pending": "Chờ duyệt",
+      "foster": "Đang chăm sóc tạm",
+      "adopted": "Đã được nhận nuôi",
+      "permanent_foster": "Foster vĩnh viễn"
+    }
   }
 }

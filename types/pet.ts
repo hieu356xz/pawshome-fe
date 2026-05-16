@@ -23,8 +23,8 @@ export enum AdoptionStatus {
 }
 
 export interface PetImage {
-  id: number;
-  petId: number;
+  id: string;
+  petId: string;
   imageUrl: string;
   isPrimary: boolean;
 }
@@ -44,9 +44,9 @@ export interface Breed {
 }
 
 export interface MedicalRecord {
-  id: number;
-  petId: number;
-  veterinarianId?: number;
+  id: string;
+  petId: string;
+  veterinarianId?: string;
   recordType: 'vaccination' | 'medication' | 'checkup' | 'surgery' | 'other';
   title: string;
   recordDate: string;
@@ -59,7 +59,7 @@ export interface MedicalRecord {
 }
 
 export interface Pet {
-  id: number;
+  id: string;
   petCode: string;
   name: string;
   speciesId: number;

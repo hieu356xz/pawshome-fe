@@ -7,7 +7,7 @@ export const petService = {
     return apiClient.get('/pets', { params });
   },
 
-  getPetById: async (id: number): Promise<ApiResponse<Pet>> => {
+  getPetById: async (id: string): Promise<ApiResponse<Pet>> => {
     return apiClient.get(`/pets/${id}`);
   },
 
@@ -18,9 +18,7 @@ export const petService = {
       Object.entries(data).forEach(([key, value]) => {
         if (value !== undefined) formData.append(key, String(value));
       });
-      return apiClient.post('/pets/search', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      return apiClient.post('/pets/search', formData);
     }
     return apiClient.post('/pets/search', data);
   },
@@ -30,53 +28,51 @@ export const petService = {
     return apiClient.post('/pets', data);
   },
 
-  updatePet: async (id: number, data: any): Promise<ApiResponse<Pet>> => {
+  updatePet: async (id: string, data: any): Promise<ApiResponse<Pet>> => {
     return apiClient.patch(`/pets/${id}`, data);
   },
 
-  deletePet: async (id: number): Promise<ApiResponse<void>> => {
+  deletePet: async (id: string): Promise<ApiResponse<void>> => {
     return apiClient.delete(`/pets/${id}`);
   },
 
   // Medical Records
-  getMedicalRecords: async (petId: number): Promise<ApiResponse<any[]>> => {
+  getMedicalRecords: async (petId: string): Promise<ApiResponse<any[]>> => {
     return apiClient.get(`/pets/${petId}/medical-records`);
   },
 
-  getUpcomingMedicalRecords: async (petId?: number): Promise<ApiResponse<any[]>> => {
+  getUpcomingMedicalRecords: async (petId?: string): Promise<ApiResponse<any[]>> => {
     return apiClient.get('/medical-records/upcoming', { params: { petId } });
   },
 
-  addMedicalRecord: async (petId: number, data: any): Promise<ApiResponse<any>> => {
+  addMedicalRecord: async (petId: string, data: any): Promise<ApiResponse<any>> => {
     return apiClient.post(`/pets/${petId}/medical-records`, data);
   },
 
-  updateMedicalRecord: async (petId: number, recordId: number, data: any): Promise<ApiResponse<any>> => {
+  updateMedicalRecord: async (petId: string, recordId: string, data: any): Promise<ApiResponse<any>> => {
     return apiClient.put(`/pets/${petId}/medical-records/${recordId}`, data);
   },
 
-  deleteMedicalRecord: async (petId: number, recordId: number): Promise<ApiResponse<void>> => {
+  deleteMedicalRecord: async (petId: string, recordId: string): Promise<ApiResponse<void>> => {
     return apiClient.delete(`/pets/${petId}/medical-records/${recordId}`);
   },
 
   // Images
-  getPetImages: async (petId: number): Promise<ApiResponse<PetImage[]>> => {
+  getPetImages: async (petId: string): Promise<ApiResponse<PetImage[]>> => {
     return apiClient.get(`/pets/${petId}/images`);
   },
 
-  uploadPetImage: async (petId: number, file: File): Promise<ApiResponse<PetImage>> => {
+  uploadPetImage: async (petId: string, file: File): Promise<ApiResponse<PetImage>> => {
     const formData = new FormData();
     formData.append('image', file);
-    return apiClient.post(`/pets/${petId}/images/upload`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+    return apiClient.post(`/pets/${petId}/images/upload`, formData);
   },
 
-  setPrimaryImage: async (id: number): Promise<ApiResponse<PetImage>> => {
+  setPrimaryImage: async (id: string): Promise<ApiResponse<PetImage>> => {
     return apiClient.post(`/pets/images/${id}/primary`);
   },
 
-  deletePetImage: async (petId: number, id: number): Promise<ApiResponse<void>> => {
+  deletePetImage: async (petId: string, id: string): Promise<ApiResponse<void>> => {
     return apiClient.delete(`/pets/${petId}/images/${id}`);
   },
 
@@ -89,16 +85,12 @@ export const petService = {
     const formData = new FormData();
     formData.append('image', file);
     if (text) formData.append('text', text);
-    return apiClient.post('/images/search', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+    return apiClient.post('/images/search', formData);
   },
 
   searchSimilarImages: async (file: File): Promise<ApiResponse<any[]>> => {
     const formData = new FormData();
     formData.append('image', file);
-    return apiClient.post('/images/search/similar', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+    return apiClient.post('/images/search/similar', formData);
   },
 };
