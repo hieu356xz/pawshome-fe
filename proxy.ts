@@ -1,25 +1,13 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import createMiddleware from "next-intl/middleware";
+import { routing } from "./i18n/routing";
 
-const locales = ["en", "vi"];
-const defaultLocale = "vi";
+// This is the "proxy" that Next.js 16 uses instead of middleware
+const middleware = createMiddleware(routing);
 
-export function proxy(request: NextRequest) {
-  // Check if there is any supported locale in the pathname
-  const { pathname } = request.nextUrl;
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
-  );
-
-  if (pathnameHasLocale) return;
-
-  // Redirect if there is no locale
-  const locale = defaultLocale; // Simplification for now
-  request.nextUrl.pathname = `/${locale}${pathname}`;
-
-  return NextResponse.redirect(request.nextUrl);
-}
+export const proxy = middleware;
+export default middleware;
 
 export const config = {
-  matcher: ["/((?!_next|api|favicon.ico).*)"],
+  // Match only internationalized pathnames
+  matcher: ["/", "/(vi|en)/:path*", "/((?!_next|api|favicon.ico).*)"],
 };

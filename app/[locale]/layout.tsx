@@ -3,7 +3,7 @@ import { Playfair_Display, Lato, Geist } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { AuthProvider } from "@/providers/AuthContext";
 
@@ -40,6 +40,8 @@ export default async function RootLayout({
   if (!locales.includes(locale)) {
     notFound();
   }
+
+  setRequestLocale(locale);
 
   const messages = await getMessages();
 
