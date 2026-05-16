@@ -6,36 +6,19 @@ import { userService } from "@/services/user.service";
 import { User } from "@/types/auth";
 import { 
   Search, 
-  MoreHorizontal, 
   UserPlus, 
-  Filter, 
-  Download,
-  Mail,
-  Calendar,
-  Shield,
-  Edit2,
-  Trash2,
-  Eye,
-  Users
+  Shield
 } from "lucide-react";
-import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuItem, 
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuCheckboxItem,
-  DropdownMenuGroup
-} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
 import { Link } from "@/lib/navigation";
 import { adminService } from "@/services/admin.service";
 import { Role } from "@/types/auth";
 
+import { AdminTable, Column } from "@/components/admin/AdminTable";
 import { AdminTableFilters, FilterGroup } from "@/components/admin/AdminTableFilters";
+import { UserInfoCell, StatusCell, BadgeGroupCell, DateCell } from "@/components/admin/table/AdminTableCells";
+import { AdminTableActions, TableActionIcons } from "@/components/admin/table/AdminTableActions";
 
 export default function UserManagementPage() {
   const t = useTranslations("UserManagement");
@@ -105,6 +88,58 @@ export default function UserManagementPage() {
     }
   ];
 
+  const columns: Column<User>[] = [
+    {
+      header: t("user"),
+      cell: (user) => (
+        <UserInfoCell 
+          name={user.fullName || "Unnamed User"} 
+          email={user.email} 
+          avatarUrl={user.avatarUrl} 
+        />
+      ),
+    },
+    {
+      header: t("role"),
+      cell: (user) => (
+        <BadgeGroupCell 
+          items={(user.roles || []).map(r => ({ id: r.id, label: r.name }))}
+          icon={<Shield size={10} />}
+          variant="blue"
+        />
+      ),
+    },
+    {
+      header: t("status"),
+      cell: (user) => (
+        <StatusCell 
+          status={user.status} 
+          variant={
+            user.status === 'active' ? "success" : 
+            user.status === 'inactive' ? "warning" : "error"
+          }
+        />
+      ),
+    },
+    {
+      header: t("joinedDate"),
+      cell: () => <DateCell date="May 14, 2026" />,
+    },
+    {
+      header: t("actions"),
+      align: "right",
+      cell: (user) => (
+        <AdminTableActions 
+          actions={[
+            { label: t("viewProfile"), icon: TableActionIcons.View },
+            { label: t("editUser"), icon: TableActionIcons.Edit, href: `/admin/users/${user.id}/edit` },
+            { label: t("deleteUser"), icon: TableActionIcons.Delete, variant: "danger" },
+          ]}
+        />
+      ),
+    },
+  ];
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -147,125 +182,23 @@ export default function UserManagementPage() {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-gray-50/50">
-                <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">{t("user")}</th>
-                <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">{t("role")}</th>
-                <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">{t("status")}</th>
-                <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">{t("joinedDate")}</th>
-                <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider text-right">{t("actions")}</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-50">
-              {isLoading ? (
-                Array.from({ length: 5 }).map((_, i) => (
-                  <tr key={i} className="animate-pulse">
-                    <td className="px-6 py-6"><div className="flex items-center gap-3"><div className="w-10 h-10 bg-gray-100 rounded-xl" /><div className="space-y-2"><div className="w-32 h-4 bg-gray-100 rounded" /><div className="w-48 h-3 bg-gray-50 rounded" /></div></div></td>
-                    <td className="px-6 py-6"><div className="w-20 h-6 bg-gray-100 rounded-full" /></td>
-                    <td className="px-6 py-6"><div className="w-16 h-6 bg-gray-100 rounded-full" /></td>
-                    <td className="px-6 py-6"><div className="w-24 h-4 bg-gray-100 rounded" /></td>
-                    <td className="px-6 py-6"><div className="w-8 h-8 bg-gray-100 rounded-lg ml-auto" /></td>
-                  </tr>
-                ))
-              ) : filteredUsers.length > 0 ? (
-                filteredUsers.map((user) => (
-                  <tr key={user.id} className="hover:bg-gray-50/50 transition-colors group">
-                    <td className="px-6 py-6">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-2xl overflow-hidden bg-orange-100 flex items-center justify-center text-orange-600 font-bold border-2 border-white shadow-sm group-hover:scale-105 transition-transform duration-300">
-                          {user.avatarUrl ? (
-                            <img src={user.avatarUrl} alt={user.fullName} className="w-full h-full object-cover" />
-                          ) : (
-                            user.fullName?.charAt(0) || "U"
-                          )}
-                        </div>
-                        <div>
-                          <p className="text-sm font-bold text-gray-900">{user.fullName || "Unnamed User"}</p>
-                          <p className="text-xs text-gray-500 flex items-center gap-1 mt-0.5">
-                            <Mail size={12} />
-                            {user.email}
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-6">
-                      <div className="flex flex-wrap gap-1">
-                        {user.roles && user.roles.length > 0 ? (
-                          user.roles.map((role) => (
-                            <span key={role.id} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wider">
-                              <Shield size={10} />
-                              {role.name}
-                            </span>
-                          ))
-                        ) : (
-                          <span className="text-gray-400 text-xs italic">No roles</span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-6 py-6">
-                      <span className={cn(
-                        "inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider",
-                        user.status === 'active' ? "bg-emerald-50 text-emerald-600" : 
-                        user.status === 'inactive' ? "bg-amber-50 text-amber-600" : "bg-red-50 text-red-600"
-                      )}>
-                        {user.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-6">
-                      <p className="text-sm text-gray-600 flex items-center gap-1.5">
-                        <Calendar size={14} className="text-gray-400" />
-                        May 14, 2026
-                      </p>
-                    </td>
-                    <td className="px-6 py-6 text-right">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger className="p-2 hover:bg-gray-100 rounded-xl transition-all text-gray-400 hover:text-gray-900 outline-none border-none cursor-pointer">
-                          <MoreHorizontal size={20} />
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-48 rounded-2xl p-2 shadow-xl border-gray-100 bg-white z-50">
-                          <DropdownMenuItem className="rounded-xl focus:bg-orange-50 focus:text-orange-600 cursor-pointer flex items-center gap-2 py-2.5 px-3">
-                            <Eye size={16} /> {t("viewProfile")}
-                          </DropdownMenuItem>
-                          <DropdownMenuItem className="p-0 cursor-pointer">
-                            <Link href={`/admin/users/${user.id}/edit`} className="flex items-center gap-2 py-2.5 px-3 w-full rounded-xl focus:bg-blue-50 focus:text-blue-600 outline-none">
-                              <Edit2 size={16} /> {t("editUser")}
-                            </Link>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem className="rounded-xl focus:bg-red-50 focus:text-red-600 cursor-pointer flex items-center gap-2 py-2.5 px-3 text-red-500">
-                            <Trash2 size={16} /> {t("deleteUser")}
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={5} className="px-6 py-20 text-center text-gray-500">
-                    <div className="flex flex-col items-center gap-3">
-                      <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center text-gray-300">
-                        <Users size={32} />
-                      </div>
-                      <p>{t("noUsersFound")}</p>
-                    </div>
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="p-6 border-t border-gray-50 flex items-center justify-between">
-          <p className="text-sm text-gray-500">
-            {t("showing")} <span className="font-bold text-gray-900">{filteredUsers.length}</span> {t("of")} <span className="font-bold text-gray-900">{users.length}</span> {t("users")}
-          </p>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" disabled className="rounded-xl border-gray-200 h-10 px-4">{t("previous")}</Button>
-            <Button variant="outline" disabled className="rounded-xl border-gray-200 h-10 px-4">{t("next")}</Button>
-          </div>
-        </div>
+        <AdminTable 
+          columns={columns}
+          data={filteredUsers}
+          isLoading={isLoading}
+          emptyMessage={t("noUsersFound")}
+          pagination={{
+            currentPage: 1,
+            totalPages: 1,
+            totalItems: filteredUsers.length,
+            onPageChange: () => {},
+            showingLabel: t("showing"),
+            ofLabel: t("of"),
+            itemsLabel: t("users"),
+            previousLabel: t("previous"),
+            nextLabel: t("next")
+          }}
+        />
       </div>
     </div>
   );
