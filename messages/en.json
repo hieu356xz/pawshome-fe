@@ -88,5 +88,25 @@
   "PostTypes": {
     "LOST": "Lost",
     "FOUND": "Found"
+  },
+  "Admin": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "roles": "Roles",
+    "permissions": "Permissions",
+    "pets": "Pets",
+    "species": "Species",
+    "breeds": "Breeds",
+    "adoptionRequests": "Adoption Requests",
+    "blog": "Blog Management",
+    "community": "Community Posts",
+    "settings": "Settings",
+    "backToHome": "Back to Home",
+    "logout": "Logout",
+    "welcome": "Welcome back, {name}",
+    "overview": "Overview",
+    "profile": "Profile Settings",
+    "systemPreferences": "System Preferences",
+    "myAccount": "My Account"
   }
 }

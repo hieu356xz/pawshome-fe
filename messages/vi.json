@@ -88,5 +88,25 @@
   "PostTypes": {
     "LOST": "Bị lạc",
     "FOUND": "Tìm thấy"
+  },
+  "Admin": {
+    "dashboard": "Bảng điều khiển",
+    "users": "Người dùng",
+    "roles": "Vai trò",
+    "permissions": "Quyền hạn",
+    "pets": "Thú cưng",
+    "species": "Loài",
+    "breeds": "Giống",
+    "adoptionRequests": "Yêu cầu nhận nuôi",
+    "blog": "Quản lý Blog",
+    "community": "Tin cộng đồng",
+    "settings": "Cài đặt",
+    "backToHome": "Về trang chủ",
+    "logout": "Đăng xuất",
+    "welcome": "Chào mừng trở lại, {name}",
+    "overview": "Tổng quan",
+    "profile": "Cài đặt cá nhân",
+    "systemPreferences": "Cấu hình hệ thống",
+    "myAccount": "Tài khoản của tôi"
   }
 }

@@ -60,29 +60,27 @@ export function Navbar() {
         <div className="flex items-center space-x-4">
           {/* Language Switcher */}
           <DropdownMenu>
-            <DropdownMenuTrigger
-              className={cn(
-                buttonVariants({ variant: "ghost" }),
-                "text-foreground/80 hover:text-primary gap-2 px-2",
-              )}>
-              <Languages className="h-4 w-4" />
-              <span className="font-bold text-xs uppercase">{locale}</span>
+            <DropdownMenuTrigger className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-gray-50 transition-all text-gray-500 outline-none border-none cursor-pointer">
+              <Languages size={20} />
+              <span className="font-bold text-xs uppercase tracking-widest">
+                {locale}
+              </span>
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="end"
-              className="bg-background border-border">
+              className="bg-white border-gray-100 rounded-2xl shadow-xl p-2 z-50">
               <DropdownMenuItem
                 onClick={() => toggleLocale("en")}
                 className={cn(
-                  "cursor-pointer",
-                  locale === "en" && "bg-muted font-bold",
+                  "rounded-xl cursor-pointer py-2 px-3 flex items-center gap-2 outline-none mb-1",
+                  locale === "en" && "bg-muted  font-bold",
                 )}>
                 English
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => toggleLocale("vi")}
                 className={cn(
-                  "cursor-pointer",
+                  "rounded-xl cursor-pointer py-2 px-3 flex items-center gap-2 outline-none",
                   locale === "vi" && "bg-muted font-bold",
                 )}>
                 Tiếng Việt
