@@ -35,6 +35,8 @@ import { Link } from "@/lib/navigation";
 import { adminService } from "@/services/admin.service";
 import { Role } from "@/types/auth";
 
+import { AdminTableFilters, FilterGroup } from "@/components/admin/AdminTableFilters";
+
 export default function UserManagementPage() {
   const t = useTranslations("UserManagement");
   const [users, setUsers] = useState<User[]>([]);
@@ -82,6 +84,27 @@ export default function UserManagementPage() {
     return matchesSearch && matchesStatus && matchesRole;
   });
 
+  const filterGroups: FilterGroup[] = [
+    {
+      id: "status",
+      label: "Status",
+      activeValue: statusFilter,
+      onSelect: setStatusFilter,
+      options: [
+        { label: "Active", value: "active" },
+        { label: "Inactive", value: "inactive" },
+        { label: "Banned", value: "banned" }
+      ]
+    },
+    {
+      id: "role",
+      label: "Roles",
+      activeValue: roleFilter,
+      onSelect: setRoleFilter,
+      options: roles.map(r => ({ label: r.name, value: r.name }))
+    }
+  ];
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -100,97 +123,27 @@ export default function UserManagementPage() {
       </div>
 
       <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
-        <div className="p-6 border-b border-gray-50 flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="relative w-full md:w-96 group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-orange-500 transition-colors" size={18} />
-            <Input 
-              placeholder={t("searchUsers")}
-              className="pl-12 h-12 rounded-2xl bg-gray-50 border-none focus-visible:ring-2 focus-visible:ring-orange-200 transition-all"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-          <div className="flex items-center gap-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger className={cn(
-                "rounded-xl border border-gray-200 text-gray-600 gap-2 h-12 px-6 flex items-center justify-center hover:bg-gray-50 transition-all cursor-pointer outline-none",
-                (statusFilter || roleFilter) && "border-orange-500 text-orange-600 bg-orange-50"
-              )}>
-                <Filter size={18} />
-                {statusFilter || roleFilter ? "Filters Active" : "Filters"}
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 rounded-2xl p-2 shadow-xl border-gray-100 bg-white z-50">
-                <DropdownMenuGroup>
-                  <DropdownMenuLabel className="text-xs font-bold text-gray-400 uppercase tracking-widest px-3 py-2">Status</DropdownMenuLabel>
-                  <DropdownMenuCheckboxItem 
-                    checked={statusFilter === null}
-                    onCheckedChange={() => setStatusFilter(null)}
-                    className="rounded-xl focus:bg-orange-50 cursor-pointer"
-                  >
-                    All Status
-                  </DropdownMenuCheckboxItem>
-                  <DropdownMenuCheckboxItem 
-                    checked={statusFilter === 'active'}
-                    onCheckedChange={() => setStatusFilter('active')}
-                    className="rounded-xl focus:bg-orange-50 cursor-pointer text-emerald-600"
-                  >
-                    Active
-                  </DropdownMenuCheckboxItem>
-                  <DropdownMenuCheckboxItem 
-                    checked={statusFilter === 'inactive'}
-                    onCheckedChange={() => setStatusFilter('inactive')}
-                    className="rounded-xl focus:bg-orange-50 cursor-pointer text-amber-600"
-                  >
-                    Inactive
-                  </DropdownMenuCheckboxItem>
-                  <DropdownMenuCheckboxItem 
-                    checked={statusFilter === 'banned'}
-                    onCheckedChange={() => setStatusFilter('banned')}
-                    className="rounded-xl focus:bg-orange-50 cursor-pointer text-red-600"
-                  >
-                    Banned
-                  </DropdownMenuCheckboxItem>
-                </DropdownMenuGroup>
-
-                <DropdownMenuSeparator className="my-2 bg-gray-50" />
-                
-                <DropdownMenuGroup>
-                  <DropdownMenuLabel className="text-xs font-bold text-gray-400 uppercase tracking-widest px-3 py-2">Roles</DropdownMenuLabel>
-                  <DropdownMenuCheckboxItem 
-                    checked={roleFilter === null}
-                    onCheckedChange={() => setRoleFilter(null)}
-                    className="rounded-xl focus:bg-orange-50 cursor-pointer"
-                  >
-                    All Roles
-                  </DropdownMenuCheckboxItem>
-                  {roles.map(role => (
-                    <DropdownMenuCheckboxItem 
-                      key={role.id}
-                      checked={roleFilter === role.name}
-                      onCheckedChange={() => setRoleFilter(role.name)}
-                      className="rounded-xl focus:bg-orange-50 cursor-pointer"
-                    >
-                      {role.name}
-                    </DropdownMenuCheckboxItem>
-                  ))}
-                </DropdownMenuGroup>
-
-                {(statusFilter || roleFilter) && (
-                  <>
-                    <DropdownMenuSeparator className="my-2 bg-gray-50" />
-                    <DropdownMenuItem 
-                      onClick={() => {
-                        setStatusFilter(null);
-                        setRoleFilter(null);
-                      }}
-                      className="rounded-xl focus:bg-red-50 focus:text-red-600 text-red-500 cursor-pointer justify-center font-bold text-xs"
-                    >
-                      Clear All Filters
-                    </DropdownMenuItem>
-                  </>
-                )}
-              </DropdownMenuContent>
-            </DropdownMenu>
+        <div className="p-6 border-b border-gray-50">
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+            <div className="relative w-full md:w-96 group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-orange-500 transition-colors" size={18} />
+              <Input 
+                placeholder={t("searchUsers")}
+                className="pl-12 h-12 rounded-2xl bg-gray-50 border-none focus-visible:ring-2 focus-visible:ring-orange-200 transition-all"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+            
+            <div className="flex-1 md:flex md:justify-end">
+              <AdminTableFilters 
+                groups={filterGroups}
+                onClearAll={() => {
+                  setStatusFilter(null);
+                  setRoleFilter(null);
+                }}
+              />
+            </div>
           </div>
         </div>
 
