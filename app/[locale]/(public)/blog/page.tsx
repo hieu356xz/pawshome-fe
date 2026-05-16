@@ -2,43 +2,46 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
+import { blogService } from "@/services/blog.service";
+import { BlogPost, Tag } from "@/types/post";
+import { BlogCard } from "@/components/shared/BlogCard";
+import { PageHeader } from "@/components/shared/PageHeader";
+import { AppPagination } from "@/components/shared/AppPagination";
 import {
+  Loader2,
   Search,
   Filter,
-  Plus,
-  Loader2,
-  AlertCircle,
+  Newspaper,
   X,
-  ArrowUpDown,
   Calendar,
+  ArrowUpDown,
+  AlertCircle,
 } from "lucide-react";
-import { Link } from "@/lib/navigation";
-import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { PostCard } from "@/components/shared/PostCard";
-import { AppPagination } from "@/components/shared/AppPagination";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { petPostService } from "@/services/pet-post.service";
-import { PetPost, PostType } from "@/types/post";
 import { SortOrder } from "@/types/common";
-import { formatDistanceToNow } from "date-fns";
-import { vi, enUS } from "date-fns/locale";
-import { useParams } from "next/navigation";
 
-export default function CommunityPostsPage() {
-  const t = useTranslations("CommunityBoard");
+export default function BlogListPage() {
+  const t = useTranslations("Blog");
+  const homeT = useTranslations("Home");
   const commonT = useTranslations("Common");
   const plT = useTranslations("PetList");
-  const params = useParams();
-  const locale = params.locale as string;
+  const cbT = useTranslations("CommunityBoard");
+  const searchParams = useSearchParams();
+  const initialTagSlug = searchParams.get("tagSlug");
 
-  const [posts, setPosts] = useState<PetPost[]>([]);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
   const [loading, setLoading] = useState(true);
   const [totalItems, setTotalItems] = useState(0);
 
   // Filters & Sorting & Pagination
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeType, setActiveType] = useState<PostType | "ALL">("ALL");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTagSlug, setSelectedTagSlug] = useState<string | null>(
+    initialTagSlug,
+  );
   const [sortBy, setSortBy] = useState("createdAt");
   const [sortOrder, setSortOrder] = useState<SortOrder>(SortOrder.DESC);
   const [page, setPage] = useState(1);
@@ -49,82 +52,70 @@ export default function CommunityPostsPage() {
   const fetchPosts = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await petPostService.getPosts({
+      const response = await blogService.getPosts({
         page,
         limit: pageSize,
-        postType: activeType === "ALL" ? undefined : (activeType as PostType),
+        tagSlug: selectedTagSlug || undefined,
+        search: searchTerm || undefined,
         sortBy,
         sortOrder,
+        status: "published",
       });
       if (response.success) {
         setPosts(response.data);
         setTotalItems(response.meta?.totalItems || response.data.length);
       }
     } catch (error) {
-      console.error("Failed to fetch posts:", error);
+      console.error("Failed to fetch blog posts:", error);
     } finally {
       setLoading(false);
     }
-  }, [page, activeType, sortBy, sortOrder]);
+  }, [page, selectedTagSlug, searchTerm, sortBy, sortOrder]);
+
+  const fetchTags = async () => {
+    try {
+      const response = await blogService.getTags();
+      if (response.success) {
+        setTags(response.data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch tags:", error);
+    }
+  };
 
   useEffect(() => {
     fetchPosts();
   }, [fetchPosts]);
 
-  const filteredPosts = posts.filter(
-    (post) =>
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.location?.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+  useEffect(() => {
+    fetchTags();
+  }, []);
 
-  const totalPages = Math.ceil(totalItems / pageSize);
-
-  const getTimeAgo = (date: string) => {
-    try {
-      return formatDistanceToNow(new Date(date), {
-        addSuffix: true,
-        locale: locale === "vi" ? vi : enUS,
-      });
-    } catch (e) {
-      return date;
-    }
-  };
+  useEffect(() => {
+    setSelectedTagSlug(searchParams.get("tagSlug"));
+    setPage(1);
+  }, [searchParams]);
 
   const handleReset = () => {
-    setSearchQuery("");
-    setActiveType("ALL");
+    setSearchTerm("");
+    setSelectedTagSlug(null);
     setSortBy("createdAt");
     setSortOrder(SortOrder.DESC);
     setPage(1);
   };
 
+  const totalPages = Math.ceil(totalItems / pageSize);
+
   return (
     <div className="min-h-screen bg-[#faf9f6] pb-24">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-16 bg-white border-b border-border/10 overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 translate-x-1/2" />
-        <div className="container mx-auto px-4 md:px-8 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
-            <div className="max-w-2xl space-y-4">
-              <h1 className="text-4xl md:text-6xl font-serif font-bold text-foreground leading-tight">
-                {t("title")}
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {t("description")}
-              </p>
-            </div>
-            <Link
-              href="/community-posts/create"
-              className={cn(
-                buttonVariants({ variant: "default", size: "lg" }),
-                "h-14 px-8 rounded-2xl shadow-xl shadow-primary/20",
-              )}>
-              <Plus className="mr-2 h-5 w-5" />
-              {t("createPost")}
-            </Link>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        title={t("title")}
+        description={t("subtitle")}
+        badgeIcon={Newspaper}
+        badgeText={homeT("articleBadge")}
+        variant="primary"
+      />
 
       <div className="container mx-auto px-4 md:px-8 mt-12">
         <div className="flex flex-col lg:flex-row gap-12">
@@ -148,46 +139,55 @@ export default function CommunityPostsPage() {
               {/* Search */}
               <div className="space-y-4">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground/60 px-1">
-                  {plT("searchPlaceholder")}
+                  {t("searchPlaceholder")}
                 </h4>
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     placeholder="..."
-                    className="pl-10 h-12 rounded-xl bg-muted/20 border-transparent focus:bg-white transition-all"
-                    value={searchQuery}
+                    className="pl-10 h-12 rounded-xl bg-muted/20 border-transparent focus:bg-white transition-all text-foreground"
+                    value={searchTerm}
                     onChange={(e) => {
-                      setSearchQuery(e.target.value);
+                      setSearchTerm(e.target.value);
                       setPage(1);
                     }}
                   />
                 </div>
               </div>
 
-              {/* Type Filter */}
+              {/* Tags Filter */}
               <div className="space-y-4">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground/60 px-1">
-                  {t("postType")}
+                  {t("tags")}
                 </h4>
                 <div className="space-y-2">
-                  {[
-                    { id: "ALL", label: plT("all") },
-                    { id: PostType.LOST, label: t("PostTypes.lost") },
-                    { id: PostType.FOUND, label: t("PostTypes.found") },
-                  ].map((type) => (
+                  <button
+                    onClick={() => {
+                      setSelectedTagSlug(null);
+                      setPage(1);
+                    }}
+                    className={cn(
+                      "w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold transition-all",
+                      selectedTagSlug === null
+                        ? "bg-primary text-white shadow-lg shadow-primary/20"
+                        : "hover:bg-muted/50 text-muted-foreground",
+                    )}>
+                    {plT("all")}
+                  </button>
+                  {tags.map((tag) => (
                     <button
-                      key={type.id}
+                      key={tag.id}
                       onClick={() => {
-                        setActiveType(type.id as any);
+                        setSelectedTagSlug(tag.slug);
                         setPage(1);
                       }}
                       className={cn(
                         "w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold transition-all",
-                        activeType === type.id
+                        selectedTagSlug === tag.slug
                           ? "bg-primary text-white shadow-lg shadow-primary/20"
                           : "hover:bg-muted/50 text-muted-foreground",
                       )}>
-                      {type.label}
+                      {tag.name}
                     </button>
                   ))}
                 </div>
@@ -196,12 +196,12 @@ export default function CommunityPostsPage() {
               {/* Sorting */}
               <div className="space-y-4">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground/60 px-1">
-                  {t("sortBy")}
+                  {cbT("sortBy")}
                 </h4>
                 <div className="space-y-2">
                   {[
-                    { id: "DESC", label: t("newest"), icon: Calendar },
-                    { id: "ASC", label: t("oldest"), icon: ArrowUpDown },
+                    { id: "DESC", label: cbT("newest"), icon: Calendar },
+                    { id: "ASC", label: cbT("oldest"), icon: ArrowUpDown },
                   ].map((order) => (
                     <button
                       key={order.id}
@@ -227,7 +227,7 @@ export default function CommunityPostsPage() {
                   variant="ghost"
                   className="w-full h-12 rounded-xl text-xs font-bold uppercase tracking-widest hover:text-red-500 hover:bg-red-50"
                   onClick={handleReset}>
-                  {plT("clearFilters")}
+                  {commonT("resetAll")}
                 </Button>
               </div>
             </div>
@@ -257,26 +257,16 @@ export default function CommunityPostsPage() {
                   {plT("loading")}
                 </p>
               </div>
-            ) : filteredPosts.length > 0 ? (
+            ) : posts.length > 0 ? (
               <div className="flex-1 flex flex-col justify-between">
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-12">
-                  {filteredPosts.map((post, index) => (
-                    <Link
+                  {posts.map((post, index) => (
+                    <div
                       key={post.id}
-                      href={`/community-posts/${post.id}`}
                       className="animate-in fade-in slide-in-from-bottom-4 duration-500"
                       style={{ animationDelay: `${index * 50}ms` }}>
-                      <PostCard
-                        type={post.postType.toUpperCase() as any}
-                        title={post.title}
-                        description={
-                          post.description || commonT("noDescription")
-                        }
-                        location={post.location || "N/A"}
-                        time={getTimeAgo(post.createdAt)}
-                        imageUrl={post.images?.[0]?.imageUrl}
-                      />
-                    </Link>
+                      <BlogCard post={post} />
+                    </div>
                   ))}
                 </div>
 
@@ -300,16 +290,16 @@ export default function CommunityPostsPage() {
                   <AlertCircle className="h-8 w-8 text-muted-foreground" />
                 </div>
                 <div className="space-y-1">
-                  <h3 className="text-xl font-bold">{t("noPostsFound")}</h3>
+                  <h3 className="text-xl font-bold">{t("noPosts")}</h3>
                   <p className="text-muted-foreground max-w-sm">
-                    {plT("noPetsFoundDesc")}
+                    {t("noPostsDesc")}
                   </p>
                 </div>
                 <Button
                   variant="outline"
                   className="rounded-xl"
                   onClick={handleReset}>
-                  {plT("clearFilters")}
+                  {commonT("resetAll")}
                 </Button>
               </div>
             )}

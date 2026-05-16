@@ -606,6 +606,27 @@
     "cancel": "Hủy",
     "delete": "Xóa",
     "edit": "Sửa",
-    "contactUs": "Liên hệ ngay"
+    "contactUs": "Liên hệ ngay",
+    "Anonymous": "Ẩn danh",
+    "noDescription": "Không có mô tả nào được cung cấp.",
+    "all": "Tất cả",
+    "resetAll": "Đặt lại tất cả"
+  },
+  "Blog": {
+    "title": "Góc chia sẻ & Kiến thức",
+    "subtitle": "Tìm hiểu về cách chăm sóc, dinh dưỡng và những câu chuyện cảm động về thú cưng.",
+    "searchPlaceholder": "Tìm kiếm bài viết...",
+    "noPosts": "Không tìm thấy bài viết nào.",
+    "noPostsDesc": "Chúng tôi không tìm thấy bài viết nào phù hợp với tìm kiếm của bạn. Hãy thử thay đổi từ khóa hoặc bộ lọc.",
+    "readMore": "Đọc thêm",
+    "views": "lượt xem",
+    "share": "Chia sẻ bài viết",
+    "author": "Tác giả",
+    "stayUpdated": "Cập nhật thông tin",
+    "newsletterDesc": "Đăng ký nhận bản tin để không bỏ lỡ những kinh nghiệm chăm sóc thú cưng bổ ích.",
+    "subscribe": "Đăng ký ngay",
+    "tags": "Chủ đề",
+    "posts": "bài viết",
+    "pawsHomeTeam": "Đội ngũ PawsHome"
   }
 }

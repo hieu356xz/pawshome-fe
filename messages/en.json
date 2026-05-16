@@ -606,6 +606,27 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact Us",
+    "Anonymous": "Anonymous",
+    "noDescription": "No description available.",
+    "all": "All",
+    "resetAll": "Reset All"
+  },
+  "Blog": {
+    "title": "Educational Corner & Pet Stories",
+    "subtitle": "Learn about pet care, nutrition, and read heartwarming stories from our community.",
+    "searchPlaceholder": "Search articles...",
+    "noPosts": "No articles found.",
+    "noPostsDesc": "We couldn't find any articles matching your search. Try changing your keywords or filters.",
+    "readMore": "Read More",
+    "views": "views",
+    "share": "Share this article",
+    "author": "Author",
+    "stayUpdated": "Stay Updated",
+    "newsletterDesc": "Subscribe to our newsletter to receive the latest pet care tips and heart-warming adoption stories.",
+    "subscribe": "Subscribe Now",
+    "tags": "Topics",
+    "posts": "articles",
+    "pawsHomeTeam": "PawsHome Team"
   }
 }
