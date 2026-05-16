@@ -419,5 +419,34 @@
     "contact": "Thông tin liên hệ",
     "save": "Lưu tin đăng",
     "images": "Hình ảnh"
+  },
+  "PetList": {
+    "title": "Tìm người bạn bốn chân mới của bạn",
+    "subtitle": "Hàng trăm thú cưng đáng yêu đang chờ đợi một mái ấm vĩnh viễn. Hãy lọc để tìm người bạn phù hợp nhất với gia đình bạn.",
+    "searchPlaceholder": "Tìm kiếm theo tên, mô tả...",
+    "petCodePlaceholder": "Ví dụ: PET001",
+    "colorPlaceholder": "Ví dụ: Đen, Vàng",
+    "filters": "Bộ lọc",
+    "clearFilters": "Xóa bộ lọc",
+    "applyFilters": "Áp dụng",
+    "noPetsFound": "Không tìm thấy thú cưng nào phù hợp với yêu cầu của bạn.",
+    "noPetsFoundDesc": "Chúng tôi không tìm thấy người bạn nhỏ nào phù hợp với các tiêu chí này. Hãy thử điều chỉnh bộ lọc hoặc xóa chúng để xem thêm.",
+    "backToHome": "Quay lại trang chủ",
+    "speciesLabel": "Loài",
+    "breedLabel": "Giống",
+    "genderLabel": "Giới tính",
+    "ageGroupLabel": "Độ tuổi",
+    "statusLabel": "Trạng thái",
+    "colorLabel": "Màu sắc",
+    "all": "Tất cả",
+    "viewProfile": "Xem hồ sơ",
+    "loading": "Đang tải dữ liệu...",
+    "previous": "Trước",
+    "next": "Tiếp",
+    "unknown": "Không xác định"
+  },
+  "Pagination": {
+    "previous": "Trước",
+    "next": "Tiếp"
   }
-}
+}

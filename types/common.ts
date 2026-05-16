@@ -10,6 +10,7 @@ export interface ApiResponse<T> {
   data: T;
   meta?: PaginationMeta;
   message?: string;
+  success: boolean;
 }
 
 export interface PaginationParams {

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Lato, Geist } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { cn } from "@/lib/utils";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { AuthProvider } from "@/providers/AuthContext";
 import { ToastProvider } from "@/components/ui/toast";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -47,24 +49,22 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html
-      lang={locale}
-      suppressHydrationWarning
-    >
-      <body 
+    <html lang={locale} suppressHydrationWarning>
+      <body
         suppressHydrationWarning
         className={cn(
           "min-h-full flex flex-col antialiased",
           playfair.variable,
           lato.variable,
           geist.variable,
-          "font-sans"
-        )}
-      >
+          "font-sans",
+        )}>
         <NextIntlClientProvider messages={messages} locale={locale}>
           <AuthProvider>
             <ToastProvider>
+              <Navbar />
               {children}
+              <Footer />
             </ToastProvider>
           </AuthProvider>
         </NextIntlClientProvider>

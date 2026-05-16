@@ -419,5 +419,34 @@
     "contact": "Contact Information",
     "save": "Save Post",
     "images": "Images"
+  },
+  "PetList": {
+    "title": "Find Your New Best Friend",
+    "subtitle": "Hundreds of lovable pets are waiting for a forever home. Filter to find the perfect companion for your family.",
+    "searchPlaceholder": "Search by name, description...",
+    "petCodePlaceholder": "e.g. PET001",
+    "colorPlaceholder": "e.g. Black, Golden",
+    "filters": "Filters",
+    "clearFilters": "Clear Filters",
+    "applyFilters": "Apply",
+    "noPetsFound": "No pets found matching your criteria.",
+    "noPetsFoundDesc": "We couldn't find any furry friends matching those exact criteria. Try adjusting your filters or clearing them to see more residents.",
+    "backToHome": "Back to Home",
+    "speciesLabel": "Species",
+    "breedLabel": "Breed",
+    "genderLabel": "Gender",
+    "ageGroupLabel": "Age Group",
+    "statusLabel": "Status",
+    "colorLabel": "Color",
+    "all": "All",
+    "viewProfile": "View Profile",
+    "loading": "Loading pets...",
+    "previous": "Previous",
+    "next": "Next",
+    "unknown": "Unknown"
+  },
+  "Pagination": {
+    "previous": "Previous",
+    "next": "Next"
   }
-}
+}
