@@ -7,6 +7,8 @@ import { AdoptionRequest, AdoptionRequestStatus } from "@/types/adoption";
 import { Search, Filter, User, PawPrint, Clock, Eye, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/toast";
+import { ConfirmModal } from "@/components/ui/confirm-modal";
 
 import { AdminTable, Column } from "@/components/admin/AdminTable";
 import {
@@ -30,6 +32,18 @@ export default function AdoptionManagementPage() {
     totalPages: 1,
     totalItems: 0,
   });
+
+  const [deleteModal, setDeleteModal] = useState<{
+    isOpen: boolean;
+    requestId: string | null;
+    petId: string | null;
+  }>({
+    isOpen: false,
+    requestId: null,
+    petId: null,
+  });
+
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const [selectedRequest, setSelectedRequest] =
     useState<AdoptionRequest | null>(null);
@@ -58,6 +72,26 @@ export default function AdoptionManagementPage() {
       console.error("Failed to fetch requests:", error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDeleteRequest = (petId: string, requestId: string) => {
+    setDeleteModal({ isOpen: true, petId, requestId });
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteModal.petId || !deleteModal.requestId) return;
+
+    setIsDeleting(true);
+    try {
+      await adoptionService.deleteRequest(deleteModal.petId, deleteModal.requestId);
+      toast.success(tCommon("actionSuccess") || "Request deleted successfully");
+      setDeleteModal({ isOpen: false, petId: null, requestId: null });
+      fetchRequests();
+    } catch (error) {
+      console.error("Delete failed:", error);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -165,12 +199,7 @@ export default function AdoptionManagementPage() {
           <Button
             variant="ghost"
             size="sm"
-            onClick={async () => {
-              if (confirm("Delete this request?")) {
-                await adoptionService.deleteRequest(req.petId, req.id);
-                fetchRequests();
-              }
-            }}
+            onClick={() => handleDeleteRequest(req.petId, req.id)}
             className="rounded-xl hover:bg-red-50 hover:text-red-600 transition-all p-2 h-9 w-9">
             <X size={16} />
           </Button>
@@ -244,6 +273,18 @@ export default function AdoptionManagementPage() {
           onSuccess={fetchRequests}
         />
       )}
+
+      <ConfirmModal
+        isOpen={deleteModal.isOpen}
+        onClose={() => setDeleteModal({ isOpen: false, petId: null, requestId: null })}
+        onConfirm={confirmDelete}
+        title={tCommon("delete")}
+        message={t("deleteConfirm")}
+        confirmText={tCommon("delete")}
+        cancelText={tCommon("cancel")}
+        variant="danger"
+        isLoading={isDeleting}
+      />
     </div>
   );
 }

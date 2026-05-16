@@ -162,6 +162,7 @@
     "status": "Trạng thái",
     "viewProfile": "Xem hồ sơ",
     "deleteUser": "Xóa người dùng",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa người dùng này?",
     "noUsersFound": "Không tìm thấy người dùng nào phù hợp.",
     "userNotFound": "Không tìm thấy người dùng",
     "userNotFoundDesc": "Người dùng bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.",
@@ -200,6 +201,7 @@
     "searchRoles": "Tìm kiếm theo tên vai trò...",
     "noRolesFound": "Không tìm thấy vai trò nào.",
     "deleteRole": "Xóa vai trò",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa vai trò này?",
     "generalInfo": "Thông tin chung",
     "permissionsList": "Danh sách quyền hạn",
     "loadingPermissions": "Đang tải quyền hạn...",
@@ -222,6 +224,7 @@
     "searchPermissions": "Tìm kiếm theo mã hoặc mô tả...",
     "noPermissionsFound": "Không tìm thấy quyền hạn nào.",
     "deletePermission": "Xóa quyền hạn",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa quyền hạn này?",
     "generalInfo": "Thông tin chung",
     "permissions": "quyền hạn"
   },
@@ -239,6 +242,7 @@
     "searchBreeds": "Tìm kiếm theo tên giống...",
     "noBreedsFound": "Không tìm thấy giống nào.",
     "deleteBreed": "Xóa giống",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa giống này?",
     "selectSpecies": "Chọn loài",
     "breeds": "giống"
   },
@@ -256,6 +260,7 @@
     "searchSpecies": "Tìm kiếm theo tên loài...",
     "noSpeciesFound": "Không tìm thấy loài nào.",
     "deleteSpecies": "Xóa loài",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa loài này?",
     "species": "loài"
   },
   "PetManagement": {
@@ -309,6 +314,7 @@
   "AdoptionManagement": {
     "title": "Yêu cầu nhận nuôi",
     "manageAdoptionsDesc": "Xem và xét duyệt các yêu cầu nhận nuôi thú cưng từ cộng đồng.",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa yêu cầu nhận nuôi này?",
     "applicant": "Người đăng ký",
     "pet": "Thú cưng",
     "requestDate": "Ngày gửi",

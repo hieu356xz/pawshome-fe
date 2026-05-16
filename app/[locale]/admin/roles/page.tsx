@@ -12,6 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/lib/navigation";
+import { toast } from "@/components/ui/toast";
+import { ConfirmModal } from "@/components/ui/confirm-modal";
 
 import { AdminTable, Column } from "@/components/admin/AdminTable";
 import { BadgeGroupCell } from "@/components/admin/table/AdminTableCells";
@@ -30,6 +32,16 @@ export default function RoleManagementPage() {
     totalPages: 1,
     totalItems: 0,
   });
+
+  const [deleteModal, setDeleteModal] = useState<{
+    isOpen: boolean;
+    roleId: string | null;
+  }>({
+    isOpen: false,
+    roleId: null,
+  });
+
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     fetchRoles();
@@ -55,6 +67,26 @@ export default function RoleManagementPage() {
       console.error("Failed to fetch roles:", error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDeleteRole = (id: string) => {
+    setDeleteModal({ isOpen: true, roleId: id });
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteModal.roleId) return;
+
+    setIsDeleting(true);
+    try {
+      await adminService.deleteRole(deleteModal.roleId);
+      toast.success(tCommon("actionSuccess") || "Role deleted successfully");
+      setDeleteModal({ isOpen: false, roleId: null });
+      fetchRoles();
+    } catch (error) {
+      console.error("Delete failed:", error);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -91,7 +123,7 @@ export default function RoleManagementPage() {
         <AdminTableActions 
           actions={[
             { label: t("editRole"), icon: TableActionIcons.Edit, href: `/admin/roles/${role.id}/edit` },
-            { label: t("deleteRole"), icon: TableActionIcons.Delete, variant: "danger" },
+            { label: t("deleteRole"), icon: TableActionIcons.Delete, variant: "danger", onClick: () => handleDeleteRole(role.id) },
           ]}
         />
       ),
@@ -154,6 +186,18 @@ export default function RoleManagementPage() {
           }}
         />
       </div>
+
+      <ConfirmModal
+        isOpen={deleteModal.isOpen}
+        onClose={() => setDeleteModal({ isOpen: false, roleId: null })}
+        onConfirm={confirmDelete}
+        title={tCommon("delete")}
+        message={t("deleteConfirm")}
+        confirmText={tCommon("delete")}
+        cancelText={tCommon("cancel")}
+        variant="danger"
+        isLoading={isDeleting}
+      />
     </div>
   );
 }

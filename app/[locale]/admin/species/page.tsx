@@ -12,6 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/lib/navigation";
+import { toast } from "@/components/ui/toast";
+import { ConfirmModal } from "@/components/ui/confirm-modal";
 
 import { AdminTable, Column } from "@/components/admin/AdminTable";
 import { AdminTableActions, TableActionIcons } from "@/components/admin/table/AdminTableActions";
@@ -29,6 +31,16 @@ export default function SpeciesManagementPage() {
     totalPages: 1,
     totalItems: 0,
   });
+
+  const [deleteModal, setDeleteModal] = useState<{
+    isOpen: boolean;
+    speciesId: number | null;
+  }>({
+    isOpen: false,
+    speciesId: null,
+  });
+
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     fetchSpecies();
@@ -57,6 +69,26 @@ export default function SpeciesManagementPage() {
     }
   };
 
+  const handleDeleteSpecies = (id: number) => {
+    setDeleteModal({ isOpen: true, speciesId: id });
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteModal.speciesId) return;
+
+    setIsDeleting(true);
+    try {
+      await speciesService.delete(deleteModal.speciesId);
+      toast.success(tCommon("actionSuccess") || "Species deleted successfully");
+      setDeleteModal({ isOpen: false, speciesId: null });
+      fetchSpecies();
+    } catch (error) {
+      console.error("Delete failed:", error);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   const columns: Column<Species>[] = [
     // ... columns definition remains same ...
     {
@@ -80,7 +112,7 @@ export default function SpeciesManagementPage() {
         <AdminTableActions 
           actions={[
             { label: t("editSpecies"), icon: TableActionIcons.Edit, href: `/admin/species/${s.id}/edit` },
-            { label: t("deleteSpecies"), icon: TableActionIcons.Delete, variant: "danger" },
+            { label: t("deleteSpecies"), icon: TableActionIcons.Delete, variant: "danger", onClick: () => handleDeleteSpecies(s.id) },
           ]}
         />
       ),
@@ -144,6 +176,18 @@ export default function SpeciesManagementPage() {
           }}
         />
       </div>
+
+      <ConfirmModal
+        isOpen={deleteModal.isOpen}
+        onClose={() => setDeleteModal({ isOpen: false, speciesId: null })}
+        onConfirm={confirmDelete}
+        title={tCommon("delete")}
+        message={t("deleteConfirm")}
+        confirmText={tCommon("delete")}
+        cancelText={tCommon("cancel")}
+        variant="danger"
+        isLoading={isDeleting}
+      />
     </div>
   );
 }

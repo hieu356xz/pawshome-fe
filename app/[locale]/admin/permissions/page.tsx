@@ -12,6 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/lib/navigation";
+import { toast } from "@/components/ui/toast";
+import { ConfirmModal } from "@/components/ui/confirm-modal";
 
 import { AdminTable, Column } from "@/components/admin/AdminTable";
 import { StatusCell } from "@/components/admin/table/AdminTableCells";
@@ -30,6 +32,16 @@ export default function PermissionManagementPage() {
     totalPages: 1,
     totalItems: 0,
   });
+
+  const [deleteModal, setDeleteModal] = useState<{
+    isOpen: boolean;
+    permissionId: string | null;
+  }>({
+    isOpen: false,
+    permissionId: null,
+  });
+
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     fetchPermissions();
@@ -55,6 +67,26 @@ export default function PermissionManagementPage() {
       console.error("Failed to fetch permissions:", error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDeletePermission = (id: string) => {
+    setDeleteModal({ isOpen: true, permissionId: id });
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteModal.permissionId) return;
+
+    setIsDeleting(true);
+    try {
+      await adminService.deletePermission(deleteModal.permissionId);
+      toast.success(tCommon("actionSuccess") || "Permission deleted successfully");
+      setDeleteModal({ isOpen: false, permissionId: null });
+      fetchPermissions();
+    } catch (error) {
+      console.error("Delete failed:", error);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -90,7 +122,7 @@ export default function PermissionManagementPage() {
         <AdminTableActions 
           actions={[
             { label: t("editPermission"), icon: TableActionIcons.Edit, href: `/admin/permissions/${p.id}/edit` },
-            { label: t("deletePermission"), icon: TableActionIcons.Delete, variant: "danger" },
+            { label: t("deletePermission"), icon: TableActionIcons.Delete, variant: "danger", onClick: () => handleDeletePermission(p.id) },
           ]}
         />
       ),
@@ -153,6 +185,18 @@ export default function PermissionManagementPage() {
           }}
         />
       </div>
+
+      <ConfirmModal
+        isOpen={deleteModal.isOpen}
+        onClose={() => setDeleteModal({ isOpen: false, permissionId: null })}
+        onConfirm={confirmDelete}
+        title={tCommon("delete")}
+        message={t("deleteConfirm")}
+        confirmText={tCommon("delete")}
+        cancelText={tCommon("cancel")}
+        variant="danger"
+        isLoading={isDeleting}
+      />
     </div>
   );
 }

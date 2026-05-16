@@ -40,4 +40,8 @@ export const userService = {
   getUserById: async (id: string): Promise<ApiResponse<User>> => {
     return apiClient.get(`/user/${id}`);
   },
+  
+  deleteUser: async (id: string): Promise<ApiResponse<void>> => {
+    return apiClient.delete(`/user/${id}`);
+  },
 };

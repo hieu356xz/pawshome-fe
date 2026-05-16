@@ -12,6 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/lib/navigation";
+import { toast } from "@/components/ui/toast";
+import { ConfirmModal } from "@/components/ui/confirm-modal";
 
 import { AdminTable, Column } from "@/components/admin/AdminTable";
 import { AdminTableActions, TableActionIcons } from "@/components/admin/table/AdminTableActions";
@@ -29,6 +31,16 @@ export default function BreedManagementPage() {
     totalPages: 1,
     totalItems: 0,
   });
+
+  const [deleteModal, setDeleteModal] = useState<{
+    isOpen: boolean;
+    breedId: number | null;
+  }>({
+    isOpen: false,
+    breedId: null,
+  });
+
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     fetchBreeds();
@@ -54,6 +66,26 @@ export default function BreedManagementPage() {
       console.error("Failed to fetch breeds:", error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDeleteBreed = (id: number) => {
+    setDeleteModal({ isOpen: true, breedId: id });
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteModal.breedId) return;
+
+    setIsDeleting(true);
+    try {
+      await breedService.delete(deleteModal.breedId);
+      toast.success(tCommon("actionSuccess") || "Breed deleted successfully");
+      setDeleteModal({ isOpen: false, breedId: null });
+      fetchBreeds();
+    } catch (error) {
+      console.error("Delete failed:", error);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -88,7 +120,7 @@ export default function BreedManagementPage() {
         <AdminTableActions 
           actions={[
             { label: t("editBreed"), icon: TableActionIcons.Edit, href: `/admin/breeds/${b.id}/edit` },
-            { label: t("deleteBreed"), icon: TableActionIcons.Delete, variant: "danger" },
+            { label: t("deleteBreed"), icon: TableActionIcons.Delete, variant: "danger", onClick: () => handleDeleteBreed(b.id) },
           ]}
         />
       ),
@@ -152,6 +184,18 @@ export default function BreedManagementPage() {
           }}
         />
       </div>
+
+      <ConfirmModal
+        isOpen={deleteModal.isOpen}
+        onClose={() => setDeleteModal({ isOpen: false, breedId: null })}
+        onConfirm={confirmDelete}
+        title={tCommon("delete")}
+        message={t("deleteConfirm")}
+        confirmText={tCommon("delete")}
+        cancelText={tCommon("cancel")}
+        variant="danger"
+        isLoading={isDeleting}
+      />
     </div>
   );
 }

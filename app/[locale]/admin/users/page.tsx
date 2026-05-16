@@ -14,6 +14,8 @@ import { Input } from "@/components/ui/input";
 import { Link } from "@/lib/navigation";
 import { adminService } from "@/services/admin.service";
 import { Role } from "@/types/auth";
+import { toast } from "@/components/ui/toast";
+import { ConfirmModal } from "@/components/ui/confirm-modal";
 
 import { AdminTable, Column } from "@/components/admin/AdminTable";
 import { AdminTableFilters, FilterGroup } from "@/components/admin/AdminTableFilters";
@@ -36,6 +38,16 @@ export default function UserManagementPage() {
     totalPages: 1,
     totalItems: 0,
   });
+
+  const [deleteModal, setDeleteModal] = useState<{
+    isOpen: boolean;
+    userId: string | null;
+  }>({
+    isOpen: false,
+    userId: null,
+  });
+
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     fetchUsers();
@@ -75,6 +87,26 @@ export default function UserManagementPage() {
       setRoles(response.data);
     } catch (error) {
       console.error("Failed to fetch roles:", error);
+    }
+  };
+
+  const handleDeleteUser = (id: string) => {
+    setDeleteModal({ isOpen: true, userId: id });
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteModal.userId) return;
+
+    setIsDeleting(true);
+    try {
+      await userService.deleteUser(deleteModal.userId);
+      toast.success(tCommon("actionSuccess") || "User deleted successfully");
+      setDeleteModal({ isOpen: false, userId: null });
+      fetchUsers();
+    } catch (error) {
+      console.error("Delete failed:", error);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -159,7 +191,7 @@ export default function UserManagementPage() {
           actions={[
             { label: t("viewProfile"), icon: TableActionIcons.View },
             { label: t("editUser"), icon: TableActionIcons.Edit, href: `/admin/users/${user.id}/edit` },
-            { label: t("deleteUser"), icon: TableActionIcons.Delete, variant: "danger" },
+            { label: t("deleteUser"), icon: TableActionIcons.Delete, variant: "danger", onClick: () => handleDeleteUser(user.id) },
           ]}
         />
       ),
@@ -228,6 +260,18 @@ export default function UserManagementPage() {
           }}
         />
       </div>
+
+      <ConfirmModal
+        isOpen={deleteModal.isOpen}
+        onClose={() => setDeleteModal({ isOpen: false, userId: null })}
+        onConfirm={confirmDelete}
+        title={tCommon("delete")}
+        message={t("deleteConfirm")}
+        confirmText={tCommon("delete")}
+        cancelText={tCommon("cancel")}
+        variant="danger"
+        isLoading={isDeleting}
+      />
     </div>
   );
 }

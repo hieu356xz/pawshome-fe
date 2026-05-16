@@ -18,6 +18,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { toast } from "@/components/ui/toast";
+import { ConfirmModal } from "@/components/ui/confirm-modal";
 
 import { AdminTable, Column } from "@/components/admin/AdminTable";
 import {
@@ -49,6 +51,16 @@ export default function BlogManagementPage() {
     totalItems: 0,
   });
 
+  const [deleteModal, setDeleteModal] = useState<{
+    isOpen: boolean;
+    postId: string | null;
+  }>({
+    isOpen: false,
+    postId: null,
+  });
+
+  const [isDeleting, setIsDeleting] = useState(false);
+
   useEffect(() => {
     fetchPosts();
   }, [pagination.page, pagination.limit, statusFilter]);
@@ -76,13 +88,23 @@ export default function BlogManagementPage() {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm(t("deleteConfirm"))) return;
+  const handleDelete = (id: string) => {
+    setDeleteModal({ isOpen: true, postId: id });
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteModal.postId) return;
+
+    setIsDeleting(true);
     try {
-      await blogService.deletePost(id);
+      await blogService.deletePost(deleteModal.postId);
+      toast.success(tCommon("actionSuccess") || "Post deleted successfully");
+      setDeleteModal({ isOpen: false, postId: null });
       fetchPosts();
     } catch (error) {
       console.error("Delete failed:", error);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -277,6 +299,18 @@ export default function BlogManagementPage() {
           }}
         />
       </div>
+
+      <ConfirmModal
+        isOpen={deleteModal.isOpen}
+        onClose={() => setDeleteModal({ isOpen: false, postId: null })}
+        onConfirm={confirmDelete}
+        title={tCommon("delete")}
+        message={t("deleteConfirm")}
+        confirmText={tCommon("delete")}
+        cancelText={tCommon("cancel")}
+        variant="danger"
+        isLoading={isDeleting}
+      />
     </div>
   );
 }
