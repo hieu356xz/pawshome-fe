@@ -279,5 +279,44 @@
       "adopted": "Đã được nhận nuôi",
       "permanent_foster": "Foster vĩnh viễn"
     }
+  },
+  "AdoptionManagement": {
+    "title": "Yêu cầu nhận nuôi",
+    "manageAdoptionsDesc": "Xem và xét duyệt các yêu cầu nhận nuôi thú cưng từ cộng đồng.",
+    "applicant": "Người đăng ký",
+    "pet": "Thú cưng",
+    "requestDate": "Ngày gửi",
+    "status": "Trạng thái",
+    "review": "Xét duyệt",
+    "approve": "Chấp thuận",
+    "reject": "Từ chối",
+    "reason": "Lý do nhận nuôi",
+    "experience": "Kinh nghiệm nuôi",
+    "livingSituation": "Điều kiện sống",
+    "noRequestsFound": "Không có yêu cầu nào.",
+    "searchRequests": "Tìm kiếm người đăng ký hoặc thú cưng...",
+    "reviewRequest": "Xét duyệt yêu cầu",
+    "notes": "Ghi chú nội bộ",
+    "statusUpdateSuccess": "Đã cập nhật trạng thái yêu cầu.",
+    "rejectionReason": "Lý do từ chối",
+    "rejectionNote": "Giải thích thêm (cho người dùng)",
+    "approvalMessage": "Lời nhắn khi chấp thuận",
+    "AdoptionStatuses": {
+      "pending": "Chờ duyệt",
+      "approved": "Đã chấp thuận",
+      "rejected": "Đã từ chối"
+    },
+    "RejectionReasons": {
+      "NOT_ENOUGH_EXPERIENCE": "Chưa có kinh nghiệm nuôi",
+      "INSUFFICIENT_LIVING_SPACE": "Không gian sống chưa phù hợp",
+      "NO_YARD_FOR_PET": "Không có sân vườn",
+      "FINANCIAL_UNSTABLE": "Tài chính chưa ổn định",
+      "COMMITMENT_QUESTIONS": "Câu hỏi về sự cam kết",
+      "OTHER_PETS_INCOMPATIBLE": "Không tương thích với thú cưng hiện có",
+      "PET_ALREADY_ADOPTED": "Thú cưng đã được nhận nuôi",
+      "INCOMPLETE_APPLICATION": "Hồ sơ chưa đầy đủ",
+      "OTHER_REQUEST_APPROVED": "Đã duyệt yêu cầu khác",
+      "OTHER": "Lý do khác"
+    }
   }
 }

@@ -16,7 +16,7 @@ export interface CreateAdoptionRequest {
 }
 
 export const adoptionService = {
-  submitRequest: async (petId: number, data: CreateAdoptionRequest): Promise<ApiResponse<any>> => {
+  submitRequest: async (petId: string, data: CreateAdoptionRequest): Promise<ApiResponse<any>> => {
     return apiClient.post(`/pets/${petId}/adoption-requests`, data);
   },
 
@@ -28,11 +28,15 @@ export const adoptionService = {
     return apiClient.get('/adoption-requests', { params });
   },
 
-  getRequestDetails: async (petId: number, id: number): Promise<ApiResponse<any>> => {
+  getRequestDetails: async (petId: string, id: string): Promise<ApiResponse<any>> => {
     return apiClient.get(`/pets/${petId}/adoption-requests/${id}`);
   },
 
-  reviewRequest: async (petId: number, id: number, data: any): Promise<ApiResponse<any>> => {
+  reviewRequest: async (petId: string, id: string, data: any): Promise<ApiResponse<any>> => {
     return apiClient.put(`/pets/${petId}/adoption-requests/${id}/review`, data);
+  },
+
+  deleteRequest: async (petId: string, id: string): Promise<ApiResponse<void>> => {
+    return apiClient.delete(`/pets/${petId}/adoption-requests/${id}`);
   },
 };

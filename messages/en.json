@@ -279,5 +279,44 @@
       "adopted": "Adopted",
       "permanent_foster": "Permanent Foster"
     }
+  },
+  "AdoptionManagement": {
+    "title": "Adoption Requests",
+    "manageAdoptionsDesc": "Review and manage adoption requests from the community.",
+    "applicant": "Applicant",
+    "pet": "Pet",
+    "requestDate": "Request Date",
+    "status": "Status",
+    "review": "Review",
+    "approve": "Approve",
+    "reject": "Reject",
+    "reason": "Reason for Adoption",
+    "experience": "Experience",
+    "livingSituation": "Living Situation",
+    "noRequestsFound": "No requests found.",
+    "searchRequests": "Search applicant or pet...",
+    "reviewRequest": "Review Request",
+    "notes": "Internal Notes",
+    "statusUpdateSuccess": "Request status updated.",
+    "rejectionReason": "Rejection Reason",
+    "rejectionNote": "Rejection Note (for applicant)",
+    "approvalMessage": "Approval Message",
+    "AdoptionStatuses": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "RejectionReasons": {
+      "NOT_ENOUGH_EXPERIENCE": "Not enough experience",
+      "INSUFFICIENT_LIVING_SPACE": "Insufficient living space",
+      "NO_YARD_FOR_PET": "No yard for pet",
+      "FINANCIAL_UNSTABLE": "Financial instability",
+      "COMMITMENT_QUESTIONS": "Commitment concerns",
+      "OTHER_PETS_INCOMPATIBLE": "Incompatible with existing pets",
+      "PET_ALREADY_ADOPTED": "Pet already adopted",
+      "INCOMPLETE_APPLICATION": "Incomplete application",
+      "OTHER_REQUEST_APPROVED": "Other request approved",
+      "OTHER": "Other reason"
+    }
   }
 }
