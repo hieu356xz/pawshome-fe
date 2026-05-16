@@ -13,6 +13,7 @@ import {
 import { cn } from "@/lib/utils";
 
 export function AdminHeader() {
+  const t = useTranslations("AdminHeader");
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();

@@ -90,7 +90,7 @@
     "LOST": "Lost",
     "FOUND": "Found"
   },
-  "Admin": {
+  "AdminSidebar": {
     "dashboard": "Dashboard",
     "users": "Users",
     "roles": "Roles",
@@ -103,11 +103,52 @@
     "community": "Community Posts",
     "settings": "Settings",
     "backToHome": "Back to Home",
-    "logout": "Logout",
+    "logout": "Logout"
+  },
+  "AdminHeader": {
     "welcome": "Welcome back, {name}",
-    "overview": "Overview",
     "profile": "Profile Settings",
     "systemPreferences": "System Preferences",
-    "myAccount": "My Account"
+    "myAccount": "My Account",
+    "backToHome": "Back to Home",
+    "logout": "Logout"
+  },
+  "UserManagement": {
+    "title": "User Management",
+    "manageUsersDesc": "Manage and monitor all platform members.",
+    "addUser": "Add User",
+    "createUser": "Create New User",
+    "editUser": "Edit User",
+    "createMemberDesc": "Add a new member to the PawsHome community.",
+    "updateMemberDesc": "Update information for {name}.",
+    "searchUsers": "Search users by name or email...",
+    "export": "Export",
+    "actions": "Actions",
+    "joinedDate": "Joined Date",
+    "user": "User",
+    "role": "Role",
+    "status": "Status",
+    "viewProfile": "View Profile",
+    "deleteUser": "Delete User",
+    "noUsersFound": "No users found matching your search.",
+    "userNotFound": "User not found",
+    "userNotFoundDesc": "The user you are looking for does not exist or has been deleted.",
+    "generalInfo": "General Information",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "phoneNumber": "Phone Number",
+    "address": "Address",
+    "password": "Password",
+    "rolesAndPermissions": "Roles & Permissions",
+    "profileImage": "Profile Image",
+    "accountStatus": "Account Status",
+    "updateUser": "Update User",
+    "backToUsers": "Back to Users",
+    "loadingRoles": "Loading roles...",
+    "showing": "Showing",
+    "of": "of",
+    "previous": "Previous",
+    "next": "Next",
+    "users": "users"
   }
 }

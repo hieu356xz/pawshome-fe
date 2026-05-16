@@ -2,6 +2,16 @@ import { apiClient } from '@/lib/api-client';
 import { ApiResponse } from '@/types/common';
 import { User } from '@/types/auth';
 
+export interface CreateUserDto {
+  email: string;
+  password?: string;
+  fullName?: string;
+  bio?: string;
+  phoneNumber?: string;
+  address?: string;
+  avatarUrl?: string;
+}
+
 export interface UpdateUserDto {
   fullName?: string;
   bio?: string;
@@ -11,11 +21,15 @@ export interface UpdateUserDto {
 }
 
 export const userService = {
-  updateProfile: async (id: number, data: UpdateUserDto): Promise<ApiResponse<User>> => {
+  createUser: async (data: CreateUserDto): Promise<ApiResponse<User>> => {
+    return apiClient.post('/user', data);
+  },
+
+  updateUser: async (id: string, data: UpdateUserDto): Promise<ApiResponse<User>> => {
     return apiClient.patch(`/user/${id}`, data);
   },
 
-  assignRoles: async (id: number, roleIds: number[]): Promise<ApiResponse<User>> => {
+  assignRoles: async (id: string, roleIds: string[]): Promise<ApiResponse<User>> => {
     return apiClient.post(`/user/${id}/roles`, { roleIds });
   },
 
@@ -23,7 +37,7 @@ export const userService = {
     return apiClient.get('/user', { params });
   },
 
-  getUserById: async (id: number): Promise<ApiResponse<User>> => {
+  getUserById: async (id: string): Promise<ApiResponse<User>> => {
     return apiClient.get(`/user/${id}`);
   },
 };

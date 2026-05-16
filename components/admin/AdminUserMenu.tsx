@@ -14,7 +14,7 @@ import {
 
 export function AdminUserMenu() {
   const { user, logout } = useAuth();
-  const t = useTranslations("Admin");
+  const t = useTranslations("AdminHeader");
 
   return (
     <DropdownMenu>

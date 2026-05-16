@@ -35,22 +35,21 @@ export type PermissionKey = `${Resource}:${Action}` | WildcardPermissionKey;
 export type RoleName = 'admin' | 'manager' | 'staff' | 'veterinarian' | 'volunteer' | 'member';
 
 export interface Permission {
-  id: number;
-  name: string;
+  id: string;
+  key: string;
   description?: string;
-  action: Action;
-  subject: Resource;
+  assignable?: boolean;
 }
 
 export interface Role {
-  id: number;
+  id: string;
   name: string;
   description?: string;
   permissions?: Permission[];
 }
 
 export interface User {
-  id: number;
+  id: string;
   email: string;
   fullName?: string;
   avatarUrl?: string;

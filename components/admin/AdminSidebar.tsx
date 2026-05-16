@@ -30,7 +30,7 @@ interface SidebarItem {
 }
 
 export function AdminSidebar() {
-  const t = useTranslations("Admin");
+  const t = useTranslations("AdminSidebar");
   const pathname = usePathname();
   const { user, logout } = useAuth();
 

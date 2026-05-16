@@ -7,19 +7,19 @@ export const adminService = {
   getRoles: async (params?: any): Promise<ApiResponse<Role[]>> => {
     return apiClient.get('/role', { params });
   },
-  getRoleById: async (id: number): Promise<ApiResponse<Role>> => {
+  getRoleById: async (id: string): Promise<ApiResponse<Role>> => {
     return apiClient.get(`/role/${id}`);
   },
   createRole: async (data: Partial<Role>): Promise<ApiResponse<Role>> => {
     return apiClient.post('/role', data);
   },
-  updateRole: async (id: number, data: Partial<Role>): Promise<ApiResponse<Role>> => {
+  updateRole: async (id: string, data: Partial<Role>): Promise<ApiResponse<Role>> => {
     return apiClient.patch(`/role/${id}`, data);
   },
-  deleteRole: async (id: number): Promise<ApiResponse<void>> => {
+  deleteRole: async (id: string): Promise<ApiResponse<void>> => {
     return apiClient.delete(`/role/${id}`);
   },
-  assignPermissionsToRole: async (roleId: number, permissionIds: number[]): Promise<ApiResponse<Role>> => {
+  assignPermissionsToRole: async (roleId: string, permissionIds: string[]): Promise<ApiResponse<Role>> => {
     return apiClient.post(`/role/${roleId}/permissions`, { permissionIds });
   },
 
@@ -27,16 +27,16 @@ export const adminService = {
   getPermissions: async (params?: any): Promise<ApiResponse<Permission[]>> => {
     return apiClient.get('/permission', { params });
   },
-  getPermissionById: async (id: number): Promise<ApiResponse<Permission>> => {
+  getPermissionById: async (id: string): Promise<ApiResponse<Permission>> => {
     return apiClient.get(`/permission/${id}`);
   },
   createPermission: async (data: Partial<Permission>): Promise<ApiResponse<Permission>> => {
     return apiClient.post('/permission', data);
   },
-  updatePermission: async (id: number, data: Partial<Permission>): Promise<ApiResponse<Permission>> => {
+  updatePermission: async (id: string, data: Partial<Permission>): Promise<ApiResponse<Permission>> => {
     return apiClient.patch(`/permission/${id}`, data);
   },
-  deletePermission: async (id: number): Promise<ApiResponse<void>> => {
+  deletePermission: async (id: string): Promise<ApiResponse<void>> => {
     return apiClient.delete(`/permission/${id}`);
   },
 
@@ -47,10 +47,10 @@ export const adminService = {
   createPolicy: async (data: any): Promise<ApiResponse<any>> => {
     return apiClient.post('/policy', data);
   },
-  updatePolicy: async (roleId: number, permissionId: number, data: any): Promise<ApiResponse<any>> => {
+  updatePolicy: async (roleId: string, permissionId: string, data: any): Promise<ApiResponse<any>> => {
     return apiClient.patch(`/policy/${roleId}/${permissionId}`, data);
   },
-  deletePolicy: async (roleId: number, permissionId: number): Promise<ApiResponse<void>> => {
+  deletePolicy: async (roleId: string, permissionId: string): Promise<ApiResponse<void>> => {
     return apiClient.delete(`/policy/${roleId}/${permissionId}`);
   },
 };
