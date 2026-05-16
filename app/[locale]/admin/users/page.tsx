@@ -149,11 +149,12 @@ export default function UserManagementPage() {
           <p className="text-gray-500 mt-1">{t("manageUsersDesc")}</p>
         </div>
         <div className="flex items-center gap-3">
-          <Link href="/admin/users/create">
-            <Button className="rounded-xl bg-orange-500 hover:bg-orange-600 text-white gap-2 shadow-lg shadow-orange-200 transition-all h-10 px-4">
-              <UserPlus size={18} />
-              {t("addUser")}
-            </Button>
+          <Link 
+            href="/admin/users/create"
+            className="rounded-xl bg-orange-500 hover:bg-orange-600 text-white gap-2 shadow-lg shadow-orange-200 transition-all h-10 px-4 flex items-center justify-center font-medium"
+          >
+            <UserPlus size={18} />
+            {t("addUser")}
           </Link>
         </div>
       </div>

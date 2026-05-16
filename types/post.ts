@@ -17,11 +17,17 @@ export interface PostImage {
   imageUrl: string;
 }
 
-export interface Comment {
+export interface Tag {
   id: number;
-  userId: number;
+  name: string;
+  slug: string;
+}
+
+export interface Comment {
+  id: string;
+  userId: string;
   content: string;
-  parentId?: number;
+  parentId?: string;
   createdAt: string;
   updatedAt: string;
   user?: User;
@@ -29,8 +35,8 @@ export interface Comment {
 }
 
 export interface PetPost {
-  id: number;
-  userId: number;
+  id: string;
+  userId: string;
   postType: PostType;
   title: string;
   description: string;
@@ -46,21 +52,22 @@ export interface PetPost {
 export interface PetPostQuery extends PaginationParams {
   postType?: PostType;
   postStatus?: PostStatus;
-  userId?: number;
+  userId?: string;
 }
 
 export interface BlogPost {
-  id: number;
-  userId: number;
+  id: string;
+  userId: string;
   title: string;
   slug: string;
   content: string;
   excerpt?: string;
-  status: 'DRAFT' | 'PUBLISHED';
+  status: 'draft' | 'published' | 'archived';
   featuredImageUrl?: string;
   viewCount: number;
-  tags?: string[];
+  tags?: Tag[];
   createdAt: string;
   updatedAt: string;
   comments?: Comment[];
+  user?: User;
 }

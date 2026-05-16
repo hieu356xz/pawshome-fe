@@ -318,5 +318,33 @@
       "OTHER_REQUEST_APPROVED": "Đã duyệt yêu cầu khác",
       "OTHER": "Lý do khác"
     }
+  },
+  "BlogManagement": {
+    "title": "Quản lý Blog",
+    "manageBlogDesc": "Tạo và quản lý các bài viết kiến thức, tin tức về thú cưng.",
+    "postTitle": "Tiêu đề bài viết",
+    "slug": "Đường dẫn (Slug)",
+    "status": "Trạng thái",
+    "author": "Tác giả",
+    "publishDate": "Ngày đăng",
+    "actions": "Thao tác",
+    "createPost": "Viết bài mới",
+    "editPost": "Chỉnh sửa bài viết",
+    "deletePost": "Xóa bài viết",
+    "noPostsFound": "Không tìm thấy bài viết nào.",
+    "searchPosts": "Tìm theo tiêu đề hoặc tác giả...",
+    "content": "Nội dung",
+    "excerpt": "Tóm tắt ngắn",
+    "tags": "Thẻ (Tags)",
+    "featuredImage": "Ảnh đại diện bài viết",
+    "saveDraft": "Lưu nháp",
+    "publish": "Xuất bản",
+    "updatePost": "Cập nhật bài viết",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa bài viết này?",
+    "PostStatuses": {
+      "draft": "Bản nháp",
+      "published": "Đã xuất bản",
+      "archived": "Đã lưu trữ"
+    }
   }
 }

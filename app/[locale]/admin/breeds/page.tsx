@@ -92,11 +92,12 @@ export default function BreedManagementPage() {
           <p className="text-gray-500 mt-1">{t("manageBreedsDesc")}</p>
         </div>
         <div className="flex items-center gap-3">
-          <Link href="/admin/breeds/create">
-            <Button className="rounded-xl bg-orange-500 hover:bg-orange-600 text-white gap-2 shadow-lg shadow-orange-200 transition-all h-10 px-4">
-              <Plus size={18} />
-              {t("addBreed")}
-            </Button>
+          <Link 
+            href="/admin/breeds/create"
+            className="rounded-xl bg-orange-500 hover:bg-orange-600 text-white gap-2 shadow-lg shadow-orange-200 transition-all h-10 px-4 flex items-center justify-center font-medium"
+          >
+            <Plus size={18} />
+            {t("addBreed")}
           </Link>
         </div>
       </div>

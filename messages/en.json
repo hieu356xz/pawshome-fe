@@ -318,5 +318,33 @@
       "OTHER_REQUEST_APPROVED": "Other request approved",
       "OTHER": "Other reason"
     }
+  },
+  "BlogManagement": {
+    "title": "Blog Management",
+    "manageBlogDesc": "Create and manage pet care articles, news, and guides.",
+    "postTitle": "Title",
+    "slug": "Slug",
+    "status": "Status",
+    "author": "Author",
+    "publishDate": "Publish Date",
+    "actions": "Actions",
+    "createPost": "Create Post",
+    "editPost": "Edit Post",
+    "deletePost": "Delete Post",
+    "noPostsFound": "No posts found.",
+    "searchPosts": "Search by title or author...",
+    "content": "Content",
+    "excerpt": "Excerpt",
+    "tags": "Tags",
+    "featuredImage": "Featured Image",
+    "saveDraft": "Save Draft",
+    "publish": "Publish",
+    "updatePost": "Update Post",
+    "deleteConfirm": "Are you sure you want to delete this post?",
+    "PostStatuses": {
+      "draft": "Draft",
+      "published": "Published",
+      "archived": "Archived"
+    }
   }
 }
