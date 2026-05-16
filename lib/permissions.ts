@@ -6,12 +6,17 @@ export const hasPermission = (user: User | null, permission: PermissionKey): boo
   // Admin has all permissions
   if (user.roles.some(role => role.name === 'admin')) return true;
 
-  const [resource, action] = permission.split(':') as [Resource, Action | '*'];
+  const [reqResource, reqAction] = permission.split(':') as [Resource, Action | '*'];
 
   return user.roles.some(role => 
     role.permissions?.some(p => {
-      const isResourceMatch = p.subject === resource || p.subject === '*' as any;
-      const isActionMatch = p.action === action || action === '*' || p.action === '*' as any;
+      if (p.key === permission || p.key === '*') return true;
+
+      const [pResource, pAction] = p.key.split(':');
+
+      const isResourceMatch = pResource === reqResource || pResource === '*';
+      const isActionMatch = pAction === reqAction || pAction === '*' || reqAction === '*';
+
       return isResourceMatch && isActionMatch;
     })
   );
