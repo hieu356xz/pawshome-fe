@@ -174,7 +174,13 @@
     "updateUser": "Update User",
     "backToUsers": "Back to Users",
     "loadingRoles": "Loading roles...",
-    "users": "users"
+    "users": "users",
+    "Statuses": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "suspended": "Suspended",
+      "banned": "Banned"
+    }
   },
   "RoleManagement": {
     "title": "Role Management",

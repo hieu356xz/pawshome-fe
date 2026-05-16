@@ -3,6 +3,7 @@
 import React from "react";
 import { Mail, Shield, Calendar } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 
 /**
  * Avatar & User Info Cell
@@ -116,9 +117,18 @@ export interface DateCellProps {
 }
 
 export function DateCell({ date, className }: DateCellProps) {
-  const formattedDate = typeof date === 'string' ? date : date.toLocaleDateString();
+  if (!date) return <span className="text-gray-400 text-xs italic">N/A</span>;
+
+  const dateObj = typeof date === "string" ? new Date(date) : date;
+
+  if (isNaN(dateObj.getTime())) {
+    return <span className="text-gray-400 text-xs italic">Invalid</span>;
+  }
+
+  const formattedDate = format(dateObj, "dd/MM/yyyy");
+
   return (
-    <p className={cn("text-sm text-gray-600 flex items-center gap-1.5", className)}>
+    <p className={cn("text-sm text-gray-600 flex items-center gap-1.5 font-medium", className)}>
       <Calendar size={14} className="text-gray-400" />
       {formattedDate}
     </p>

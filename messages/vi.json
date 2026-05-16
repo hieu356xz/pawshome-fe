@@ -174,7 +174,13 @@
     "updateUser": "Cập nhật người dùng",
     "backToUsers": "Quay lại danh sách",
     "loadingRoles": "Đang tải vai trò...",
-    "users": "người dùng"
+    "users": "người dùng",
+    "Statuses": {
+      "active": "Hoạt động",
+      "inactive": "Ngưng hoạt động",
+      "suspended": "Tạm khóa",
+      "banned": "Bị cấm"
+    }
   },
   "RoleManagement": {
     "title": "Quản lý vai trò",
