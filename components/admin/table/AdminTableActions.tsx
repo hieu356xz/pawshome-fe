@@ -2,11 +2,11 @@
 
 import React from "react";
 import { MoreHorizontal, Eye, Edit2, Trash2 } from "lucide-react";
-import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuItem, 
-  DropdownMenuTrigger 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Link } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
@@ -24,16 +24,22 @@ interface AdminTableActionsProps {
   className?: string;
 }
 
-export function AdminTableActions({ actions, className }: AdminTableActionsProps) {
+export function AdminTableActions({
+  actions,
+  className,
+}: AdminTableActionsProps) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className={cn(
-        "p-2 hover:bg-gray-100 rounded-xl transition-all text-gray-400 hover:text-gray-900 outline-none border-none cursor-pointer flex items-center justify-center",
-        className
-      )}>
+      <DropdownMenuTrigger
+        className={cn(
+          "p-2 hover:bg-gray-100 rounded-xl transition-all text-gray-400 hover:text-gray-900 outline-none border-none cursor-pointer flex items-center justify-center",
+          className,
+        )}>
         <MoreHorizontal size={20} />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-48 rounded-2xl p-2 shadow-xl border-gray-100 bg-white z-50">
+      <DropdownMenuContent
+        align="end"
+        className="w-48 rounded-2xl p-2 shadow-xl border-gray-100 bg-white z-50">
         {actions.map((action, index) => {
           const content = (
             <>
@@ -42,31 +48,15 @@ export function AdminTableActions({ actions, className }: AdminTableActionsProps
             </>
           );
 
-          if (action.href) {
-            return (
-              <DropdownMenuItem key={index} className="p-0 cursor-pointer">
-                <Link 
-                  href={action.href} 
-                  className={cn(
-                    "flex items-center gap-2 py-2.5 px-3 w-full rounded-xl outline-none focus:bg-orange-50 focus:text-orange-600 transition-colors",
-                    action.variant === "danger" && "text-red-500 focus:bg-red-50 focus:text-red-600"
-                  )}
-                >
-                  {content}
-                </Link>
-              </DropdownMenuItem>
-            );
-          }
-
           return (
-            <DropdownMenuItem 
-              key={index} 
+            <DropdownMenuItem
+              key={index}
               onClick={action.onClick}
               className={cn(
                 "rounded-xl cursor-pointer flex items-center gap-2 py-2.5 px-3 focus:bg-orange-50 focus:text-orange-600 transition-colors",
-                action.variant === "danger" && "text-red-500 focus:bg-red-50 focus:text-red-600"
-              )}
-            >
+                action.variant === "danger" &&
+                  "text-red-500 focus:bg-red-50 focus:text-red-600",
+              )}>
               {content}
             </DropdownMenuItem>
           );
