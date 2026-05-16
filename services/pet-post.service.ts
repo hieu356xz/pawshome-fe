@@ -27,12 +27,20 @@ export const petPostService = {
     return apiClient.delete(`/pet-posts/${id}`);
   },
 
-  searchByImage: async (file: File): Promise<ApiResponse<PetPost[]>> => {
-    const formData = new FormData();
-    formData.append('image', file);
-    return apiClient.post('/pet-posts/search/image', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+  search: async (params: any, file?: File): Promise<ApiResponse<PetPost[]>> => {
+    if (file) {
+      const formData = new FormData();
+      formData.append('image', file);
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          formData.append(key, String(value));
+        }
+      });
+      return apiClient.post('/pet-posts/search', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+    }
+    return apiClient.get('/pet-posts/search', { params });
   },
 
   // Images

@@ -10,7 +10,8 @@
     "logout": "Logout",
     "profile": "Profile",
     "settings": "Settings",
-    "adminDashboard": "Admin Dashboard"
+    "adminDashboard": "Admin Dashboard",
+    "search": "Search"
   },
   "Hero": {
     "badge": "Established & Trusted",
@@ -485,7 +486,12 @@
     "PostTypes": {
       "lost": "Lost",
       "found": "Found"
-    }
+    },
+    "PostStatuses": {
+      "active": "Active",
+      "closed": "Closed"
+    },
+    "status": "Status"
   },
   "PetList": {
     "title": "Find Your New Best Friend",
@@ -610,7 +616,9 @@
     "Anonymous": "Anonymous",
     "noDescription": "No description available.",
     "all": "All",
-    "resetAll": "Reset All"
+    "resetAll": "Reset All",
+    "results": "results",
+    "search": "Search"
   },
   "Blog": {
     "title": "Educational Corner & Pet Stories",
@@ -628,5 +636,21 @@
     "tags": "Topics",
     "posts": "articles",
     "pawsHomeTeam": "PawsHome Team"
+  },
+  "Search": {
+    "title": "Unified Search",
+    "subtitle": "Search for pets or articles using text or images with AI power.",
+    "searchPlaceholder": "Type keywords to search...",
+    "imageSearch": "Visual Search",
+    "uploadPrompt": "Drag & drop image here or click to browse",
+    "uploadHint": "AI will analyze the image to find the best matching results",
+    "searchPets": "Find Pets",
+    "searchPosts": "Find Posts",
+    "analyzing": "Analyzing image...",
+    "noResults": "No results found.",
+    "noResultsDesc": "Try changing your keywords or use a clearer image.",
+    "resultsFound": "Found {count} results",
+    "clearImage": "Clear image",
+    "textAndImage": "Combined text and image search"
   }
 }

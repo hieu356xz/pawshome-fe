@@ -10,7 +10,8 @@
     "logout": "Đăng xuất",
     "profile": "Trang cá nhân",
     "settings": "Cài đặt",
-    "adminDashboard": "Trang quản trị"
+    "adminDashboard": "Trang quản trị",
+    "search": "Tìm kiếm"
   },
   "Hero": {
     "badge": "Tin cậy & Uy tín",
@@ -485,7 +486,12 @@
     "PostTypes": {
       "lost": "Bị lạc",
       "found": "Tìm thấy"
-    }
+    },
+    "PostStatuses": {
+      "active": "Đang hoạt động",
+      "closed": "Đã đóng"
+    },
+    "status": "Trạng thái"
   },
   "PetList": {
     "title": "Tìm người bạn bốn chân mới của bạn",
@@ -610,7 +616,9 @@
     "Anonymous": "Ẩn danh",
     "noDescription": "Không có mô tả nào được cung cấp.",
     "all": "Tất cả",
-    "resetAll": "Đặt lại tất cả"
+    "resetAll": "Đặt lại tất cả",
+    "results": "kết quả",
+    "search": "Tìm kiếm"
   },
   "Blog": {
     "title": "Góc chia sẻ & Kiến thức",
@@ -628,5 +636,21 @@
     "tags": "Chủ đề",
     "posts": "bài viết",
     "pawsHomeTeam": "Đội ngũ PawsHome"
+  },
+  "Search": {
+    "title": "Tìm kiếm thông minh",
+    "subtitle": "Tìm kiếm thú cưng hoặc bài viết bằng văn bản hoặc hình ảnh với sức mạnh AI.",
+    "searchPlaceholder": "Nhập từ khóa tìm kiếm...",
+    "imageSearch": "Tìm bằng hình ảnh",
+    "uploadPrompt": "Kéo thả ảnh vào đây hoặc click để chọn",
+    "uploadHint": "AI sẽ phân tích hình ảnh để tìm kết quả tương đồng nhất",
+    "searchPets": "Tìm thú cưng",
+    "searchPosts": "Tìm bài đăng",
+    "analyzing": "Đang phân tích hình ảnh...",
+    "noResults": "Không tìm thấy kết quả nào phù hợp.",
+    "noResultsDesc": "Hãy thử thay đổi từ khóa hoặc sử dụng một hình ảnh khác rõ nét hơn.",
+    "resultsFound": "Tìm thấy {count} kết quả",
+    "clearImage": "Xóa ảnh",
+    "textAndImage": "Kết hợp văn bản và hình ảnh"
   }
 }

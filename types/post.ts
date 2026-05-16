@@ -75,3 +75,8 @@ export interface BlogPost {
   comments?: Comment[];
   user?: User;
 }
+
+export interface PostSearchResult {
+  post: PetPost;
+  similarityScore: number;
+}

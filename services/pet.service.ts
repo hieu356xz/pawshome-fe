@@ -16,9 +16,13 @@ export const petService = {
       const formData = new FormData();
       formData.append('image', file);
       Object.entries(data).forEach(([key, value]) => {
-        if (value !== undefined) formData.append(key, String(value));
+        if (value !== undefined && value !== null) {
+          formData.append(key, String(value));
+        }
       });
-      return apiClient.post('/pets/search', formData);
+      return apiClient.post('/pets/search', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
     }
     return apiClient.post('/pets/search', data);
   },

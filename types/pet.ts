@@ -102,3 +102,8 @@ export interface PetSearch extends PaginationParams {
   ageGroup?: PetAgeGroup;
   adoptionStatus?: AdoptionStatus;
 }
+
+export interface PetSearchResult {
+  pet: Pet;
+  similarityScore: number;
+}
