@@ -217,5 +217,20 @@
     "deleteBreed": "Xóa giống",
     "selectSpecies": "Chọn loài",
     "breeds": "giống"
+  },
+  "SpeciesManagement": {
+    "title": "Quản lý loài",
+    "manageSpeciesDesc": "Quản lý các nhóm loài chính (Chó, Mèo, v.v.)",
+    "addSpecies": "Thêm loài",
+    "createSpecies": "Tạo loài mới",
+    "editSpecies": "Chỉnh sửa loài",
+    "updateSpecies": "Cập nhật loài",
+    "backToSpecies": "Quay lại danh sách",
+    "speciesName": "Tên loài",
+    "description": "Mô tả",
+    "searchSpecies": "Tìm kiếm theo tên loài...",
+    "noSpeciesFound": "Không tìm thấy loài nào.",
+    "deleteSpecies": "Xóa loài",
+    "species": "loài"
   }
 }

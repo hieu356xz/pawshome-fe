@@ -217,5 +217,20 @@
     "deleteBreed": "Delete Breed",
     "selectSpecies": "Select Species",
     "breeds": "breeds"
+  },
+  "SpeciesManagement": {
+    "title": "Species Management",
+    "manageSpeciesDesc": "Manage primary species groups (Dogs, Cats, etc.)",
+    "addSpecies": "Add Species",
+    "createSpecies": "Create New Species",
+    "editSpecies": "Edit Species",
+    "updateSpecies": "Update Species",
+    "backToSpecies": "Back to Species",
+    "speciesName": "Species Name",
+    "description": "Description",
+    "searchSpecies": "Search by species name...",
+    "noSpeciesFound": "No species found.",
+    "deleteSpecies": "Delete Species",
+    "species": "species"
   }
 }
