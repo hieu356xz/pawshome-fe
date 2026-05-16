@@ -23,15 +23,33 @@ export default function BreedManagementPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 10,
+    totalPages: 1,
+    totalItems: 0,
+  });
+
   useEffect(() => {
     fetchBreeds();
-  }, []);
+  }, [pagination.page, pagination.limit]);
 
   const fetchBreeds = async () => {
     setIsLoading(true);
     try {
-      const response = await breedService.getAll();
+      const response = await breedService.getAll({
+        page: pagination.page,
+        limit: pagination.limit,
+        search: searchTerm,
+      });
       setBreeds(response.data);
+      if (response.meta) {
+        setPagination((prev) => ({
+          ...prev,
+          totalPages: response.meta?.totalPages || 1,
+          totalItems: response.meta?.totalItems || 0,
+        }));
+      }
     } catch (error) {
       console.error("Failed to fetch breeds:", error);
     } finally {
@@ -39,15 +57,8 @@ export default function BreedManagementPage() {
     }
   };
 
-  const filteredBreeds = breeds.filter(b => {
-    const matchesSearch = 
-      b.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      b.species?.name.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    return matchesSearch;
-  });
-
   const columns: Column<Breed>[] = [
+    // ... columns definition remains same ...
     {
       header: t("breedName"),
       cell: (b) => (
@@ -102,7 +113,7 @@ export default function BreedManagementPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm">
         <div className="p-6 border-b border-gray-50">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
             <div className="relative w-full md:w-96 group">
@@ -112,6 +123,12 @@ export default function BreedManagementPage() {
                 className="pl-12 h-12 rounded-2xl bg-gray-50 border-none focus-visible:ring-2 focus-visible:ring-orange-200 transition-all"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    setPagination({ ...pagination, page: 1 });
+                    fetchBreeds();
+                  }
+                }}
               />
             </div>
           </div>
@@ -119,14 +136,14 @@ export default function BreedManagementPage() {
 
         <AdminTable 
           columns={columns}
-          data={filteredBreeds}
+          data={breeds}
           isLoading={isLoading}
           emptyMessage={t("noBreedsFound")}
           pagination={{
-            currentPage: 1,
-            totalPages: 1,
-            totalItems: filteredBreeds.length,
-            onPageChange: () => {},
+            currentPage: pagination.page,
+            totalPages: pagination.totalPages,
+            totalItems: pagination.totalItems,
+            onPageChange: (page) => setPagination({ ...pagination, page }),
             showingLabel: tCommon("showing"),
             ofLabel: tCommon("of"),
             itemsLabel: t("breeds"),

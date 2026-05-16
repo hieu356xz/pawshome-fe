@@ -41,15 +41,34 @@ export default function CommunityManagementPage() {
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
   const [typeFilter, setTypeFilter] = useState<string | null>(null);
 
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 10,
+    totalPages: 1,
+    totalItems: 0,
+  });
+
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [pagination.page, pagination.limit, statusFilter, typeFilter]);
 
   const fetchPosts = async () => {
     setIsLoading(true);
     try {
-      const response = await petPostService.getPosts();
+      const response = await petPostService.getPosts({
+        page: pagination.page,
+        limit: pagination.limit,
+        postStatus: statusFilter as PostStatus,
+        postType: typeFilter as PostType,
+      });
       setPosts(response.data);
+      if (response.meta) {
+        setPagination((prev) => ({
+          ...prev,
+          totalPages: response.meta?.totalPages || 1,
+          totalItems: response.meta?.totalItems || 0,
+        }));
+      }
     } catch (error) {
       console.error("Failed to fetch community posts:", error);
     } finally {
@@ -61,7 +80,7 @@ export default function CommunityManagementPage() {
     if (!confirm(t("deleteConfirm"))) return;
     try {
       await petPostService.deletePost(id);
-      setPosts(posts.filter((p) => p.id !== id));
+      fetchPosts();
     } catch (error) {
       console.error("Delete failed:", error);
     }
@@ -71,7 +90,7 @@ export default function CommunityManagementPage() {
     const newStatus = post.postStatus === PostStatus.ACTIVE ? PostStatus.CLOSED : PostStatus.ACTIVE;
     try {
       await petPostService.updateStatus(post.id, newStatus);
-      setPosts(posts.map(p => p.id === post.id ? { ...p, postStatus: newStatus } : p));
+      fetchPosts();
     } catch (error) {
       console.error("Failed to update status:", error);
     }
@@ -83,10 +102,7 @@ export default function CommunityManagementPage() {
       post.user?.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.location?.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesStatus = !statusFilter || post.postStatus === statusFilter;
-    const matchesType = !typeFilter || post.postType === typeFilter;
-
-    return matchesSearch && matchesStatus && matchesType;
+    return matchesSearch;
   });
 
   const filterGroups: FilterGroup[] = [
@@ -94,7 +110,10 @@ export default function CommunityManagementPage() {
       id: "postType",
       label: t("postType"),
       activeValue: typeFilter,
-      onSelect: setTypeFilter,
+      onSelect: (val) => {
+        setTypeFilter(val);
+        setPagination({ ...pagination, page: 1 });
+      },
       options: [
         { label: t("PostTypes.lost"), value: PostType.LOST },
         { label: t("PostTypes.found"), value: PostType.FOUND },
@@ -104,7 +123,10 @@ export default function CommunityManagementPage() {
       id: "postStatus",
       label: t("status"),
       activeValue: statusFilter,
-      onSelect: setStatusFilter,
+      onSelect: (val) => {
+        setStatusFilter(val);
+        setPagination({ ...pagination, page: 1 });
+      },
       options: [
         { label: t("PostStatuses.active"), value: PostStatus.ACTIVE },
         { label: t("PostStatuses.closed"), value: PostStatus.CLOSED },
@@ -246,6 +268,7 @@ export default function CommunityManagementPage() {
                 onClearAll={() => {
                   setStatusFilter(null);
                   setTypeFilter(null);
+                  setPagination({ ...pagination, page: 1 });
                 }}
               />
             </div>
@@ -258,10 +281,10 @@ export default function CommunityManagementPage() {
           isLoading={isLoading}
           emptyMessage={t("noPostsFound")}
           pagination={{
-            currentPage: 1,
-            totalPages: 1,
-            totalItems: filteredPosts.length,
-            onPageChange: () => {},
+            currentPage: pagination.page,
+            totalPages: pagination.totalPages,
+            totalItems: pagination.totalItems,
+            onPageChange: (page) => setPagination({ ...pagination, page }),
             showingLabel: tCommon("showing"),
             ofLabel: tCommon("of"),
             itemsLabel: t("posts"),

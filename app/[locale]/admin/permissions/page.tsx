@@ -24,16 +24,33 @@ export default function PermissionManagementPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 10,
+    totalPages: 1,
+    totalItems: 0,
+  });
+
   useEffect(() => {
     fetchPermissions();
-  }, []);
+  }, [pagination.page, pagination.limit]);
 
   const fetchPermissions = async () => {
     setIsLoading(true);
     try {
-      // Fetch more permissions as we did for roles
-      const response = await adminService.getPermissions({ limit: 100 });
+      const response = await adminService.getPermissions({
+        page: pagination.page,
+        limit: pagination.limit,
+        search: searchTerm,
+      });
       setPermissions(response.data);
+      if (response.meta) {
+        setPagination((prev) => ({
+          ...prev,
+          totalPages: response.meta?.totalPages || 1,
+          totalItems: response.meta?.totalItems || 0,
+        }));
+      }
     } catch (error) {
       console.error("Failed to fetch permissions:", error);
     } finally {
@@ -41,15 +58,8 @@ export default function PermissionManagementPage() {
     }
   };
 
-  const filteredPermissions = permissions.filter(p => {
-    const matchesSearch = 
-      p.key.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      p.description?.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    return matchesSearch;
-  });
-
   const columns: Column<Permission>[] = [
+    // ... columns definition remains same ...
     {
       header: t("permissionKey"),
       cell: (p) => (
@@ -96,7 +106,7 @@ export default function PermissionManagementPage() {
         </div>
         <div className="flex items-center gap-3">
           <Link href="/admin/permissions/create">
-            <Button className="rounded-xl bg-orange-500 hover:bg-orange-600 text-white gap-2 shadow-lg shadow-orange-200 transition-all h-10 px-4">
+            <Button className="rounded-xl bg-orange-500 hover:bg-orange-600 text-white gap-2 shadow-lg shadow-orange-200 transition-all h-10 px-4 font-medium">
               <Plus size={18} />
               {t("addPermission")}
             </Button>
@@ -104,7 +114,7 @@ export default function PermissionManagementPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm">
         <div className="p-6 border-b border-gray-50">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
             <div className="relative w-full md:w-96 group">
@@ -114,6 +124,12 @@ export default function PermissionManagementPage() {
                 className="pl-12 h-12 rounded-2xl bg-gray-50 border-none focus-visible:ring-2 focus-visible:ring-orange-200 transition-all"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    setPagination({ ...pagination, page: 1 });
+                    fetchPermissions();
+                  }
+                }}
               />
             </div>
           </div>
@@ -121,14 +137,14 @@ export default function PermissionManagementPage() {
 
         <AdminTable 
           columns={columns}
-          data={filteredPermissions}
+          data={permissions}
           isLoading={isLoading}
           emptyMessage={t("noPermissionsFound")}
           pagination={{
-            currentPage: 1,
-            totalPages: 1,
-            totalItems: filteredPermissions.length,
-            onPageChange: () => {},
+            currentPage: pagination.page,
+            totalPages: pagination.totalPages,
+            totalItems: pagination.totalItems,
+            onPageChange: (page) => setPagination({ ...pagination, page }),
             showingLabel: tCommon("showing"),
             ofLabel: tCommon("of"),
             itemsLabel: t("permissions"),

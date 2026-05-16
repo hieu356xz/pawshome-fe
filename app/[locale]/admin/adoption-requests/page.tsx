@@ -24,18 +24,36 @@ export default function AdoptionManagementPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
 
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 10,
+    totalPages: 1,
+    totalItems: 0,
+  });
+
   const [selectedRequest, setSelectedRequest] =
     useState<AdoptionRequest | null>(null);
 
   useEffect(() => {
     fetchRequests();
-  }, []);
+  }, [pagination.page, pagination.limit, statusFilter]);
 
   const fetchRequests = async () => {
     setIsLoading(true);
     try {
-      const response = await adoptionService.getAllRequests();
+      const response = await adoptionService.getAllRequests({
+        page: pagination.page,
+        limit: pagination.limit,
+        status: statusFilter,
+      });
       setRequests(response.data);
+      if (response.meta) {
+        setPagination((prev) => ({
+          ...prev,
+          totalPages: response.meta?.totalPages || 1,
+          totalItems: response.meta?.totalItems || 0,
+        }));
+      }
     } catch (error) {
       console.error("Failed to fetch requests:", error);
     } finally {
@@ -48,9 +66,7 @@ export default function AdoptionManagementPage() {
       req.applicantName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       req.pet?.name.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesStatus = !statusFilter || req.status === statusFilter;
-
-    return matchesSearch && matchesStatus;
+    return matchesSearch;
   });
 
   const filterGroups: FilterGroup[] = [
@@ -58,7 +74,10 @@ export default function AdoptionManagementPage() {
       id: "status",
       label: t("status"),
       activeValue: statusFilter,
-      onSelect: setStatusFilter,
+      onSelect: (val) => {
+        setStatusFilter(val);
+        setPagination({ ...pagination, page: 1 });
+      },
       options: [
         {
           label: t("AdoptionStatuses.pending"),
@@ -77,6 +96,7 @@ export default function AdoptionManagementPage() {
   ];
 
   const columns: Column<AdoptionRequest>[] = [
+    // ... columns definition remains same ...
     {
       header: t("applicant"),
       cell: (req) => (
@@ -170,7 +190,7 @@ export default function AdoptionManagementPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm">
         <div className="p-6 border-b border-gray-50">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
             <div className="relative w-full md:w-96 group">
@@ -189,7 +209,10 @@ export default function AdoptionManagementPage() {
             <div className="flex-1 md:flex md:justify-end">
               <AdminTableFilters
                 groups={filterGroups}
-                onClearAll={() => setStatusFilter(null)}
+                onClearAll={() => {
+                  setStatusFilter(null);
+                  setPagination({ ...pagination, page: 1 });
+                }}
               />
             </div>
           </div>
@@ -201,10 +224,10 @@ export default function AdoptionManagementPage() {
           isLoading={isLoading}
           emptyMessage={t("noRequestsFound")}
           pagination={{
-            currentPage: 1,
-            totalPages: 1,
-            totalItems: filteredRequests.length,
-            onPageChange: () => {},
+            currentPage: pagination.page,
+            totalPages: pagination.totalPages,
+            totalItems: pagination.totalItems,
+            onPageChange: (page) => setPagination({ ...pagination, page }),
             showingLabel: tCommon("showing"),
             ofLabel: tCommon("of"),
             itemsLabel: t("title").toLowerCase(),

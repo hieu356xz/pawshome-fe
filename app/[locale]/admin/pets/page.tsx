@@ -35,16 +35,38 @@ export default function PetManagementPage() {
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
   const [speciesFilter, setSpeciesFilter] = useState<string | null>(null);
 
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 10,
+    totalPages: 1,
+    totalItems: 0,
+  });
+
   useEffect(() => {
     fetchPets();
+  }, [pagination.page, pagination.limit, statusFilter, speciesFilter]);
+
+  useEffect(() => {
     fetchSpecies();
   }, []);
 
   const fetchPets = async () => {
     setIsLoading(true);
     try {
-      const response = await petService.getPets();
+      const response = await petService.getPets({
+        page: pagination.page,
+        limit: pagination.limit,
+        adoptionStatus: statusFilter as AdoptionStatus,
+        speciesId: speciesFilter ? parseInt(speciesFilter) : undefined,
+      });
       setPets(response.data);
+      if (response.meta) {
+        setPagination((prev) => ({
+          ...prev,
+          totalPages: response.meta?.totalPages || 1,
+          totalItems: response.meta?.totalItems || 0,
+        }));
+      }
     } catch (error) {
       console.error("Failed to fetch pets:", error);
     } finally {
@@ -66,11 +88,7 @@ export default function PetManagementPage() {
       pet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       pet.petCode.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesStatus = !statusFilter || pet.adoptionStatus === statusFilter;
-    const matchesSpecies =
-      !speciesFilter || pet.speciesId === parseInt(speciesFilter);
-
-    return matchesSearch && matchesStatus && matchesSpecies;
+    return matchesSearch;
   });
 
   const filterGroups: FilterGroup[] = [
@@ -78,7 +96,10 @@ export default function PetManagementPage() {
       id: "status",
       label: t("status"),
       activeValue: statusFilter,
-      onSelect: setStatusFilter,
+      onSelect: (val) => {
+        setStatusFilter(val);
+        setPagination({ ...pagination, page: 1 });
+      },
       options: [
         { label: t("AdoptionStatuses.seeking"), value: AdoptionStatus.SEEKING },
         { label: t("AdoptionStatuses.adopted"), value: AdoptionStatus.ADOPTED },
@@ -90,7 +111,10 @@ export default function PetManagementPage() {
       id: "species",
       label: t("species"),
       activeValue: speciesFilter,
-      onSelect: setSpeciesFilter,
+      onSelect: (val) => {
+        setSpeciesFilter(val);
+        setPagination({ ...pagination, page: 1 });
+      },
       options: species.map((s) => ({ label: s.name, value: s.id.toString() })),
     },
   ];
@@ -226,6 +250,7 @@ export default function PetManagementPage() {
                 onClearAll={() => {
                   setStatusFilter(null);
                   setSpeciesFilter(null);
+                  setPagination({ ...pagination, page: 1 });
                 }}
               />
             </div>
@@ -238,10 +263,10 @@ export default function PetManagementPage() {
           isLoading={isLoading}
           emptyMessage={t("noPetsFound")}
           pagination={{
-            currentPage: 1,
-            totalPages: 1,
-            totalItems: filteredPets.length,
-            onPageChange: () => {},
+            currentPage: pagination.page,
+            totalPages: pagination.totalPages,
+            totalItems: pagination.totalItems,
+            onPageChange: (page) => setPagination({ ...pagination, page }),
             showingLabel: tCommon("showing"),
             ofLabel: tCommon("of"),
             itemsLabel: t("pets"),

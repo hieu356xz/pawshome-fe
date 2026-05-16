@@ -24,15 +24,33 @@ export default function RoleManagementPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 10,
+    totalPages: 1,
+    totalItems: 0,
+  });
+
   useEffect(() => {
     fetchRoles();
-  }, []);
+  }, [pagination.page, pagination.limit]);
 
   const fetchRoles = async () => {
     setIsLoading(true);
     try {
-      const response = await adminService.getRoles();
+      const response = await adminService.getRoles({
+        page: pagination.page,
+        limit: pagination.limit,
+        search: searchTerm,
+      });
       setRoles(response.data);
+      if (response.meta) {
+        setPagination((prev) => ({
+          ...prev,
+          totalPages: response.meta?.totalPages || 1,
+          totalItems: response.meta?.totalItems || 0,
+        }));
+      }
     } catch (error) {
       console.error("Failed to fetch roles:", error);
     } finally {
@@ -40,15 +58,8 @@ export default function RoleManagementPage() {
     }
   };
 
-  const filteredRoles = roles.filter(role => {
-    const matchesSearch = 
-      role.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      role.description?.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    return matchesSearch;
-  });
-
   const columns: Column<Role>[] = [
+    // ... columns definition remains same ...
     {
       header: t("roleName"),
       cell: (role) => (
@@ -96,7 +107,7 @@ export default function RoleManagementPage() {
         </div>
         <div className="flex items-center gap-3">
           <Link href="/admin/roles/create">
-            <Button className="rounded-xl bg-orange-500 hover:bg-orange-600 text-white gap-2 shadow-lg shadow-orange-200 transition-all h-10 px-4">
+            <Button className="rounded-xl bg-orange-500 hover:bg-orange-600 text-white gap-2 shadow-lg shadow-orange-200 transition-all h-10 px-4 font-medium">
               <ShieldPlus size={18} />
               {t("addRole")}
             </Button>
@@ -104,7 +115,7 @@ export default function RoleManagementPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm">
         <div className="p-6 border-b border-gray-50">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
             <div className="relative w-full md:w-96 group">
@@ -114,6 +125,12 @@ export default function RoleManagementPage() {
                 className="pl-12 h-12 rounded-2xl bg-gray-50 border-none focus-visible:ring-2 focus-visible:ring-orange-200 transition-all"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    setPagination({ ...pagination, page: 1 });
+                    fetchRoles();
+                  }
+                }}
               />
             </div>
           </div>
@@ -121,14 +138,14 @@ export default function RoleManagementPage() {
 
         <AdminTable 
           columns={columns}
-          data={filteredRoles}
+          data={roles}
           isLoading={isLoading}
           emptyMessage={t("noRolesFound")}
           pagination={{
-            currentPage: 1,
-            totalPages: 1,
-            totalItems: filteredRoles.length,
-            onPageChange: () => {},
+            currentPage: pagination.page,
+            totalPages: pagination.totalPages,
+            totalItems: pagination.totalItems,
+            onPageChange: (page) => setPagination({ ...pagination, page }),
             showingLabel: tCommon("showing"),
             ofLabel: tCommon("of"),
             itemsLabel: t("roles"),

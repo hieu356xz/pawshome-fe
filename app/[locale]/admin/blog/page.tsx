@@ -42,15 +42,33 @@ export default function BlogManagementPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
 
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 10,
+    totalPages: 1,
+    totalItems: 0,
+  });
+
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [pagination.page, pagination.limit, statusFilter]);
 
   const fetchPosts = async () => {
     setIsLoading(true);
     try {
-      const response = await blogService.getPosts();
+      const response = await blogService.getPosts({
+        page: pagination.page,
+        limit: pagination.limit,
+        status: statusFilter as any,
+      });
       setPosts(response.data);
+      if (response.meta) {
+        setPagination((prev) => ({
+          ...prev,
+          totalPages: response.meta?.totalPages || 1,
+          totalItems: response.meta?.totalItems || 0,
+        }));
+      }
     } catch (error) {
       console.error("Failed to fetch posts:", error);
     } finally {
@@ -62,7 +80,7 @@ export default function BlogManagementPage() {
     if (!confirm(t("deleteConfirm"))) return;
     try {
       await blogService.deletePost(id);
-      setPosts(posts.filter((p) => p.id !== id));
+      fetchPosts();
     } catch (error) {
       console.error("Delete failed:", error);
     }
@@ -73,9 +91,7 @@ export default function BlogManagementPage() {
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.user?.fullName?.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesStatus = !statusFilter || post.status === statusFilter;
-
-    return matchesSearch && matchesStatus;
+    return matchesSearch;
   });
 
   const filterGroups: FilterGroup[] = [
@@ -83,7 +99,10 @@ export default function BlogManagementPage() {
       id: "status",
       label: t("status"),
       activeValue: statusFilter,
-      onSelect: setStatusFilter,
+      onSelect: (val) => {
+        setStatusFilter(val);
+        setPagination({ ...pagination, page: 1 });
+      },
       options: [
         { label: t("PostStatuses.draft"), value: "draft" },
         { label: t("PostStatuses.published"), value: "published" },
@@ -231,7 +250,10 @@ export default function BlogManagementPage() {
             <div className="flex-1 md:flex md:justify-end">
               <AdminTableFilters
                 groups={filterGroups}
-                onClearAll={() => setStatusFilter(null)}
+                onClearAll={() => {
+                  setStatusFilter(null);
+                  setPagination({ ...pagination, page: 1 });
+                }}
               />
             </div>
           </div>
@@ -243,10 +265,10 @@ export default function BlogManagementPage() {
           isLoading={isLoading}
           emptyMessage={t("noPostsFound")}
           pagination={{
-            currentPage: 1,
-            totalPages: 1,
-            totalItems: filteredPosts.length,
-            onPageChange: () => {},
+            currentPage: pagination.page,
+            totalPages: pagination.totalPages,
+            totalItems: pagination.totalItems,
+            onPageChange: (page) => setPagination({ ...pagination, page }),
             showingLabel: tCommon("showing"),
             ofLabel: tCommon("of"),
             itemsLabel: t("title").toLowerCase(),

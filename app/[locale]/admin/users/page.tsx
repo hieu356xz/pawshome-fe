@@ -30,16 +30,38 @@ export default function UserManagementPage() {
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
   const [roleFilter, setRoleFilter] = useState<string | null>(null);
 
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 10,
+    totalPages: 1,
+    totalItems: 0,
+  });
+
   useEffect(() => {
     fetchUsers();
+  }, [pagination.page, pagination.limit, statusFilter, roleFilter]);
+
+  useEffect(() => {
     fetchRoles();
   }, []);
 
   const fetchUsers = async () => {
     setIsLoading(true);
     try {
-      const response = await userService.getUsers();
+      const response = await userService.getUsers({
+        page: pagination.page,
+        limit: pagination.limit,
+        status: statusFilter,
+        role: roleFilter,
+      });
       setUsers(response.data);
+      if (response.meta) {
+        setPagination((prev) => ({
+          ...prev,
+          totalPages: response.meta?.totalPages || 1,
+          totalItems: response.meta?.totalItems || 0,
+        }));
+      }
     } catch (error) {
       console.error("Failed to fetch users:", error);
     } finally {
@@ -61,35 +83,38 @@ export default function UserManagementPage() {
       user.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase());
     
-    const matchesStatus = !statusFilter || user.status === statusFilter;
-    
-    const matchesRole = !roleFilter || user.roles?.some(r => r.name === roleFilter);
-    
-    return matchesSearch && matchesStatus && matchesRole;
+    return matchesSearch;
   });
 
   const filterGroups: FilterGroup[] = [
     {
       id: "status",
-      label: "Status",
+      label: t("status"),
       activeValue: statusFilter,
-      onSelect: setStatusFilter,
+      onSelect: (val) => {
+        setStatusFilter(val);
+        setPagination({ ...pagination, page: 1 });
+      },
       options: [
-        { label: "Active", value: "active" },
-        { label: "Inactive", value: "inactive" },
-        { label: "Banned", value: "banned" }
+        { label: t("Statuses.active"), value: "active" },
+        { label: t("Statuses.inactive"), value: "inactive" },
+        { label: t("Statuses.banned"), value: "banned" }
       ]
     },
     {
       id: "role",
-      label: "Roles",
+      label: t("role"),
       activeValue: roleFilter,
-      onSelect: setRoleFilter,
+      onSelect: (val) => {
+        setRoleFilter(val);
+        setPagination({ ...pagination, page: 1 });
+      },
       options: roles.map(r => ({ label: r.name, value: r.name }))
     }
   ];
 
   const columns: Column<User>[] = [
+    // ... columns definition remains same ...
     {
       header: t("user"),
       cell: (user) => (
@@ -114,7 +139,7 @@ export default function UserManagementPage() {
       header: t("status"),
       cell: (user) => (
         <StatusCell 
-          status={user.status} 
+          status={t(`Statuses.${user.status}`)} 
           variant={
             user.status === 'active' ? "success" : 
             user.status === 'inactive' ? "warning" : "error"
@@ -124,10 +149,10 @@ export default function UserManagementPage() {
     },
     {
       header: t("joinedDate"),
-      cell: () => <DateCell date="May 14, 2026" />,
+      cell: (user) => <DateCell date={user.createdAt} />,
     },
     {
-      header: t("actions"),
+      header: tCommon("actions"),
       align: "right",
       cell: (user) => (
         <AdminTableActions 
@@ -159,7 +184,7 @@ export default function UserManagementPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm">
         <div className="p-6 border-b border-gray-50">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
             <div className="relative w-full md:w-96 group">
@@ -178,6 +203,7 @@ export default function UserManagementPage() {
                 onClearAll={() => {
                   setStatusFilter(null);
                   setRoleFilter(null);
+                  setPagination({ ...pagination, page: 1 });
                 }}
               />
             </div>
@@ -190,10 +216,10 @@ export default function UserManagementPage() {
           isLoading={isLoading}
           emptyMessage={t("noUsersFound")}
           pagination={{
-            currentPage: 1,
-            totalPages: 1,
-            totalItems: filteredUsers.length,
-            onPageChange: () => {},
+            currentPage: pagination.page,
+            totalPages: pagination.totalPages,
+            totalItems: pagination.totalItems,
+            onPageChange: (page) => setPagination({ ...pagination, page }),
             showingLabel: tCommon("showing"),
             ofLabel: tCommon("of"),
             itemsLabel: t("users"),

@@ -23,15 +23,33 @@ export default function SpeciesManagementPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 10,
+    totalPages: 1,
+    totalItems: 0,
+  });
+
   useEffect(() => {
     fetchSpecies();
-  }, []);
+  }, [pagination.page, pagination.limit]);
 
   const fetchSpecies = async () => {
     setIsLoading(true);
     try {
-      const response = await speciesService.getAll();
+      const response = await speciesService.getAll({
+        page: pagination.page,
+        limit: pagination.limit,
+        search: searchTerm,
+      });
       setSpecies(response.data);
+      if (response.meta) {
+        setPagination((prev) => ({
+          ...prev,
+          totalPages: response.meta?.totalPages || 1,
+          totalItems: response.meta?.totalItems || 0,
+        }));
+      }
     } catch (error) {
       console.error("Failed to fetch species:", error);
     } finally {
@@ -39,15 +57,8 @@ export default function SpeciesManagementPage() {
     }
   };
 
-  const filteredSpecies = species.filter(s => {
-    const matchesSearch = 
-      s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      s.description?.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    return matchesSearch;
-  });
-
   const columns: Column<Species>[] = [
+    // ... columns definition remains same ...
     {
       header: t("speciesName"),
       cell: (s) => (
@@ -94,7 +105,7 @@ export default function SpeciesManagementPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm">
         <div className="p-6 border-b border-gray-50">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
             <div className="relative w-full md:w-96 group">
@@ -104,6 +115,12 @@ export default function SpeciesManagementPage() {
                 className="pl-12 h-12 rounded-2xl bg-gray-50 border-none focus-visible:ring-2 focus-visible:ring-orange-200 transition-all"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    setPagination({ ...pagination, page: 1 });
+                    fetchSpecies();
+                  }
+                }}
               />
             </div>
           </div>
@@ -111,14 +128,14 @@ export default function SpeciesManagementPage() {
 
         <AdminTable 
           columns={columns}
-          data={filteredSpecies}
+          data={species}
           isLoading={isLoading}
           emptyMessage={t("noSpeciesFound")}
           pagination={{
-            currentPage: 1,
-            totalPages: 1,
-            totalItems: filteredSpecies.length,
-            onPageChange: () => {},
+            currentPage: pagination.page,
+            totalPages: pagination.totalPages,
+            totalItems: pagination.totalItems,
+            onPageChange: (page) => setPagination({ ...pagination, page }),
             showingLabel: tCommon("showing"),
             ofLabel: tCommon("of"),
             itemsLabel: t("species"),
