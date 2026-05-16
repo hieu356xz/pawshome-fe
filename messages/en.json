@@ -142,7 +142,8 @@
     "resetAll": "Reset All",
     "all": "All",
     "systemError": "System Error",
-    "actionFailed": "Action Failed"
+    "actionFailed": "Action Failed",
+    "actionSuccess": "Action successful"
   },
   "UserManagement": {
     "title": "User Management",
@@ -279,6 +280,7 @@
     "searchPets": "Search by name or pet code...",
     "noPetsFound": "No pets found.",
     "deletePet": "Delete Profile",
+    "deleteConfirm": "Are you sure you want to delete this pet profile?",
     "generalInfo": "General Information",
     "healthAndAdoption": "Health & Adoption",
     "media": "Media",

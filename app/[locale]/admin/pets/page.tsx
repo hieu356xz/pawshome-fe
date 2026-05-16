@@ -9,6 +9,8 @@ import { Search, Plus, PawPrint, Filter, Hash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/lib/navigation";
+import { toast } from "@/components/ui/toast";
+import { ConfirmModal } from "@/components/ui/confirm-modal";
 
 import { AdminTable, Column } from "@/components/admin/AdminTable";
 import {
@@ -41,6 +43,16 @@ export default function PetManagementPage() {
     totalPages: 1,
     totalItems: 0,
   });
+
+  const [deleteModal, setDeleteModal] = useState<{
+    isOpen: boolean;
+    petId: string | null;
+  }>({
+    isOpen: false,
+    petId: null,
+  });
+
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     fetchPets();
@@ -80,6 +92,26 @@ export default function PetManagementPage() {
       setSpecies(response.data);
     } catch (error) {
       console.error("Failed to fetch species:", error);
+    }
+  };
+
+  const handleDeletePet = (id: string) => {
+    setDeleteModal({ isOpen: true, petId: id });
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteModal.petId) return;
+
+    setIsDeleting(true);
+    try {
+      await petService.deletePet(deleteModal.petId);
+      toast.success(tCommon("actionSuccess") || "Pet deleted successfully");
+      setDeleteModal({ isOpen: false, petId: null });
+      fetchPets();
+    } catch (error) {
+      console.error("Delete failed:", error);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -202,6 +234,7 @@ export default function PetManagementPage() {
               label: t("deletePet"),
               icon: TableActionIcons.Delete,
               variant: "danger",
+              onClick: () => handleDeletePet(pet.id),
             },
           ]}
         />
@@ -275,6 +308,18 @@ export default function PetManagementPage() {
           }}
         />
       </div>
+
+      <ConfirmModal
+        isOpen={deleteModal.isOpen}
+        onClose={() => setDeleteModal({ isOpen: false, petId: null })}
+        onConfirm={confirmDelete}
+        title={tCommon("delete")}
+        message={t("deleteConfirm")}
+        confirmText={tCommon("delete")}
+        cancelText={tCommon("cancel")}
+        variant="danger"
+        isLoading={isDeleting}
+      />
     </div>
   );
 }

@@ -142,7 +142,8 @@
     "resetAll": "Đặt lại tất cả",
     "all": "Tất cả",
     "systemError": "Lỗi hệ thống",
-    "actionFailed": "Thao tác thất bại"
+    "actionFailed": "Thao tác thất bại",
+    "actionSuccess": "Thao tác thành công"
   },
   "UserManagement": {
     "title": "Quản lý người dùng",
@@ -279,6 +280,7 @@
     "searchPets": "Tìm kiếm theo tên hoặc mã thú cưng...",
     "noPetsFound": "Không tìm thấy thú cưng nào.",
     "deletePet": "Xóa hồ sơ",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa hồ sơ thú cưng này?",
     "generalInfo": "Thông tin chung",
     "healthAndAdoption": "Sức khỏe & Nhận nuôi",
     "media": "Hình ảnh",
