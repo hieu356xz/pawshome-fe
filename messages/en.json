@@ -84,7 +84,11 @@
     "hasAccount": "Already have an account?",
     "loginNow": "Login now",
     "registerSuccess": "Account created successfully! You can now login.",
-    "passwordMismatch": "Passwords do not match."
+    "passwordMismatch": "Passwords do not match.",
+    "invalidCredentials": "Invalid email or password.",
+    "accountDeleted": "This account has been deleted.",
+    "loginWithGoogleRequired": "This account was registered with Google. Please login with Google.",
+    "accountBanned": "Your account has been banned. Please contact the administrator."
   },
   "PostTypes": {
     "LOST": "Lost",
@@ -163,6 +167,12 @@
     "viewProfile": "View Profile",
     "deleteUser": "Delete User",
     "deleteConfirm": "Are you sure you want to delete this user?",
+    "banUser": "Ban User",
+    "unbanUser": "Unban User",
+    "banConfirm": "Are you sure you want to ban this user?",
+    "unbanConfirm": "Are you sure you want to unban this user?",
+    "banReason": "Ban Reason",
+    "banReasonPlaceholder": "Enter reason for banning...",
     "noUsersFound": "No users found matching your search.",
     "userNotFound": "User not found",
     "userNotFoundDesc": "The user you are looking for does not exist or has been deleted.",
@@ -184,7 +194,8 @@
       "active": "Active",
       "inactive": "Inactive",
       "suspended": "Suspended",
-      "banned": "Banned"
+      "banned": "Banned",
+      "deleted": "Deleted"
     }
   },
   "RoleManagement": {

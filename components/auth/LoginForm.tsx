@@ -9,13 +9,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 import { Loader2, Mail, Lock, Eye, EyeOff, AlertCircle } from "lucide-react";
 import { Link } from "@/lib/navigation";
@@ -46,14 +46,23 @@ export function LoginForm() {
         setError(t("loginError"));
       }
     } catch (err: any) {
-      console.error("Detailed Login Error:", err);
-      
-      // Lấy thông báo lỗi từ backend nếu có
-      const backendMessage = err?.message || err?.response?.data?.message;
-      const finalMessage = typeof backendMessage === 'string' 
-        ? backendMessage 
-        : t("loginError");
-        
+      console.log("Login Error:", err);
+
+      const backendMessage = err as string | undefined;
+      let finalMessage = t("loginError");
+
+      if (backendMessage === "Invalid credentials") {
+        finalMessage = t("invalidCredentials");
+      } else if (backendMessage === "Account has been deleted") {
+        finalMessage = t("accountDeleted");
+      } else if (backendMessage === "Please login with Google") {
+        finalMessage = t("loginWithGoogleRequired");
+      } else if (backendMessage === "Account is banned") {
+        finalMessage = t("accountBanned");
+      } else if (typeof backendMessage === "string") {
+        finalMessage = backendMessage;
+      }
+
       setError(finalMessage);
     } finally {
       setIsLoading(false);
@@ -74,7 +83,7 @@ export function LoginForm() {
               <p>{error}</p>
             </div>
           )}
-          
+
           <div className="space-y-2">
             <Label htmlFor="email">{t("emailLabel")}</Label>
             <div className="relative">
@@ -98,8 +107,7 @@ export function LoginForm() {
               <Label htmlFor="password">{t("passwordLabel")}</Label>
               <Link
                 href="/forgot-password"
-                className="text-xs font-medium text-primary hover:underline transition-all"
-              >
+                className="text-xs font-medium text-primary hover:underline transition-all">
                 {t("forgotPassword")}
               </Link>
             </div>
@@ -119,8 +127,7 @@ export function LoginForm() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-              >
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
                 {showPassword ? (
                   <EyeOff className="size-4" />
                 ) : (
@@ -138,8 +145,7 @@ export function LoginForm() {
             />
             <label
               htmlFor="remember"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
-            >
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">
               {t("rememberMe")}
             </label>
           </div>
@@ -147,8 +153,7 @@ export function LoginForm() {
           <Button
             type="submit"
             className="w-full h-12 text-base font-semibold rounded-xl"
-            disabled={isLoading}
-          >
+            disabled={isLoading}>
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -175,9 +180,8 @@ export function LoginForm() {
             variant="outline"
             className="w-full h-12 text-base font-semibold rounded-xl border-border hover:bg-muted/50"
             onClick={() => {
-              window.location.href = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/auth/google`;
-            }}
-          >
+              window.location.href = `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/auth/google`;
+            }}>
             <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -213,8 +217,7 @@ export function LoginForm() {
         </div>
         <Link
           href="/register"
-          className="text-sm font-semibold text-primary hover:underline transition-all"
-        >
+          className="text-sm font-semibold text-primary hover:underline transition-all">
           {t("registerNow")}
         </Link>
       </CardFooter>

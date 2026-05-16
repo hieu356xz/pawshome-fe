@@ -84,7 +84,11 @@
     "hasAccount": "Đã có tài khoản?",
     "loginNow": "Đăng nhập ngay",
     "registerSuccess": "Đăng ký thành công! Bạn có thể đăng nhập ngay.",
-    "passwordMismatch": "Mật khẩu xác nhận không khớp."
+    "passwordMismatch": "Mật khẩu xác nhận không khớp.",
+    "invalidCredentials": "Email hoặc mật khẩu không chính xác.",
+    "accountDeleted": "Tài khoản này đã bị xóa khỏi hệ thống.",
+    "loginWithGoogleRequired": "Tài khoản này được đăng ký qua Google. Vui lòng đăng nhập bằng Google.",
+    "accountBanned": "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên."
   },
   "PostTypes": {
     "LOST": "Bị lạc",
