@@ -140,7 +140,9 @@
     "filtersActive": "Filters Active",
     "applyFilters": "Apply Filters",
     "resetAll": "Reset All",
-    "all": "All"
+    "all": "All",
+    "systemError": "System Error",
+    "actionFailed": "Action Failed"
   },
   "UserManagement": {
     "title": "User Management",

@@ -25,6 +25,8 @@ import { AdminFormSection } from "./form/AdminFormSection";
 import { AdminFormHeader } from "./form/AdminFormHeader";
 import { AdminStatusSelection } from "./form/AdminStatusSelection";
 import { AdminRoleSelection } from "./form/AdminRoleSelection";
+import { AdminFormError } from "./form/AdminFormError";
+import { useToast } from "@/components/ui/toast";
 
 interface UserFormProps {
   initialData?: User;
@@ -34,10 +36,12 @@ interface UserFormProps {
 export function UserForm({ initialData, isEdit = false }: UserFormProps) {
   const t = useTranslations("UserManagement");
   const router = useRouter();
+  const { toast } = useToast();
   const [roles, setRoles] = useState<Role[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdatingRoles, setIsUpdatingRoles] = useState(false);
   const [isFetchingRoles, setIsFetchingRoles] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
     fullName: initialData?.fullName || "",
@@ -77,11 +81,17 @@ export function UserForm({ initialData, isEdit = false }: UserFormProps) {
     if (!initialData?.id) return;
     
     setIsUpdatingRoles(true);
+    setError(null);
     try {
       await userService.assignRoles(initialData.id, formData.roleIds);
+      toast({ 
+        type: "success", 
+        message: t("rolesUpdated") || "Roles updated successfully" 
+      });
       router.refresh();
-    } catch (error) {
-      console.error("Failed to update roles:", error);
+    } catch (err: any) {
+      console.error("Failed to update roles:", err);
+      setError(err);
     } finally {
       setIsUpdatingRoles(false);
     }
@@ -90,6 +100,7 @@ export function UserForm({ initialData, isEdit = false }: UserFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
     try {
       let userId = initialData?.id;
 
@@ -114,10 +125,16 @@ export function UserForm({ initialData, isEdit = false }: UserFormProps) {
         await userService.assignRoles(userId, formData.roleIds);
       }
 
+      toast({ 
+        type: "success", 
+        message: isEdit ? "User updated successfully" : "User created successfully" 
+      });
+      
       router.push("/admin/users");
       router.refresh();
-    } catch (error) {
-      console.error("Submit error:", error);
+    } catch (err: any) {
+      console.error("Submit error:", err);
+      setError(err);
     } finally {
       setIsLoading(false);
     }
@@ -132,6 +149,8 @@ export function UserForm({ initialData, isEdit = false }: UserFormProps) {
         submitLabel={isEdit ? t("updateUser") : t("createUser")}
         isLoading={isLoading}
       />
+
+      <AdminFormError message={error} onClear={() => setError(null)} />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">

@@ -140,7 +140,9 @@
     "filtersActive": "Đang lọc",
     "applyFilters": "Áp dụng bộ lọc",
     "resetAll": "Đặt lại tất cả",
-    "all": "Tất cả"
+    "all": "Tất cả",
+    "systemError": "Lỗi hệ thống",
+    "actionFailed": "Thao tác thất bại"
   },
   "UserManagement": {
     "title": "Quản lý người dùng",

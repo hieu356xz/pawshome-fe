@@ -1,6 +1,14 @@
 import axios from "axios";
+import { toast } from "@/components/ui/toast";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+
+// Extend AxiosRequestConfig to include custom properties
+declare module "axios" {
+  export interface AxiosRequestConfig {
+    skipToast?: boolean;
+  }
+}
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,
@@ -71,6 +79,31 @@ apiClient.interceptors.response.use(
 
     const errorMessage =
       error.response?.data?.message || error.response?.data || error.message;
+
+    // Auto-toast for mutations (POST, PATCH, PUT, DELETE)
+    const method = error.config?.method?.toUpperCase();
+    const isMutation = ["POST", "PATCH", "PUT", "DELETE"].includes(
+      method || "",
+    );
+    const skipToast = error.config?.skipToast;
+
+    if (isMutation && !skipToast) {
+      const pathname =
+        typeof window !== "undefined" ? window.location.pathname : "";
+      const isAdmin = pathname.includes("/admin");
+      const isVi = pathname.startsWith("/vi");
+
+      const title = isAdmin
+        ? isVi
+          ? "Lỗi hệ thống"
+          : "System Error"
+        : isVi
+          ? "Thao tác thất bại"
+          : "Action Failed";
+
+      toast.error(errorMessage, title);
+    }
+
     return Promise.reject(errorMessage);
   },
 );
