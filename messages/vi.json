@@ -502,8 +502,40 @@
     "req3": "Đảm bảo khả năng tài chính cho việc chăm sóc y tế và dinh dưỡng.",
     "contactBtn": "Liên hệ tư vấn thêm"
   },
+  "AdoptionForm": {
+    "title": "Đơn đăng ký nhận nuôi",
+    "subtitle": "Cảm ơn bạn đã quan tâm đến việc nhận nuôi thành viên mới.",
+    "petInfo": "Thông tin thú cưng",
+    "personalInfo": "Thông tin cá nhân",
+    "fullName": "Họ và tên",
+    "email": "Địa chỉ Email",
+    "phone": "Số điện thoại",
+    "address": "Địa chỉ thường trú",
+    "survey": "Câu hỏi khảo sát",
+    "reasonLabel": "Tại sao bạn muốn nhận nuôi bé thú cưng này?",
+    "experienceLabel": "Bạn đã từng nuôi thú cưng chưa? Hãy chia sẻ kinh nghiệm của bạn.",
+    "hasOtherPetsLabel": "Hiện tại bạn có đang nuôi bé thú cưng nào khác không?",
+    "otherPetsDetailLabel": "Nếu có, hãy cho chúng tôi biết thêm về chúng.",
+    "livingSituationLabel": "Điều kiện nhà ở của bạn (Chung cư/Nhà đất, diện tích...)",
+    "hasYardLabel": "Nhà bạn có sân vườn hoặc không gian chạy nhảy không?",
+    "commitmentLabel": "Lời cam kết của bạn đối với bé.",
+    "agreement": "Tôi cam kết sẽ yêu thương, chăm sóc và chịu trách nhiệm hoàn toàn cho cuộc sống của bé thú cưng này.",
+    "submit": "Gửi đơn đăng ký",
+    "submitting": "Đang gửi...",
+    "success": "Gửi đơn đăng ký thành công! Chúng tôi sẽ phản hồi sớm nhất.",
+    "error": "Có lỗi xảy ra khi gửi đơn. Vui lòng thử lại sau.",
+    "quote": "\"Bằng cách gửi đơn đăng ký này, bạn đang thực hiện bước đầu tiên tiến tới một tình bạn trọn đời.\""
+  },
   "Pagination": {
     "previous": "Trước",
     "next": "Tiếp"
+  },
+  "Common": {
+    "back": "Quay lại",
+    "unknown": "Chưa xác định",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "edit": "Sửa"
   }
 }

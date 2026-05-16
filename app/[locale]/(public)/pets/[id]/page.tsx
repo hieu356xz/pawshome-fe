@@ -20,7 +20,7 @@ import {
   Stethoscope,
   Palette,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { petService } from "@/services/pet.service";
 import { Pet } from "@/types/pet";
 import { cn } from "@/lib/utils";
@@ -328,10 +328,15 @@ export default function PetDetailPage() {
                   </Link>
                 </div>
 
-                <Button className="w-full h-14 rounded-2xl bg-primary hover:bg-primary/90 text-lg font-bold shadow-xl shadow-primary/20 group">
+                <Link
+                  href={`/pets/${pet.id}/adopt`}
+                  className={cn(
+                    buttonVariants({ variant: "default" }),
+                    "w-full h-14 rounded-2xl bg-primary hover:bg-primary/90 text-lg font-bold shadow-xl shadow-primary/20 group",
+                  )}>
                   {t("adoptMe")}
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </Button>
+                </Link>
 
                 <div className="flex items-center justify-center">
                   <Link
