@@ -47,6 +47,7 @@ export interface PetPost {
   updatedAt: string;
   images?: PostImage[];
   comments?: Comment[];
+  user?: User;
 }
 
 export interface PetPostQuery extends PaginationParams {

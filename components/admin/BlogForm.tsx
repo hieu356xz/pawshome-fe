@@ -238,24 +238,6 @@ export function BlogForm({ initialData, isEdit = false }: BlogFormProps) {
               }
               required
             />
-
-            <div className="pt-4 border-t border-gray-50 flex flex-col gap-3">
-              <Button
-                type="submit"
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-xl h-11 shadow-lg shadow-orange-100"
-                disabled={isLoading}>
-                {isLoading ? (
-                  <Loader2 className="animate-spin mr-2" size={18} />
-                ) : (
-                  <Save className="mr-2" size={18} />
-                )}
-                {formData.status === "draft" 
-                  ? t("saveDraft") 
-                  : isEdit 
-                    ? t("updatePost") 
-                    : t("publish")}
-              </Button>
-            </div>
           </div>
 
           {/* Featured Image */}

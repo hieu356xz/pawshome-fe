@@ -7,7 +7,7 @@ export const petPostService = {
     return apiClient.get('/pet-posts', { params });
   },
 
-  getPostById: async (id: number): Promise<ApiResponse<PetPost>> => {
+  getPostById: async (id: string | number): Promise<ApiResponse<PetPost>> => {
     return apiClient.get(`/pet-posts/${id}`);
   },
 
@@ -15,15 +15,15 @@ export const petPostService = {
     return apiClient.post('/pet-posts', data);
   },
 
-  updatePost: async (id: number, data: any): Promise<ApiResponse<PetPost>> => {
+  updatePost: async (id: string | number, data: any): Promise<ApiResponse<PetPost>> => {
     return apiClient.put(`/pet-posts/${id}`, data);
   },
 
-  updateStatus: async (id: number, status: string): Promise<ApiResponse<any>> => {
+  updateStatus: async (id: string | number, status: string): Promise<ApiResponse<any>> => {
     return apiClient.put(`/pet-posts/${id}/status`, { status });
   },
 
-  deletePost: async (id: number): Promise<ApiResponse<void>> => {
+  deletePost: async (id: string | number): Promise<ApiResponse<void>> => {
     return apiClient.delete(`/pet-posts/${id}`);
   },
 
@@ -36,11 +36,11 @@ export const petPostService = {
   },
 
   // Images
-  getImages: async (postId: number): Promise<ApiResponse<any[]>> => {
+  getImages: async (postId: string | number): Promise<ApiResponse<any[]>> => {
     return apiClient.get(`/pet-posts/${postId}/images`);
   },
 
-  uploadImage: async (postId: number, file: File): Promise<ApiResponse<any>> => {
+  uploadImage: async (postId: string | number, file: File): Promise<ApiResponse<any>> => {
     const formData = new FormData();
     formData.append('image', file);
     return apiClient.post(`/pet-posts/${postId}/images`, formData, {
@@ -48,7 +48,7 @@ export const petPostService = {
     });
   },
 
-  deleteImage: async (postId: number, imageId: number): Promise<ApiResponse<void>> => {
+  deleteImage: async (postId: string | number, imageId: number): Promise<ApiResponse<void>> => {
     return apiClient.delete(`/pet-posts/${postId}/images/${imageId}`);
   },
 

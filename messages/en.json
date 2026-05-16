@@ -346,5 +346,35 @@
       "published": "Published",
       "archived": "Archived"
     }
+  },
+  "CommunityManagement": {
+    "title": "Community Posts Management",
+    "managePostsDesc": "Manage and monitor lost and found pet posts from the community.",
+    "postTitle": "Post Title",
+    "postType": "Post Type",
+    "status": "Status",
+    "author": "Author",
+    "location": "Location",
+    "date": "Date",
+    "actions": "Actions",
+    "deleteConfirm": "Are you sure you want to delete this post?",
+    "noPostsFound": "No posts found.",
+    "searchPosts": "Search by title, author, or location...",
+    "posts": "posts",
+    "PostTypes": {
+      "lost": "Lost",
+      "found": "Found"
+    },
+    "PostStatuses": {
+      "active": "Active",
+      "closed": "Closed"
+    },
+    "createPost": "Create New Post",
+    "editPost": "Edit Community Post",
+    "updatePost": "Update Post",
+    "description": "Detailed Description",
+    "contact": "Contact Information",
+    "save": "Save Post",
+    "images": "Images"
   }
 }

@@ -346,5 +346,35 @@
       "published": "Đã xuất bản",
       "archived": "Đã lưu trữ"
     }
+  },
+  "CommunityManagement": {
+    "title": "Quản lý bài đăng cộng đồng",
+    "managePostsDesc": "Quản lý và giám sát các tin đăng tìm thú cưng bị lạc hoặc tìm thấy từ cộng đồng.",
+    "postTitle": "Tiêu đề tin đăng",
+    "postType": "Loại tin",
+    "status": "Trạng thái",
+    "author": "Người đăng",
+    "location": "Vị trí",
+    "date": "Ngày đăng",
+    "actions": "Thao tác",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa tin đăng này?",
+    "noPostsFound": "Không tìm thấy tin đăng nào.",
+    "searchPosts": "Tìm theo tiêu đề, người đăng hoặc vị trí...",
+    "posts": "bài đăng",
+    "PostTypes": {
+      "lost": "Bị lạc",
+      "found": "Tìm thấy"
+    },
+    "PostStatuses": {
+      "active": "Đang hoạt động",
+      "closed": "Đã đóng"
+    },
+    "createPost": "Tạo tin đăng mới",
+    "editPost": "Chỉnh sửa tin đăng",
+    "updatePost": "Cập nhật tin đăng",
+    "description": "Mô tả chi tiết",
+    "contact": "Thông tin liên hệ",
+    "save": "Lưu tin đăng",
+    "images": "Hình ảnh"
   }
 }
