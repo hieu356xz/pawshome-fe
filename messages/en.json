@@ -70,7 +70,17 @@
     "loginError": "Login failed. Please check your credentials.",
     "submitting": "Processing...",
     "loginWithGoogle": "Login with Google",
-    "orContinueWith": "Or continue with"
+    "orContinueWith": "Or continue with",
+    "registerTitle": "Create Account",
+    "registerDesc": "Join the PawsHome community today",
+    "fullNameLabel": "Full Name",
+    "fullNamePlaceholder": "John Doe",
+    "confirmPasswordLabel": "Confirm Password",
+    "registerButton": "Create Account",
+    "hasAccount": "Already have an account?",
+    "loginNow": "Login now",
+    "registerSuccess": "Account created successfully! You can now login.",
+    "passwordMismatch": "Passwords do not match."
   },
   "PostTypes": {
     "LOST": "Lost",

@@ -70,7 +70,17 @@
     "loginError": "Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.",
     "submitting": "Đang xử lý...",
     "loginWithGoogle": "Đăng nhập với Google",
-    "orContinueWith": "Hoặc tiếp tục với"
+    "orContinueWith": "Hoặc tiếp tục với",
+    "registerTitle": "Tạo tài khoản",
+    "registerDesc": "Tham gia cộng đồng PawsHome ngay hôm nay",
+    "fullNameLabel": "Họ và tên",
+    "fullNamePlaceholder": "Nguyễn Văn A",
+    "confirmPasswordLabel": "Xác nhận mật khẩu",
+    "registerButton": "Đăng ký",
+    "hasAccount": "Đã có tài khoản?",
+    "loginNow": "Đăng nhập ngay",
+    "registerSuccess": "Đăng ký thành công! Bạn có thể đăng nhập ngay.",
+    "passwordMismatch": "Mật khẩu xác nhận không khớp."
   },
   "PostTypes": {
     "LOST": "Bị lạc",
