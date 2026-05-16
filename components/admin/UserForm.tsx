@@ -13,7 +13,8 @@ import {
   MapPin, 
   Shield,
   Edit2,
-  Lock
+  Lock,
+  Loader2
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -35,6 +36,7 @@ export function UserForm({ initialData, isEdit = false }: UserFormProps) {
   const router = useRouter();
   const [roles, setRoles] = useState<Role[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isUpdatingRoles, setIsUpdatingRoles] = useState(false);
   const [isFetchingRoles, setIsFetchingRoles] = useState(true);
 
   const [formData, setFormData] = useState({
@@ -71,6 +73,20 @@ export function UserForm({ initialData, isEdit = false }: UserFormProps) {
     }));
   };
 
+  const handleSaveRoles = async () => {
+    if (!initialData?.id) return;
+    
+    setIsUpdatingRoles(true);
+    try {
+      await userService.assignRoles(initialData.id, formData.roleIds);
+      router.refresh();
+    } catch (error) {
+      console.error("Failed to update roles:", error);
+    } finally {
+      setIsUpdatingRoles(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -94,7 +110,7 @@ export function UserForm({ initialData, isEdit = false }: UserFormProps) {
         userId = response.data.id;
       }
 
-      if (userId) {
+      if (!isEdit && userId) {
         await userService.assignRoles(userId, formData.roleIds);
       }
 
@@ -185,6 +201,17 @@ export function UserForm({ initialData, isEdit = false }: UserFormProps) {
               onToggle={handleRoleToggle}
               isLoading={isFetchingRoles}
               loadingLabel={t("loadingRoles")}
+              action={isEdit && (
+                <button
+                  type="button"
+                  onClick={handleSaveRoles}
+                  disabled={isUpdatingRoles}
+                  className="px-4 py-2 bg-orange-500 text-white rounded-xl text-sm font-medium hover:bg-orange-600 disabled:opacity-50 transition-colors flex items-center gap-2"
+                >
+                  {isUpdatingRoles ? <Loader2 className="animate-spin" size={16} /> : <Shield size={16} />}
+                  {t("saveRoles")}
+                </button>
+              )}
             />
           </div>
         </div>

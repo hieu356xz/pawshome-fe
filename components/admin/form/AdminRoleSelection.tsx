@@ -18,6 +18,7 @@ interface AdminRoleSelectionProps {
   isLoading?: boolean;
   loadingLabel?: string;
   className?: string;
+  action?: React.ReactNode;
 }
 
 export function AdminRoleSelection({ 
@@ -27,14 +28,18 @@ export function AdminRoleSelection({
   onToggle, 
   isLoading,
   loadingLabel = "Loading roles...",
-  className 
+  className,
+  action
 }: AdminRoleSelectionProps) {
   return (
     <div className={cn("space-y-6", className)}>
-      <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-        <Shield size={20} className="text-orange-500" />
-        {label}
-      </h3>
+      <div className="flex items-center justify-between">
+        <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+          <Shield size={20} className="text-orange-500" />
+          {label}
+        </h3>
+        {action}
+      </div>
       
       {isLoading ? (
         <div className="flex items-center gap-2 text-gray-400">
