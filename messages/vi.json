@@ -126,7 +126,12 @@
     "view": "Xem",
     "save": "Lưu",
     "cancel": "Hủy",
-    "confirm": "Xác nhận"
+    "confirm": "Xác nhận",
+    "filters": "Bộ lọc",
+    "filtersActive": "Đang lọc",
+    "applyFilters": "Áp dụng bộ lọc",
+    "resetAll": "Đặt lại tất cả",
+    "all": "Tất cả"
   },
   "UserManagement": {
     "title": "Quản lý người dùng",
@@ -228,6 +233,7 @@
     "backToSpecies": "Quay lại danh sách",
     "speciesName": "Tên loài",
     "description": "Mô tả",
+    "generalInfo": "Thông tin chung",
     "searchSpecies": "Tìm kiếm theo tên loài...",
     "noSpeciesFound": "Không tìm thấy loài nào.",
     "deleteSpecies": "Xóa loài",

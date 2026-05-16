@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Filter, X, ChevronDown, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 export interface FilterOption {
   label: string;
@@ -30,6 +31,7 @@ export function AdminTableFilters({
   onClearAll,
   className,
 }: AdminTableFiltersProps) {
+  const t = useTranslations("AdminCommon");
   const [isOpen, setIsOpen] = useState(false);
   // Store pending selections locally
   const [pendingFilters, setPendingFilters] = useState<
@@ -108,7 +110,7 @@ export function AdminTableFilters({
                 onClick={handleReset}
                 className="text-xs font-bold text-gray-400 hover:text-red-500 flex items-center gap-1 ml-2 transition-colors">
                 <RotateCcw size={12} />
-                Reset
+                {t("resetAll")}
               </button>
             </div>
           )}
@@ -138,7 +140,7 @@ export function AdminTableFilters({
                         ? "bg-orange-500 border-orange-500 text-white shadow-md shadow-orange-100"
                         : "bg-gray-50 border-transparent text-gray-500 hover:bg-gray-100 hover:text-gray-900",
                     )}>
-                    {group.allLabel || "All"}
+                    {group.allLabel || t("all")}
                   </button>
                   {group.options.map((option) => (
                     <button
@@ -168,12 +170,12 @@ export function AdminTableFilters({
               onClick={handleReset}
               className="text-xs font-bold text-gray-400 hover:text-red-500 flex items-center gap-2 px-4 py-2 transition-all">
               <RotateCcw size={14} />
-              Reset All
+              {t("resetAll")}
             </button>
             <Button
               onClick={handleApply}
               className="bg-gray-900 hover:bg-gray-800 text-white font-bold text-xs uppercase tracking-widest rounded-xl px-8 h-12 shadow-lg">
-              Apply Filters
+              {t("applyFilters")}
             </Button>
           </div>
         </div>

@@ -126,7 +126,12 @@
     "view": "View",
     "save": "Save",
     "cancel": "Cancel",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "filters": "Filters",
+    "filtersActive": "Filters Active",
+    "applyFilters": "Apply Filters",
+    "resetAll": "Reset All",
+    "all": "All"
   },
   "UserManagement": {
     "title": "User Management",
@@ -228,6 +233,7 @@
     "backToSpecies": "Back to Species",
     "speciesName": "Species Name",
     "description": "Description",
+    "generalInfo": "General Information",
     "searchSpecies": "Search by species name...",
     "noSpeciesFound": "No species found.",
     "deleteSpecies": "Delete Species",
