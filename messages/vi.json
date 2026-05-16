@@ -5,7 +5,10 @@
     "community": "Tin cộng đồng",
     "blog": "Bài viết",
     "login": "Đăng nhập",
-    "register": "Đăng ký"
+    "register": "Đăng ký",
+    "logout": "Đăng xuất",
+    "profile": "Trang cá nhân",
+    "settings": "Cài đặt"
   },
   "Hero": {
     "badge": "Tin cậy & Uy tín",

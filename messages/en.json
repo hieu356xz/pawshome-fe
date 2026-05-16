@@ -5,7 +5,10 @@
     "community": "Community Posts",
     "blog": "Blog",
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "logout": "Logout",
+    "profile": "Profile",
+    "settings": "Settings"
   },
   "Hero": {
     "badge": "Established & Trusted",

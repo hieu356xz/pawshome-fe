@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { AuthProvider } from "@/providers/AuthContext";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -58,7 +59,9 @@ export default async function RootLayout({
         )}
       >
         <NextIntlClientProvider messages={messages} locale={locale}>
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </NextIntlClientProvider>
       </body>
     </html>

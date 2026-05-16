@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/lib/navigation";
 import { authService } from "@/services/auth.service";
+import { useAuth } from "@/providers/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,6 +23,7 @@ import { Link } from "@/lib/navigation";
 export function LoginForm() {
   const t = useTranslations("Auth");
   const router = useRouter();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -37,6 +39,7 @@ export function LoginForm() {
     try {
       const response = await authService.login({ email, password });
       if (response.data.tokens?.accessToken) {
+        login(response.data.user);
         router.push("/");
         router.refresh();
       } else {

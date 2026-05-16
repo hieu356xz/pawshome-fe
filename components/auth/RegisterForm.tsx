@@ -7,15 +7,24 @@ import { authService } from "@/services/auth.service";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
-import { Loader2, Mail, Lock, User, AlertCircle, CheckCircle2, Eye, EyeOff } from "lucide-react";
+import {
+  Loader2,
+  Mail,
+  Lock,
+  User,
+  AlertCircle,
+  CheckCircle2,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 import { Link } from "@/lib/navigation";
 
 export function RegisterForm() {
@@ -50,7 +59,9 @@ export function RegisterForm() {
     } catch (err: any) {
       console.error("Registration error:", err);
       const backendMessage = err?.message || err?.response?.data?.message;
-      setError(typeof backendMessage === 'string' ? backendMessage : t("loginError"));
+      setError(
+        typeof backendMessage === "string" ? backendMessage : t("loginError"),
+      );
     } finally {
       setIsLoading(false);
     }
@@ -65,7 +76,7 @@ export function RegisterForm() {
           </div>
           <CardTitle className="text-2xl">{t("registerSuccess")}</CardTitle>
           <p className="text-muted-foreground">{t("loginNow")}</p>
-          <Button asChild className="w-full mt-4">
+          <Button className="w-full mt-4">
             <Link href="/login">{t("loginNow")}</Link>
           </Button>
         </CardContent>
@@ -104,7 +115,7 @@ export function RegisterForm() {
               />
             </div>
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="email">{t("emailLabel")}</Label>
             <div className="relative">
@@ -141,8 +152,7 @@ export function RegisterForm() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-              >
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
                 {showPassword ? (
                   <EyeOff className="size-4" />
                 ) : (
@@ -173,8 +183,7 @@ export function RegisterForm() {
           <Button
             type="submit"
             className="w-full h-12 text-base font-semibold rounded-xl mt-4"
-            disabled={isLoading}
-          >
+            disabled={isLoading}>
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -201,9 +210,8 @@ export function RegisterForm() {
             variant="outline"
             className="w-full h-12 text-base font-semibold rounded-xl border-border hover:bg-muted/50"
             onClick={() => {
-              window.location.href = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/auth/google`;
-            }}
-          >
+              window.location.href = `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/auth/google`;
+            }}>
             <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -239,8 +247,7 @@ export function RegisterForm() {
         </div>
         <Link
           href="/login"
-          className="text-sm font-semibold text-primary hover:underline transition-all"
-        >
+          className="text-sm font-semibold text-primary hover:underline transition-all">
           {t("loginNow")}
         </Link>
       </CardFooter>

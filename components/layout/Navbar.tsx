@@ -3,21 +3,21 @@
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/lib/navigation";
 import { Search, Menu, Languages } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuItem, 
-  DropdownMenuTrigger 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import UserMenu from "./UserMenu";
 
 export function Navbar() {
   const t = useTranslations("Navbar");
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
-
   const toggleLocale = (newLocale: "en" | "vi") => {
     router.replace(pathname, { locale: newLocale });
   };
@@ -33,29 +33,25 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8 text-sm font-medium">
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
           <Link
             href="/"
-            className="transition-colors hover:text-primary text-foreground/80"
-          >
+            className="transition-colors hover:text-primary text-foreground/80">
             {t("home")}
           </Link>
           <Link
             href="/pets"
-            className="transition-colors hover:text-primary text-foreground/80"
-          >
+            className="transition-colors hover:text-primary text-foreground/80">
             {t("pets")}
           </Link>
           <Link
             href="/community-posts"
-            className="transition-colors hover:text-primary text-foreground/80"
-          >
+            className="transition-colors hover:text-primary text-foreground/80">
             {t("community")}
           </Link>
           <Link
             href="/blog"
-            className="transition-colors hover:text-primary text-foreground/80"
-          >
+            className="transition-colors hover:text-primary text-foreground/80">
             {t("blog")}
           </Link>
         </nav>
@@ -64,44 +60,43 @@ export function Navbar() {
         <div className="flex items-center space-x-4">
           {/* Language Switcher */}
           <DropdownMenu>
-            <DropdownMenuTrigger className={cn(buttonVariants({ variant: "ghost" }), "text-foreground/80 hover:text-primary gap-2 px-2")}>
+            <DropdownMenuTrigger
+              className={cn(
+                buttonVariants({ variant: "ghost" }),
+                "text-foreground/80 hover:text-primary gap-2 px-2",
+              )}>
               <Languages className="h-4 w-4" />
               <span className="font-bold text-xs uppercase">{locale}</span>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-background border-border">
-              <DropdownMenuItem 
+            <DropdownMenuContent
+              align="end"
+              className="bg-background border-border">
+              <DropdownMenuItem
                 onClick={() => toggleLocale("en")}
-                className={cn("cursor-pointer", locale === "en" && "bg-muted font-bold")}
-              >
+                className={cn(
+                  "cursor-pointer",
+                  locale === "en" && "bg-muted font-bold",
+                )}>
                 English
               </DropdownMenuItem>
-              <DropdownMenuItem 
+              <DropdownMenuItem
                 onClick={() => toggleLocale("vi")}
-                className={cn("cursor-pointer", locale === "vi" && "bg-muted font-bold")}
-              >
+                className={cn(
+                  "cursor-pointer",
+                  locale === "vi" && "bg-muted font-bold",
+                )}>
                 Tiếng Việt
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Link href="/search" className="p-2 text-foreground/80 hover:text-primary transition-colors">
+          <Link
+            href="/search"
+            className="p-2 text-foreground/80 hover:text-primary transition-colors">
             <Search className="h-5 w-5" />
           </Link>
-          
-          <div className="hidden md:flex items-center space-x-2 border-l pl-4 border-border">
-            <Link 
-              href="/login" 
-              className={cn(buttonVariants({ variant: "ghost" }), "text-foreground/80 hover:text-primary hover:bg-transparent")}
-            >
-              {t("login")}
-            </Link>
-            <Link 
-              href="/register" 
-              className={cn(buttonVariants({ variant: "default" }), "bg-primary text-primary-foreground hover:bg-primary/90 shadow-md")}
-            >
-              {t("register")}
-            </Link>
-          </div>
+
+          <UserMenu />
 
           <button className="md:hidden p-2">
             <Menu className="h-6 w-6 text-foreground" />
