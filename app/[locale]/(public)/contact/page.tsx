@@ -6,16 +6,10 @@ import {
   Phone,
   Mail,
   Clock,
-  CreditCard,
   QrCode,
-  ArrowRight,
   Heart,
   Copy,
   CheckCircle2,
-  Globe,
-  Camera,
-  MessageSquare,
-  Link2,
   Building2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -251,15 +245,6 @@ export default function ContactPage() {
                     </p>
                   </div>
                 </div>
-              </div>
-
-              <div className="pt-4 text-center">
-                <Button
-                  variant="link"
-                  className="text-xs text-primary font-bold h-auto p-0 hover:no-underline flex items-center gap-1 mx-auto">
-                  Tìm hiểu cách chúng tôi sử dụng khoản quyên góp{" "}
-                  <ArrowRight className="h-3 w-3" />
-                </Button>
               </div>
             </div>
           </div>

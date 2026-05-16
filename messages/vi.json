@@ -485,6 +485,23 @@
     "socialMedia": "Mạng xã hội",
     "followUs": "Theo dõi chúng tôi để cập nhật tình hình các bé nhanh nhất."
   },
+  "Adoption": {
+    "title": "Quy trình nhận nuôi",
+    "subtitle": "Hành trình tìm mái ấm mới cho các bé gồm 4 bước đơn giản.",
+    "step1Title": "1. Chọn thú cưng",
+    "step1Desc": "Tìm hiểu thông tin và chọn bé thú cưng phù hợp với lối sống của bạn.",
+    "step2Title": "2. Gửi yêu cầu",
+    "step2Desc": "Điền thông tin vào mẫu đăng ký nhận nuôi để chúng tôi hiểu hơn về bạn.",
+    "step3Title": "3. Phỏng vấn & Kiểm tra",
+    "step3Desc": "Trò chuyện cùng tình nguyện viên và kiểm tra điều kiện sinh hoạt cho bé.",
+    "step4Title": "4. Đón bé về nhà",
+    "step4Desc": "Hoàn tất thủ tục và bắt đầu hành trình hạnh phúc cùng thành viên mới.",
+    "requirements": "Điều kiện nhận nuôi",
+    "req1": "Cam kết yêu thương và chăm sóc bé suốt đời.",
+    "req2": "Có không gian sống an toàn và ổn định.",
+    "req3": "Đảm bảo khả năng tài chính cho việc chăm sóc y tế và dinh dưỡng.",
+    "contactBtn": "Liên hệ tư vấn thêm"
+  },
   "Pagination": {
     "previous": "Trước",
     "next": "Tiếp"

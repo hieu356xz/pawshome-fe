@@ -108,9 +108,12 @@ export default function Home() {
           </div>
 
           <div className="mt-16 text-center">
-            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-md h-14 px-10 text-lg">
+            <Link 
+              href="/pets" 
+              className={cn(buttonVariants({ size: "lg" }), "bg-accent text-accent-foreground hover:bg-accent/90 shadow-md h-14 px-10 text-lg")}
+            >
               {t("findCompanion")}
-            </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -128,9 +131,12 @@ export default function Home() {
               <p className="text-primary-foreground/80 text-lg">
                 {t("blogCornerDesc")}
               </p>
-              <Button variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+              <Link 
+                href="/blog" 
+                className={cn(buttonVariants({ variant: "outline" }), "border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary")}
+              >
                 {t("readBlog")}
-              </Button>
+              </Link>
             </div>
             <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
                <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20">

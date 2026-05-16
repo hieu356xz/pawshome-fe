@@ -318,14 +318,14 @@ export default function PetDetailPage() {
                   <div className="p-2 bg-primary text-white rounded-lg">
                     <Stethoscope className="h-4 w-4" />
                   </div>
-                  <div>
-                    <p className="text-xs font-bold text-primary">
-                      {t("adoptionProcess")}
+                  <Link href="/adoption" className="flex-1 group/process">
+                    <p className="text-xs font-bold text-primary group-hover/process:underline flex items-center gap-1">
+                      {t("adoptionProcess")} <ArrowRight className="h-3 w-3" />
                     </p>
-                    <p className="text-[11px] text-muted-foreground mt-0.5">
+                    <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
                       {t("adoptionProcessDesc")}
                     </p>
-                  </div>
+                  </Link>
                 </div>
 
                 <Button className="w-full h-14 rounded-2xl bg-primary hover:bg-primary/90 text-lg font-bold shadow-xl shadow-primary/20 group">

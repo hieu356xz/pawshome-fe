@@ -485,6 +485,23 @@
     "socialMedia": "Social Media",
     "followUs": "Follow us to get the latest updates on our pets."
   },
+  "Adoption": {
+    "title": "Adoption Process",
+    "subtitle": "The journey to finding a new home for our residents in 4 simple steps.",
+    "step1Title": "1. Choose a Pet",
+    "step1Desc": "Browse our profiles and find a pet that matches your lifestyle.",
+    "step2Title": "2. Submit Request",
+    "step2Desc": "Fill out the adoption application form so we can learn more about you.",
+    "step3Title": "3. Interview & Check",
+    "step3Desc": "Have a chat with our volunteers and ensure a safe environment for the pet.",
+    "step4Title": "4. Welcome Home",
+    "step4Desc": "Complete the paperwork and start your happy journey with your new family member.",
+    "requirements": "Adoption Requirements",
+    "req1": "Commitment to love and care for the pet for its entire life.",
+    "req2": "Provide a safe and stable living environment.",
+    "req3": "Financial ability to provide proper nutrition and medical care.",
+    "contactBtn": "Contact for More Info"
+  },
   "Pagination": {
     "previous": "Previous",
     "next": "Next"
