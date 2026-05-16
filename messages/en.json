@@ -38,7 +38,8 @@
     "readBlog": "Read Our Blog",
     "articleBadge": "Article",
     "adoptionStoryBadge": "Adoption Story",
-    "readMore": "Read More"
+    "readMore": "Read More",
+    "noRecentArticles": "No recent articles."
   },
   "Footer": {
     "desc": "Providing a warm and trustworthy community for pet lovers, adopters, and owners since 2024.",
