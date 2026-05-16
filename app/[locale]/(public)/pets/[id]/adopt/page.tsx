@@ -43,6 +43,7 @@ export default function AdoptionFormPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isAgreed, setIsAgreed] = useState(false);
 
   const [formData, setFormData] = useState<CreateAdoptionRequest>({
     applicantName: "",
@@ -74,6 +75,8 @@ export default function AdoptionFormPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isAgreed) return;
+    
     setIsSubmitting(true);
     try {
       await adoptionService.submitRequest(params.id as string, formData);
@@ -411,7 +414,13 @@ export default function AdoptionFormPage() {
               {/* Section 3: Agreement */}
               <div className="p-6 bg-primary/5 rounded-2xl border border-primary/10 space-y-6">
                 <div className="flex items-start space-x-4">
-                  <Checkbox id="agreement" required className="mt-1" />
+                  <Checkbox
+                    id="agreement"
+                    required
+                    className="mt-1"
+                    checked={isAgreed}
+                    onCheckedChange={(checked) => setIsAgreed(checked as boolean)}
+                  />
                   <Label
                     htmlFor="agreement"
                     className="text-sm font-medium leading-relaxed cursor-pointer">
@@ -421,7 +430,7 @@ export default function AdoptionFormPage() {
 
                 <Button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !isAgreed}
                   className="w-full h-14 rounded-xl text-lg font-bold shadow-lg shadow-primary/20">
                   {isSubmitting ? (
                     <Loader2 className="mr-2 h-5 w-5 animate-spin" />
