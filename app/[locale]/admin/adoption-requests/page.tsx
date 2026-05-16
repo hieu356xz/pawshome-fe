@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { adoptionService } from "@/services/adoption.service";
 import { AdoptionRequest, AdoptionRequestStatus } from "@/types/adoption";
@@ -190,10 +191,17 @@ export default function AdoptionManagementPage() {
             variant="ghost"
             size="sm"
             onClick={() => setSelectedRequest(req)}
-            className="rounded-xl hover:bg-orange-50 hover:text-orange-600 transition-all gap-2 h-9 px-4">
+            className={cn(
+              "rounded-xl transition-all gap-2 h-9 px-4",
+              req.status === AdoptionRequestStatus.PENDING
+                ? "hover:bg-orange-50 hover:text-orange-600"
+                : "hover:bg-blue-50 hover:text-blue-600",
+            )}>
             <Eye size={16} />
             <span className="text-xs font-bold uppercase tracking-wider">
-              {t("review")}
+              {req.status === AdoptionRequestStatus.PENDING
+                ? t("review")
+                : tCommon("view")}
             </span>
           </Button>
           <Button

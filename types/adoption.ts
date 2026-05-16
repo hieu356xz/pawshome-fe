@@ -23,6 +23,9 @@ export interface AdoptionRequest {
   commitment?: string;
   status: AdoptionRequestStatus;
   notes?: string;
+  rejectionReason?: string;
+  rejectionNote?: string;
+  approvalMessage?: string;
   reviewerId?: string;
   reviewedAt?: string;
   createdAt: string;
