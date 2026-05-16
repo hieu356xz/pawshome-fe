@@ -70,6 +70,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <PetCard 
+              id="1"
               name="Milo"
               ageGroup="ADULT"
               breed="Domestic Shorthair"
@@ -78,6 +79,7 @@ export default function Home() {
               adoptionStatus="SEEKING"
             />
             <PetCard 
+              id="2"
               name="Luna"
               ageGroup="YOUNG"
               breed="Husky Mix"
@@ -86,6 +88,7 @@ export default function Home() {
               adoptionStatus="PENDING"
             />
             <PetCard 
+              id="3"
               name="Oliver"
               ageGroup="BABY"
               breed="Golden Retriever"
@@ -94,6 +97,7 @@ export default function Home() {
               adoptionStatus="NEW_INTAKE"
             />
             <PetCard 
+              id="4"
               name="Bella"
               ageGroup="SENIOR"
               breed="Persian"

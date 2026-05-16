@@ -1,9 +1,11 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { Link } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
 
 interface PetCardProps {
+  id: string; // Added id prop
   name: string;
   ageGroup: string;
   breed: string;
@@ -13,12 +15,12 @@ interface PetCardProps {
   imageUrl?: string;
 }
 
-export function PetCard({ name, ageGroup, breed, species, gender, adoptionStatus, imageUrl }: PetCardProps) {
+export function PetCard({ id, name, ageGroup, breed, species, gender, adoptionStatus, imageUrl }: PetCardProps) {
   const t = useTranslations("PetList");
 
   return (
     <div className="group relative flex flex-col h-full animate-in fade-in duration-500">
-      <div className="relative aspect-[4/5] w-full rounded-[1rem] overflow-hidden border border-border/30 shadow-sm transition-all duration-500 hover:shadow-lg hover:-translate-y-1 bg-white">
+      <Link href={`/pets/${id}`} className="relative aspect-[4/5] w-full rounded-[1rem] overflow-hidden border border-border/30 shadow-sm transition-all duration-500 hover:shadow-lg hover:-translate-y-1 bg-white block">
         {imageUrl ? (
           <img 
             src={imageUrl} 
@@ -44,16 +46,18 @@ export function PetCard({ name, ageGroup, breed, species, gender, adoptionStatus
             <p className="font-serif text-xl font-bold leading-tight">{name}</p>
             <p className="text-[11px] opacity-90 font-medium tracking-wide italic truncate">{breed}</p>
           </div>
-          <button className="w-full bg-accent text-accent-foreground py-2 rounded-lg text-xs font-bold shadow-lg transform active:scale-95 transition-all hover:bg-accent/90">
+          <div className="w-full bg-accent text-accent-foreground py-2 rounded-lg text-xs font-bold shadow-lg transform active:scale-95 transition-all hover:bg-accent/90 text-center">
             {t("viewProfile")}
-          </button>
+          </div>
         </div>
-      </div>
+      </Link>
       
       {/* Static Info Below Card */}
       <div className="mt-2.5 px-0.5">
         <div className="flex items-center justify-between gap-1.5">
-          <h4 className="font-serif text-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300 truncate leading-tight">{name}</h4>
+          <Link href={`/pets/${id}`}>
+            <h4 className="font-serif text-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300 truncate leading-tight hover:underline underline-offset-4">{name}</h4>
+          </Link>
           <span className="text-[9px] font-bold text-muted-foreground/40 uppercase tracking-widest whitespace-nowrap">{gender}</span>
         </div>
         <div className="flex items-center gap-1.5 mt-1">

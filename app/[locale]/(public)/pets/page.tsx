@@ -342,6 +342,7 @@ export default function PetListPage() {
                       className="animate-in fade-in slide-in-from-bottom-4 duration-500"
                       style={{ animationDelay: `${index * 50}ms` }}>
                       <PetCard
+                        id={pet.id}
                         name={pet.name}
                         ageGroup={pt(`AgeGroups.${pet.ageGroup.toLowerCase()}`)}
                         breed={pet.breed?.name || t("unknown")}

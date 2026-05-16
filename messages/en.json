@@ -445,8 +445,28 @@
     "next": "Next",
     "unknown": "Unknown"
   },
+  "PetDetail": {
+    "backToList": "Back to List",
+    "adoptMe": "Adopt Me Now",
+    "about": "About Me",
+    "characteristics": "Characteristics",
+    "health": "Health Status",
+    "description": "Additional Information",
+    "medicalRecords": "Medical Records",
+    "vaccinated": "Vaccinated",
+    "neutered": "Neutered",
+    "weight": "Weight",
+    "notVaccinated": "Not Vaccinated",
+    "notNeutered": "Not Neutered",
+    "adoptionProcess": "Adoption Process",
+    "adoptionProcessDesc": "We will review your request and get back to you within 2-3 business days.",
+    "contactSupport": "Contact Support",
+    "share": "Share Me",
+    "noDescription": "No description available yet for this adorable pet.",
+    "noNotes": "No additional notes available for this pet."
+  },
   "Pagination": {
     "previous": "Previous",
     "next": "Next"
   }
-}
+}

@@ -445,8 +445,28 @@
     "next": "Tiếp",
     "unknown": "Không xác định"
   },
+  "PetDetail": {
+    "backToList": "Quay lại danh sách",
+    "adoptMe": "Nhận nuôi bé ngay",
+    "about": "Về bé",
+    "characteristics": "Đặc điểm cơ bản",
+    "health": "Tình trạng sức khỏe",
+    "description": "Thông tin thêm",
+    "medicalRecords": "Hồ sơ y tế",
+    "vaccinated": "Đã tiêm phòng",
+    "neutered": "Đã triệt sản",
+    "weight": "Cân nặng",
+    "notVaccinated": "Chưa tiêm phòng",
+    "notNeutered": "Chưa triệt sản",
+    "adoptionProcess": "Quy trình nhận nuôi",
+    "adoptionProcessDesc": "Chúng tôi sẽ xem xét yêu cầu của bạn và phản hồi trong vòng 2-3 ngày làm việc.",
+    "contactSupport": "Liên hệ hỗ trợ",
+    "share": "Chia sẻ bé",
+    "noDescription": "Hiện chưa có mô tả chi tiết cho bé thú cưng đáng yêu này.",
+    "noNotes": "Hiện chưa có ghi chú thêm về tính cách của bé."
+  },
   "Pagination": {
     "previous": "Trước",
     "next": "Tiếp"
   }
-}
+}

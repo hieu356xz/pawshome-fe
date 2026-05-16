@@ -70,6 +70,9 @@ export interface Pet {
   weight?: number;
   adoptionStatus: AdoptionStatus;
   description?: string;
+  isVaccinated: boolean;
+  isNeutered: boolean;
+  healthSummary?: string;
   intakeDate: string;
   createdAt: string;
   updatedAt: string;
