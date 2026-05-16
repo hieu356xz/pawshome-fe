@@ -8,7 +8,8 @@
     "register": "Register",
     "logout": "Logout",
     "profile": "Profile",
-    "settings": "Settings"
+    "settings": "Settings",
+    "adminDashboard": "Admin Dashboard"
   },
   "Hero": {
     "badge": "Established & Trusted",

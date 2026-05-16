@@ -2,10 +2,11 @@
 
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/lib/navigation";
-import { User as UserIcon, LogOut, Settings, UserCircle } from "lucide-react";
+import { User as UserIcon, LogOut, Settings, UserCircle, ShieldCheck } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { useAuth } from "@/providers/AuthContext";
 import { cn } from "@/lib/utils";
+import { hasAnyRole } from "@/lib/permissions";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -76,6 +77,20 @@ export default function UserMenu() {
                 <span className="text-sm font-medium">{t("settings")}</span>
               </Link>
             </DropdownMenuItem>
+
+            {user && hasAnyRole(user, ["admin", "manager", "staff"]) && (
+              <DropdownMenuItem className="p-0 cursor-pointer">
+                <Link
+                  href="/admin"
+                  className="flex items-center gap-2 px-3 py-2.5 w-full outline-none transition-colors text-orange-600 focus:bg-orange-50">
+                  <ShieldCheck className="h-4 w-4" />
+                  <span className="text-sm font-bold">
+                    {t("adminDashboard")}
+                  </span>
+                </Link>
+              </DropdownMenuItem>
+            )}
+
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={handleLogout}
