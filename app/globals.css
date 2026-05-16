@@ -1,26 +1,43 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary: #5d4037;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #8d6e63;
+  --color-secondary-foreground: #ffffff;
+  --color-accent: #c19a6b;
+  --color-accent-foreground: #2c1e1a;
+  --color-background: #fdfbf7;
+  --color-foreground: #2c1e1a;
+  --color-muted: #e7e2d8;
+  --color-muted-foreground: #6b5a55;
+  --color-border: #d7cfc4;
+  --color-input: #d7cfc4;
+  --color-ring: #c19a6b;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #2c1e1a;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #2c1e1a;
+  
+  --font-serif: var(--font-playfair), serif;
+  --font-sans: var(--font-lato), sans-serif;
+
+  --radius-lg: 0.75rem;
+  --radius-md: 0.5rem;
+  --radius-sm: 0.25rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-bold;
+  }
 }
