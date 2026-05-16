@@ -200,5 +200,22 @@
     "deletePermission": "Delete Permission",
     "generalInfo": "General Information",
     "permissions": "permissions"
+  },
+  "BreedManagement": {
+    "title": "Breed Management",
+    "manageBreedsDesc": "Manage pet breeds within the system.",
+    "addBreed": "Add Breed",
+    "createBreed": "Create New Breed",
+    "editBreed": "Edit Breed",
+    "updateBreed": "Update Breed",
+    "backToBreeds": "Back to Breeds",
+    "breedName": "Breed Name",
+    "species": "Species",
+    "description": "Description",
+    "searchBreeds": "Search by breed name...",
+    "noBreedsFound": "No breeds found.",
+    "deleteBreed": "Delete Breed",
+    "selectSpecies": "Select Species",
+    "breeds": "breeds"
   }
 }

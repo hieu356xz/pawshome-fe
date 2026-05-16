@@ -40,6 +40,7 @@ export interface Breed {
   speciesId: number;
   name: string;
   description?: string;
+  species?: Species;
 }
 
 export interface MedicalRecord {

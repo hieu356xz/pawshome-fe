@@ -200,5 +200,22 @@
     "deletePermission": "Xóa quyền hạn",
     "generalInfo": "Thông tin chung",
     "permissions": "quyền hạn"
+  },
+  "BreedManagement": {
+    "title": "Quản lý giống loài",
+    "manageBreedsDesc": "Quản lý các giống thú cưng trong hệ thống.",
+    "addBreed": "Thêm giống",
+    "createBreed": "Tạo giống mới",
+    "editBreed": "Chỉnh sửa giống",
+    "updateBreed": "Cập nhật giống",
+    "backToBreeds": "Quay lại danh sách",
+    "breedName": "Tên giống",
+    "species": "Loài",
+    "description": "Mô tả",
+    "searchBreeds": "Tìm kiếm theo tên giống...",
+    "noBreedsFound": "Không tìm thấy giống nào.",
+    "deleteBreed": "Xóa giống",
+    "selectSpecies": "Chọn loài",
+    "breeds": "giống"
   }
 }
