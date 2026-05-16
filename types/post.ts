@@ -1,5 +1,5 @@
 import { User } from './auth';
-import { PaginationParams } from './common';
+import { PaginationParams, SortOrder } from './common';
 
 export enum PostType {
   LOST = 'lost',
@@ -12,9 +12,10 @@ export enum PostStatus {
 }
 
 export interface PostImage {
-  id: number;
-  postId: number;
+  id: string;
+  postId: string;
   imageUrl: string;
+  s3Key?: string;
 }
 
 export interface Tag {
@@ -39,9 +40,9 @@ export interface PetPost {
   userId: string;
   postType: PostType;
   title: string;
-  description: string;
-  location?: string;
-  contact?: string;
+  description: string | null;
+  location: string | null;
+  contact: string;
   postStatus: PostStatus;
   createdAt: string;
   updatedAt: string;
@@ -54,6 +55,8 @@ export interface PetPostQuery extends PaginationParams {
   postType?: PostType;
   postStatus?: PostStatus;
   userId?: string;
+  sortBy?: string;
+  sortOrder?: SortOrder;
 }
 
 export interface BlogPost {

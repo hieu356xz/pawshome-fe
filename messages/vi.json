@@ -449,6 +449,44 @@
     "save": "Lưu tin đăng",
     "images": "Hình ảnh"
   },
+  "CommunityBoard": {
+    "title": "Bảng tin cộng đồng",
+    "description": "Mô tả",
+    "createTitle": "Tạo tin đăng mới",
+    "createSubtitle": "Hãy cung cấp thông tin chi tiết nhất có thể để cộng đồng có thể hỗ trợ bạn nhanh nhất.",
+    "postTitlePlaceholder": "Ví dụ: Tìm mèo lạc màu vàng tại Cầu Giấy...",
+    "locationPlaceholder": "Ví dụ: Phường Dịch Vọng, Quận Cầu Giấy, Hà Nội",
+    "contactPlaceholder": "Số điện thoại hoặc link Facebook của bạn",
+    "uploadImages": "Tải lên hình ảnh",
+    "uploadImagesDesc": "Chọn tối đa 5 hình ảnh rõ nét của thú cưng.",
+    "submitting": "Đang đăng tin...",
+    "successCreate": "Đăng tin thành công! Tin của bạn sẽ được hiển thị ngay.",
+    "errorCreate": "Có lỗi xảy ra khi đăng tin. Vui lòng thử lại sau.",
+    "sortBy": "Sắp xếp theo",
+    "newest": "Mới nhất",
+    "oldest": "Cũ nhất",
+    "postInfo": "Thông tin tin đăng",
+    "contactInfo": "Thông tin người đăng",
+    "noComments": "Chưa có bình luận nào. Hãy là người đầu tiên thảo luận!",
+    "addComment": "Gửi bình luận",
+    "writeComment": "Viết bình luận của bạn...",
+    "comments": "Bình luận",
+    "reply": "Trả lời",
+    "share": "Chia sẻ tin đăng",
+    "noPostsFound": "Không tìm thấy tin đăng nào.",
+    "postTitle": "Tiêu đề tin đăng",
+    "location": "Vị trí",
+    "postType": "Loại tin",
+    "author": "Người đăng",
+    "contact": "Liên hệ",
+    "createPost": "Tạo tin đăng mới",
+    "posts": "bản tin",
+    "images": "Hình ảnh",
+    "PostTypes": {
+      "lost": "Bị lạc",
+      "found": "Tìm thấy"
+    }
+  },
   "PetList": {
     "title": "Tìm người bạn bốn chân mới của bạn",
     "subtitle": "Hàng trăm thú cưng đáng yêu đang chờ đợi một mái ấm vĩnh viễn. Hãy lọc để tìm người bạn phù hợp nhất với gia đình bạn.",
@@ -472,7 +510,9 @@
     "loading": "Đang tải dữ liệu...",
     "previous": "Trước",
     "next": "Tiếp",
-    "unknown": "Không xác định"
+    "unknown": "Không xác định",
+    "showing": "Đang hiển thị",
+    "back": "Quay lại"
   },
   "PetDetail": {
     "backToList": "Quay lại danh sách",
@@ -492,7 +532,8 @@
     "contactSupport": "Liên hệ hỗ trợ",
     "share": "Chia sẻ bé",
     "noDescription": "Hiện chưa có mô tả chi tiết cho bé thú cưng đáng yêu này.",
-    "noNotes": "Hiện chưa có ghi chú thêm về tính cách của bé."
+    "noNotes": "Hiện chưa có ghi chú thêm về tính cách của bé.",
+    "unknown": "Chưa xác định"
   },
   "Contact": {
     "title": "Liên hệ với chúng tôi",
@@ -564,6 +605,7 @@
     "save": "Lưu",
     "cancel": "Hủy",
     "delete": "Xóa",
-    "edit": "Sửa"
+    "edit": "Sửa",
+    "contactUs": "Liên hệ ngay"
   }
 }

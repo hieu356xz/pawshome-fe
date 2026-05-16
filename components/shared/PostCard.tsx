@@ -14,7 +14,7 @@ interface PostCardProps {
 }
 
 export function PostCard({ type, title, description, location, time, imageUrl }: PostCardProps) {
-  const t = useTranslations("PostTypes");
+  const t = useTranslations("CommunityBoard.PostTypes");
   const typeColors = {
     LOST: "bg-red-500",
     FOUND: "bg-green-500",
@@ -41,7 +41,7 @@ export function PostCard({ type, title, description, location, time, imageUrl }:
             typeColors[type]
           )}
         >
-          {t(type)}
+          {t(type.toLowerCase())}
         </div>
       </div>
       <div className="p-6 space-y-3">

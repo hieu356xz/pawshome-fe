@@ -449,6 +449,44 @@
     "save": "Save Post",
     "images": "Images"
   },
+  "CommunityBoard": {
+    "title": "Community Notice Board",
+    "description": "Description",
+    "createTitle": "Create New Post",
+    "createSubtitle": "Please provide as much detail as possible so the community can help you quickly.",
+    "postTitlePlaceholder": "e.g., Lost yellow cat in Cau Giay area...",
+    "locationPlaceholder": "e.g., Dich Vong Ward, Cau Giay District, Hanoi",
+    "contactPlaceholder": "Your phone number or Facebook profile link",
+    "uploadImages": "Upload Images",
+    "uploadImagesDesc": "Select up to 5 clear images of the pet.",
+    "submitting": "Submitting post...",
+    "successCreate": "Post created successfully! Your post will be displayed immediately.",
+    "errorCreate": "An error occurred while creating the post. Please try again later.",
+    "sortBy": "Sort by",
+    "newest": "Newest First",
+    "oldest": "Oldest First",
+    "postInfo": "Post Information",
+    "contactInfo": "Author Information",
+    "noComments": "No comments yet. Be the first to start the discussion!",
+    "addComment": "Send Comment",
+    "writeComment": "Write your comment...",
+    "comments": "Comments",
+    "reply": "Reply",
+    "share": "Share Post",
+    "noPostsFound": "No posts found.",
+    "postTitle": "Post Title",
+    "location": "Location",
+    "postType": "Post Type",
+    "author": "Author",
+    "contact": "Contact",
+    "createPost": "Create New Post",
+    "posts": "posts",
+    "images": "Images",
+    "PostTypes": {
+      "lost": "Lost",
+      "found": "Found"
+    }
+  },
   "PetList": {
     "title": "Find Your New Best Friend",
     "subtitle": "Hundreds of lovable pets are waiting for a forever home. Filter to find the perfect companion for your family.",
@@ -472,7 +510,9 @@
     "loading": "Loading pets...",
     "previous": "Previous",
     "next": "Next",
-    "unknown": "Unknown"
+    "unknown": "Unknown",
+    "showing": "Showing",
+    "back": "Back"
   },
   "PetDetail": {
     "backToList": "Back to List",
@@ -492,7 +532,8 @@
     "contactSupport": "Contact Support",
     "share": "Share Me",
     "noDescription": "No description available yet for this adorable pet.",
-    "noNotes": "No additional notes available for this pet."
+    "noNotes": "No additional notes available for this pet.",
+    "unknown": "Unknown"
   },
   "Contact": {
     "title": "Contact Us",
@@ -564,6 +605,7 @@
     "save": "Save",
     "cancel": "Cancel",
     "delete": "Delete",
-    "edit": "Edit"
+    "edit": "Edit",
+    "contactUs": "Contact Us"
   }
 }
