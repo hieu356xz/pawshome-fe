@@ -66,7 +66,8 @@ export function LoginForm() {
     } catch (err: any) {
       console.log("Login Error:", err);
 
-      const backendMessage = err?.response?.data?.message || err?.message;
+      // apiClient returns the error message string directly
+      const backendMessage = typeof err === "string" ? err : (err?.response?.data?.message || err?.message);
       setError(mapErrorMessage(backendMessage) || t("loginError"));
     } finally {
       setIsLoading(false);

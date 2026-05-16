@@ -38,7 +38,12 @@ apiClient.interceptors.response.use(
     const originalRequest = error.config;
 
     // Handle 401 Unauthorized (Token expired)
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      originalRequest.url !== "/auth/login" &&
+      originalRequest.url !== "/auth/register"
+    ) {
       originalRequest._retry = true;
 
       try {
