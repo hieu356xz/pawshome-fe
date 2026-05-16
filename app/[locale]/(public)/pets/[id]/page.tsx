@@ -333,9 +333,13 @@ export default function PetDetailPage() {
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Button>
 
-                <p className="text-center text-[10px] font-bold text-muted-foreground/80 uppercase tracking-[0.2em]">
-                  {t("contactSupport")}
-                </p>
+                <div className="flex items-center justify-center">
+                  <Link
+                    href={"/contact"}
+                    className="text-[10px] font-bold text-muted-foreground/80 uppercase tracking-[0.2em]">
+                    {t("contactSupport")}
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

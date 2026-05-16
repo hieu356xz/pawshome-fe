@@ -4,6 +4,7 @@
     "pets": "Pets",
     "community": "Community Posts",
     "blog": "Blog",
+    "contact": "Contact",
     "login": "Login",
     "register": "Register",
     "logout": "Logout",
@@ -464,6 +465,25 @@
     "share": "Share Me",
     "noDescription": "No description available yet for this adorable pet.",
     "noNotes": "No additional notes available for this pet."
+  },
+  "Contact": {
+    "title": "Contact Us",
+    "subtitle": "We are always here to listen and support you and the pets.",
+    "contactInfo": "Contact Information",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "workingHours": "Working Hours",
+    "hours": "8:00 AM - 6:00 PM (Daily)",
+    "donationTitle": "Donations & Support",
+    "donationSubtitle": "Every contribution helps improve the lives of the residents at our shelter.",
+    "bankAccount": "Bank Account",
+    "accountNumber": "Account Number",
+    "accountName": "Account Name",
+    "bankName": "Bank",
+    "qrCode": "Transfer QR Code",
+    "socialMedia": "Social Media",
+    "followUs": "Follow us to get the latest updates on our pets."
   },
   "Pagination": {
     "previous": "Previous",

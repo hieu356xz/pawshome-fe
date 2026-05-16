@@ -4,6 +4,7 @@
     "pets": "Thú cưng",
     "community": "Tin cộng đồng",
     "blog": "Bài viết",
+    "contact": "Liên hệ",
     "login": "Đăng nhập",
     "register": "Đăng ký",
     "logout": "Đăng xuất",
@@ -464,6 +465,25 @@
     "share": "Chia sẻ bé",
     "noDescription": "Hiện chưa có mô tả chi tiết cho bé thú cưng đáng yêu này.",
     "noNotes": "Hiện chưa có ghi chú thêm về tính cách của bé."
+  },
+  "Contact": {
+    "title": "Liên hệ với chúng tôi",
+    "subtitle": "Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn cũng như các bé thú cưng.",
+    "contactInfo": "Thông tin liên lạc",
+    "address": "Địa chỉ",
+    "phone": "Số điện thoại",
+    "email": "Email",
+    "workingHours": "Giờ làm việc",
+    "hours": "8:00 - 18:00 (Hàng ngày)",
+    "donationTitle": "Quyên góp & Hỗ trợ",
+    "donationSubtitle": "Mọi sự đóng góp của bạn đều giúp cải thiện cuộc sống cho các bé tại trạm.",
+    "bankAccount": "Tài khoản ngân hàng",
+    "accountNumber": "Số tài khoản",
+    "accountName": "Chủ tài khoản",
+    "bankName": "Ngân hàng",
+    "qrCode": "Mã QR chuyển khoản",
+    "socialMedia": "Mạng xã hội",
+    "followUs": "Theo dõi chúng tôi để cập nhật tình hình các bé nhanh nhất."
   },
   "Pagination": {
     "previous": "Trước",

@@ -54,6 +54,11 @@ export function Navbar() {
             className="transition-colors hover:text-primary text-foreground/80">
             {t("blog")}
           </Link>
+          <Link
+            href="/contact"
+            className="transition-colors hover:text-primary text-foreground/80">
+            {t("contact")}
+          </Link>
         </nav>
 
         {/* Actions */}
