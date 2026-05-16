@@ -113,6 +113,21 @@
     "backToHome": "Back to Home",
     "logout": "Logout"
   },
+  "AdminCommon": {
+    "actions": "Actions",
+    "showing": "Showing",
+    "of": "of",
+    "previous": "Previous",
+    "next": "Next",
+    "search": "Search...",
+    "export": "Export",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
   "UserManagement": {
     "title": "User Management",
     "manageUsersDesc": "Manage and monitor all platform members.",
@@ -145,10 +160,26 @@
     "updateUser": "Update User",
     "backToUsers": "Back to Users",
     "loadingRoles": "Loading roles...",
-    "showing": "Showing",
-    "of": "of",
-    "previous": "Previous",
-    "next": "Next",
     "users": "users"
+  },
+  "RoleManagement": {
+    "title": "Role Management",
+    "manageRolesDesc": "Manage system roles and their associated permissions.",
+    "addRole": "Add Role",
+    "createRole": "Create New Role",
+    "editRole": "Edit Role",
+    "updateRole": "Update Role",
+    "backToRoles": "Back to Roles",
+    "roleName": "Role Name",
+    "description": "Description",
+    "permissions": "Permissions",
+    "searchRoles": "Search roles by name...",
+    "noRolesFound": "No roles found.",
+    "deleteRole": "Delete Role",
+    "generalInfo": "General Information",
+    "permissionsList": "Permissions List",
+    "loadingPermissions": "Loading permissions...",
+    "actions": "Actions",
+    "roles": "roles"
   }
 }

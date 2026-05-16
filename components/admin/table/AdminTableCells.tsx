@@ -64,9 +64,16 @@ export interface BadgeGroupCellProps {
   icon?: React.ReactNode;
   variant?: "blue" | "orange" | "purple" | "gray" | "info";
   className?: string;
+  maxVisible?: number;
 }
 
-export function BadgeGroupCell({ items, icon, variant = "blue", className }: BadgeGroupCellProps) {
+export function BadgeGroupCell({ 
+  items, 
+  icon, 
+  variant = "blue", 
+  className,
+  maxVisible = 5
+}: BadgeGroupCellProps) {
   const getBadgeVariant = (): any => {
     switch (variant) {
       case "orange": return "orange";
@@ -80,14 +87,22 @@ export function BadgeGroupCell({ items, icon, variant = "blue", className }: Bad
     return <span className="text-gray-400 text-xs italic">None</span>;
   }
 
+  const visibleItems = items.slice(0, maxVisible);
+  const remainingCount = items.length - maxVisible;
+
   return (
-    <div className={cn("flex flex-wrap gap-1", className)}>
-      {items.map((item) => (
+    <div className={cn("flex flex-wrap gap-1 items-center", className)}>
+      {visibleItems.map((item) => (
         <Badge key={item.id} variant={getBadgeVariant()} className="gap-1 px-2 py-0.5 uppercase tracking-wider">
           {icon}
           {item.label}
         </Badge>
       ))}
+      {remainingCount > 0 && (
+        <Badge variant="outline" className="text-[10px] text-gray-400 border-gray-100 bg-gray-50 h-5 px-1.5 hover:bg-gray-100">
+          +{remainingCount} more
+        </Badge>
+      )}
     </div>
   );
 }

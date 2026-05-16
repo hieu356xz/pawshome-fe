@@ -22,6 +22,7 @@ import { AdminTableActions, TableActionIcons } from "@/components/admin/table/Ad
 
 export default function UserManagementPage() {
   const t = useTranslations("UserManagement");
+  const tCommon = useTranslations("AdminCommon");
   const [users, setUsers] = useState<User[]>([]);
   const [roles, setRoles] = useState<Role[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -192,11 +193,11 @@ export default function UserManagementPage() {
             totalPages: 1,
             totalItems: filteredUsers.length,
             onPageChange: () => {},
-            showingLabel: t("showing"),
-            ofLabel: t("of"),
+            showingLabel: tCommon("showing"),
+            ofLabel: tCommon("of"),
             itemsLabel: t("users"),
-            previousLabel: t("previous"),
-            nextLabel: t("next")
+            previousLabel: tCommon("previous"),
+            nextLabel: tCommon("next")
           }}
         />
       </div>

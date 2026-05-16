@@ -113,6 +113,21 @@
     "backToHome": "Quay lại trang chủ",
     "logout": "Đăng xuất"
   },
+  "AdminCommon": {
+    "actions": "Thao tác",
+    "showing": "Hiển thị",
+    "of": "trên",
+    "previous": "Trước",
+    "next": "Tiếp",
+    "search": "Tìm kiếm...",
+    "export": "Xuất dữ liệu",
+    "delete": "Xóa",
+    "edit": "Chỉnh sửa",
+    "view": "Xem",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "confirm": "Xác nhận"
+  },
   "UserManagement": {
     "title": "Quản lý người dùng",
     "manageUsersDesc": "Quản lý và giám sát tất cả các thành viên trên hệ thống.",
@@ -145,10 +160,26 @@
     "updateUser": "Cập nhật người dùng",
     "backToUsers": "Quay lại danh sách",
     "loadingRoles": "Đang tải vai trò...",
-    "showing": "Hiển thị",
-    "of": "trên",
-    "previous": "Trước",
-    "next": "Tiếp",
     "users": "người dùng"
+  },
+  "RoleManagement": {
+    "title": "Quản lý vai trò",
+    "manageRolesDesc": "Quản lý quyền hạn và chức vụ trong hệ thống.",
+    "addRole": "Thêm vai trò",
+    "createRole": "Tạo vai trò mới",
+    "editRole": "Chỉnh sửa vai trò",
+    "updateRole": "Cập nhật vai trò",
+    "backToRoles": "Quay lại danh sách",
+    "roleName": "Tên vai trò",
+    "description": "Mô tả",
+    "permissions": "Quyền hạn",
+    "searchRoles": "Tìm kiếm theo tên vai trò...",
+    "noRolesFound": "Không tìm thấy vai trò nào.",
+    "deleteRole": "Xóa vai trò",
+    "generalInfo": "Thông tin chung",
+    "permissionsList": "Danh sách quyền hạn",
+    "loadingPermissions": "Đang tải quyền hạn...",
+    "actions": "Thao tác",
+    "roles": "vai trò"
   }
 }
