@@ -90,6 +90,15 @@
     "LOST": "Lost",
     "FOUND": "Found"
   },
+  "Admin": {
+    "welcome": "Welcome back, {name}",
+    "users": "Users",
+    "pets": "Pets",
+    "blog": "Blog Management",
+    "settings": "Settings",
+    "description": "Welcome to the PawsHome Management System. Please select a module from the sidebar or use the quick links below to get started.",
+    "manageNow": "Manage now"
+  },
   "AdminSidebar": {
     "dashboard": "Dashboard",
     "users": "Users",

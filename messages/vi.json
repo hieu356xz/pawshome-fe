@@ -90,6 +90,15 @@
     "LOST": "Bị lạc",
     "FOUND": "Tìm thấy"
   },
+  "Admin": {
+    "welcome": "Chào mừng trở lại, {name}",
+    "users": "Người dùng",
+    "pets": "Thú cưng",
+    "blog": "Quản lý Blog",
+    "settings": "Cài đặt",
+    "description": "Chào mừng bạn đến với Hệ thống quản lý PawsHome. Vui lòng chọn một chức năng từ thanh bên hoặc sử dụng các liên kết nhanh bên dưới để bắt đầu.",
+    "manageNow": "Quản lý ngay"
+  },
   "AdminSidebar": {
     "dashboard": "Bảng điều khiển",
     "users": "Người dùng",

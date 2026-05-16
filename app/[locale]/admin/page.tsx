@@ -6,7 +6,7 @@ import { useAuth } from "@/providers/AuthContext";
 import { 
   ShieldCheck, 
   ArrowRight,
-  Settings,
+  FileText,
   Users,
   PawPrint
 } from "lucide-react";
@@ -19,7 +19,7 @@ export default function AdminDashboardPage() {
   const quickLinks = [
     { title: t("users"), href: "/admin/users", icon: Users, color: "bg-blue-500" },
     { title: t("pets"), href: "/admin/pets", icon: PawPrint, color: "bg-orange-500" },
-    { title: t("settings"), href: "/admin/settings", icon: Settings, color: "bg-gray-500" },
+    { title: t("blog"), href: "/admin/blog", icon: FileText, color: "bg-purple-500" },
   ];
 
   return (
@@ -33,7 +33,7 @@ export default function AdminDashboardPage() {
       </h1>
       
       <p className="text-gray-500 max-w-lg mx-auto font-lato text-lg mb-12">
-        Welcome to the PawsHome Management System. Please select a module from the sidebar or use the quick links below to get started.
+        {t("description")}
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-3xl">
@@ -48,7 +48,7 @@ export default function AdminDashboardPage() {
             </div>
             <h3 className="font-bold text-gray-900 group-hover:text-orange-600 transition-colors">{link.title}</h3>
             <p className="text-sm text-gray-400 mt-1 flex items-center gap-1">
-              Manage now <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              {t("manageNow")} <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </p>
           </Link>
         ))}
