@@ -4,11 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { userService } from "@/services/user.service";
 import { User } from "@/types/auth";
-import { 
-  Search, 
-  UserPlus, 
-  Shield
-} from "lucide-react";
+import { Search, UserPlus, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/lib/navigation";
@@ -18,9 +14,20 @@ import { toast } from "@/components/ui/toast";
 import { ConfirmModal } from "@/components/ui/confirm-modal";
 
 import { AdminTable, Column } from "@/components/admin/AdminTable";
-import { AdminTableFilters, FilterGroup } from "@/components/admin/AdminTableFilters";
-import { UserInfoCell, StatusCell, BadgeGroupCell, DateCell } from "@/components/admin/table/AdminTableCells";
-import { AdminTableActions, TableActionIcons } from "@/components/admin/table/AdminTableActions";
+import {
+  AdminTableFilters,
+  FilterGroup,
+} from "@/components/admin/AdminTableFilters";
+import {
+  UserInfoCell,
+  StatusCell,
+  BadgeGroupCell,
+  DateCell,
+} from "@/components/admin/table/AdminTableCells";
+import {
+  AdminTableActions,
+  TableActionIcons,
+} from "@/components/admin/table/AdminTableActions";
 
 export default function UserManagementPage() {
   const t = useTranslations("UserManagement");
@@ -110,11 +117,11 @@ export default function UserManagementPage() {
     }
   };
 
-  const filteredUsers = users.filter(user => {
-    const matchesSearch = 
+  const filteredUsers = users.filter((user) => {
+    const matchesSearch =
       user.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     return matchesSearch;
   });
 
@@ -130,8 +137,8 @@ export default function UserManagementPage() {
       options: [
         { label: t("Statuses.active"), value: "active" },
         { label: t("Statuses.inactive"), value: "inactive" },
-        { label: t("Statuses.banned"), value: "banned" }
-      ]
+        { label: t("Statuses.banned"), value: "banned" },
+      ],
     },
     {
       id: "role",
@@ -141,8 +148,8 @@ export default function UserManagementPage() {
         setRoleFilter(val);
         setPagination({ ...pagination, page: 1 });
       },
-      options: roles.map(r => ({ label: r.name, value: r.name }))
-    }
+      options: roles.map((r) => ({ label: r.name, value: r.name })),
+    },
   ];
 
   const columns: Column<User>[] = [
@@ -150,18 +157,18 @@ export default function UserManagementPage() {
     {
       header: t("user"),
       cell: (user) => (
-        <UserInfoCell 
-          name={user.fullName || "Unnamed User"} 
-          email={user.email} 
-          avatarUrl={user.avatarUrl} 
+        <UserInfoCell
+          name={user.fullName || "Unnamed User"}
+          email={user.email}
+          avatarUrl={user.avatarUrl}
         />
       ),
     },
     {
       header: t("role"),
       cell: (user) => (
-        <BadgeGroupCell 
-          items={(user.roles || []).map(r => ({ id: r.id, label: r.name }))}
+        <BadgeGroupCell
+          items={(user.roles || []).map((r) => ({ id: r.id, label: r.name }))}
           icon={<Shield size={10} />}
           variant="blue"
         />
@@ -170,11 +177,20 @@ export default function UserManagementPage() {
     {
       header: t("status"),
       cell: (user) => (
-        <StatusCell 
-          status={t(`Statuses.${user.status}`)} 
+        <StatusCell
+          status={
+            user.isDeleted
+              ? t("Statuses.deleted")
+              : t(`Statuses.${user.status}`)
+          }
           variant={
-            user.status === 'active' ? "success" : 
-            user.status === 'inactive' ? "warning" : "error"
+            user.isDeleted
+              ? "error"
+              : user.status === "active"
+                ? "success"
+                : user.status === "inactive"
+                  ? "warning"
+                  : "error"
           }
         />
       ),
@@ -187,11 +203,22 @@ export default function UserManagementPage() {
       header: tCommon("actions"),
       align: "right",
       cell: (user) => (
-        <AdminTableActions 
+        <AdminTableActions
           actions={[
             { label: t("viewProfile"), icon: TableActionIcons.View },
-            { label: t("editUser"), icon: TableActionIcons.Edit, href: `/admin/users/${user.id}/edit` },
-            { label: t("deleteUser"), icon: TableActionIcons.Delete, variant: "danger", onClick: () => handleDeleteUser(user.id) },
+            {
+              label: t("editUser"),
+              icon: TableActionIcons.Edit,
+              href: `/admin/users/${user.id}/edit`,
+              disabled: user.isDeleted,
+            },
+            {
+              label: t("deleteUser"),
+              icon: TableActionIcons.Delete,
+              variant: "danger",
+              onClick: () => handleDeleteUser(user.id),
+              disabled: user.isDeleted,
+            },
           ]}
         />
       ),
@@ -202,14 +229,15 @@ export default function UserManagementPage() {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-playfair font-bold text-gray-900">{t("title")}</h1>
+          <h1 className="text-3xl font-playfair font-bold text-gray-900">
+            {t("title")}
+          </h1>
           <p className="text-gray-500 mt-1">{t("manageUsersDesc")}</p>
         </div>
         <div className="flex items-center gap-3">
-          <Link 
+          <Link
             href="/admin/users/create"
-            className="rounded-xl bg-orange-500 hover:bg-orange-600 text-white gap-2 shadow-lg shadow-orange-200 transition-all h-10 px-4 flex items-center justify-center font-medium"
-          >
+            className="rounded-xl bg-orange-500 hover:bg-orange-600 text-white gap-2 shadow-lg shadow-orange-200 transition-all h-10 px-4 flex items-center justify-center font-medium">
             <UserPlus size={18} />
             {t("addUser")}
           </Link>
@@ -220,17 +248,20 @@ export default function UserManagementPage() {
         <div className="p-6 border-b border-gray-50">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
             <div className="relative w-full md:w-96 group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-orange-500 transition-colors" size={18} />
-              <Input 
+              <Search
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-orange-500 transition-colors"
+                size={18}
+              />
+              <Input
                 placeholder={t("searchUsers")}
                 className="pl-12 h-12 rounded-2xl bg-gray-50 border-none focus-visible:ring-2 focus-visible:ring-orange-200 transition-all"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            
+
             <div className="flex-1 md:flex md:justify-end">
-              <AdminTableFilters 
+              <AdminTableFilters
                 groups={filterGroups}
                 onClearAll={() => {
                   setStatusFilter(null);
@@ -242,11 +273,14 @@ export default function UserManagementPage() {
           </div>
         </div>
 
-        <AdminTable 
+        <AdminTable
           columns={columns}
           data={filteredUsers}
           isLoading={isLoading}
           emptyMessage={t("noUsersFound")}
+          rowClassName={(user) =>
+            user.isDeleted ? "opacity-60 grayscale-[0.5]" : ""
+          }
           pagination={{
             currentPage: pagination.page,
             totalPages: pagination.totalPages,
@@ -256,7 +290,7 @@ export default function UserManagementPage() {
             ofLabel: tCommon("of"),
             itemsLabel: t("users"),
             previousLabel: tCommon("previous"),
-            nextLabel: tCommon("next")
+            nextLabel: tCommon("next"),
           }}
         />
       </div>

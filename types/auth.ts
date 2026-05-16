@@ -65,6 +65,7 @@ export interface User {
   status: "inactive" | "active" | "banned";
   googleId?: string;
   roles?: Role[];
+  isDeleted?: boolean;
   createdAt: string;
   updatedAt: string;
 }

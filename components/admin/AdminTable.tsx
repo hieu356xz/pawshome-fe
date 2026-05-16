@@ -30,6 +30,7 @@ interface AdminTableProps<T> {
     nextLabel?: string;
     itemsLabel?: string;
   };
+  rowClassName?: (item: T) => string;
 }
 
 export function AdminTable<T extends { id: string | number }>({
@@ -38,6 +39,7 @@ export function AdminTable<T extends { id: string | number }>({
   isLoading,
   emptyMessage = "No data found",
   pagination,
+  rowClassName,
 }: AdminTableProps<T>) {
   return (
     <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
@@ -75,7 +77,10 @@ export function AdminTable<T extends { id: string | number }>({
               data.map((item) => (
                 <tr
                   key={item.id}
-                  className="hover:bg-gray-50/50 transition-colors group"
+                  className={cn(
+                    "hover:bg-gray-50/50 transition-colors group",
+                    rowClassName?.(item)
+                  )}
                 >
                   {columns.map((column, index) => (
                     <td

@@ -184,7 +184,8 @@
       "active": "Hoạt động",
       "inactive": "Ngưng hoạt động",
       "suspended": "Tạm khóa",
-      "banned": "Bị cấm"
+      "banned": "Bị cấm",
+      "deleted": "Đã xóa"
     }
   },
   "RoleManagement": {

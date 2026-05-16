@@ -17,6 +17,7 @@ export interface ActionItem {
   onClick?: () => void;
   href?: string;
   variant?: "default" | "danger";
+  disabled?: boolean;
 }
 
 interface AdminTableActionsProps {
@@ -50,13 +51,17 @@ export function AdminTableActions({
 
           if (action.href) {
             return (
-              <DropdownMenuItem key={index} className="p-0 cursor-pointer">
+              <DropdownMenuItem
+                key={index}
+                disabled={action.disabled}
+                className="p-0 cursor-pointer">
                 <Link
                   href={action.href}
                   className={cn(
-                    "rounded-xl cursor-pointer flex items-center gap-2 py-2.5 px-3 focus:bg-orange-50 focus:text-orange-600 transition-colors",
+                    "rounded-xl cursor-pointer flex items-center gap-2 py-2.5 px-3 focus:bg-orange-50 focus:text-orange-600 transition-colors w-full",
                     action.variant === "danger" &&
                       "text-red-500 focus:bg-red-50 focus:text-red-600",
+                    action.disabled && "opacity-50 cursor-not-allowed pointer-events-none",
                   )}>
                   {content}
                 </Link>
@@ -68,10 +73,12 @@ export function AdminTableActions({
             <DropdownMenuItem
               key={index}
               onClick={action.onClick}
+              disabled={action.disabled}
               className={cn(
                 "rounded-xl cursor-pointer flex items-center gap-2 py-2.5 px-3 focus:bg-orange-50 focus:text-orange-600 transition-colors",
                 action.variant === "danger" &&
                   "text-red-500 focus:bg-red-50 focus:text-red-600",
+                action.disabled && "opacity-50 cursor-not-allowed pointer-events-none",
               )}>
               {content}
             </DropdownMenuItem>
