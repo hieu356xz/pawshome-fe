@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/lib/navigation";
 import { authService } from "@/services/auth.service";
@@ -31,6 +32,23 @@ export function LoginForm() {
   const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
 
+  const searchParams = useSearchParams();
+  const errorParam = searchParams.get("error");
+
+  const mapErrorMessage = (message: string) => {
+    if (message === "Invalid credentials") return t("invalidCredentials");
+    if (message === "Account has been deleted") return t("accountDeleted");
+    if (message === "Please login with Google") return t("loginWithGoogleRequired");
+    if (message === "Account is banned") return t("accountBanned");
+    return message;
+  };
+
+  useEffect(() => {
+    if (errorParam) {
+      setError(mapErrorMessage(errorParam));
+    }
+  }, [errorParam]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -48,22 +66,8 @@ export function LoginForm() {
     } catch (err: any) {
       console.log("Login Error:", err);
 
-      const backendMessage = err as string | undefined;
-      let finalMessage = t("loginError");
-
-      if (backendMessage === "Invalid credentials") {
-        finalMessage = t("invalidCredentials");
-      } else if (backendMessage === "Account has been deleted") {
-        finalMessage = t("accountDeleted");
-      } else if (backendMessage === "Please login with Google") {
-        finalMessage = t("loginWithGoogleRequired");
-      } else if (backendMessage === "Account is banned") {
-        finalMessage = t("accountBanned");
-      } else if (typeof backendMessage === "string") {
-        finalMessage = backendMessage;
-      }
-
-      setError(finalMessage);
+      const backendMessage = err?.response?.data?.message || err?.message;
+      setError(mapErrorMessage(backendMessage) || t("loginError"));
     } finally {
       setIsLoading(false);
     }
