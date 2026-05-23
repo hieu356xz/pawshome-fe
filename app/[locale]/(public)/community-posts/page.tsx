@@ -106,15 +106,13 @@ export default function CommunityPostsPage() {
       {/* Hero Section */}
       <PageHeader
         title={t("title")}
-        description={t("description")}
+        description={t("subtitle")}
         badgeIcon={MessageSquare}
         badgeText={navbarT("community")}
-        variant="primary"
-      >
+        variant="primary">
         <Link
           href="/community-posts/create"
-          className="h-14 px-8 rounded-2xl bg-white text-primary hover:bg-white/95 text-sm font-bold flex items-center justify-center transition-all shadow-xl shadow-black/10 hover:shadow-black/20 hover:scale-[1.02] duration-200"
-        >
+          className="h-14 px-8 rounded-2xl bg-white text-primary hover:bg-white/95 text-sm font-bold flex items-center justify-center transition-all shadow-xl shadow-black/10 hover:shadow-black/20 hover:scale-[1.02] duration-200">
           <Plus className="mr-2 h-5 w-5 text-primary" />
           {t("createPost")}
         </Link>

@@ -454,6 +454,7 @@
   "CommunityBoard": {
     "title": "Bảng tin cộng đồng",
     "description": "Mô tả",
+    "subtitle": "Nơi kết nối cộng đồng để chia sẻ thông tin, hỗ trợ tìm kiếm và giúp đỡ các bé thú cưng bị lạc.",
     "createTitle": "Tạo tin đăng mới",
     "createSubtitle": "Hãy cung cấp thông tin chi tiết nhất có thể để cộng đồng có thể hỗ trợ bạn nhanh nhất.",
     "postTitlePlaceholder": "Ví dụ: Tìm mèo lạc màu vàng tại Cầu Giấy...",

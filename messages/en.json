@@ -454,6 +454,7 @@
   "CommunityBoard": {
     "title": "Community Notice Board",
     "description": "Description",
+    "subtitle": "Connecting pet lovers to share notices, track lost companions, and support animal welfare.",
     "createTitle": "Create New Post",
     "createSubtitle": "Please provide as much detail as possible so the community can help you quickly.",
     "postTitlePlaceholder": "e.g., Lost yellow cat in Cau Giay area...",
