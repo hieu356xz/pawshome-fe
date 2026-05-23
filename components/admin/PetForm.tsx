@@ -48,11 +48,11 @@ interface PetFormProps {
 
 export function PetForm({ initialData, isEdit = false }: PetFormProps) {
   const t = useTranslations("PetManagement");
+  const commonT = useTranslations("Common");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   
   const [species, setSpecies] = useState<Species[]>([]);
-  const [allBreeds, setAllBreeds] = useState<Breed[]>([]);
   const [filteredBreeds, setFilteredBreeds] = useState<Breed[]>([]);
 
   const [formData, setFormData] = useState({
@@ -77,27 +77,45 @@ export function PetForm({ initialData, isEdit = false }: PetFormProps) {
   }, []);
 
   useEffect(() => {
-    if (formData.speciesId) {
-      const filtered = allBreeds.filter(b => b.speciesId === formData.speciesId);
-      setFilteredBreeds(filtered);
-      
-      // If the current breed is not in the new filtered list, reset it
-      if (!filtered.some(b => b.id === formData.breedId)) {
-        setFormData(prev => ({ ...prev, breedId: filtered.length > 0 ? filtered[0].id : 0 }));
+    let active = true;
+    const fetchBreedsForSpecies = async () => {
+      if (formData.speciesId) {
+        try {
+          const breedRes = await breedService.getAll({
+            speciesId: formData.speciesId,
+            limit: 100,
+          });
+          if (active && breedRes.success) {
+            setFilteredBreeds(breedRes.data);
+            
+            // If the current breed is not in the new fetched list and is not 0 (Unknown), reset it to 0
+            if (formData.breedId !== 0 && !breedRes.data.some(b => b.id === formData.breedId)) {
+              setFormData(prev => ({ 
+                ...prev, 
+                breedId: 0 
+              }));
+            }
+          }
+        } catch (error) {
+          console.error("Failed to fetch breeds for species:", error);
+        }
+      } else {
+        if (active) {
+          setFilteredBreeds([]);
+        }
       }
-    } else {
-      setFilteredBreeds([]);
-    }
-  }, [formData.speciesId, allBreeds]);
+    };
+
+    fetchBreedsForSpecies();
+    return () => {
+      active = false;
+    };
+  }, [formData.speciesId]);
 
   const fetchData = async () => {
     try {
-      const [speciesRes, breedsRes] = await Promise.all([
-        speciesService.getAll(),
-        breedService.getAll()
-      ]);
+      const speciesRes = await speciesService.getAll();
       setSpecies(speciesRes.data);
-      setAllBreeds(breedsRes.data);
       
       if (!isEdit && speciesRes.data.length > 0) {
         setFormData(prev => ({ ...prev, speciesId: speciesRes.data[0].id }));
@@ -109,14 +127,19 @@ export function PetForm({ initialData, isEdit = false }: PetFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.speciesId || !formData.breedId) return;
+    if (!formData.speciesId) return;
 
     setIsLoading(true);
     try {
+      const payload = {
+        ...formData,
+        breedId: formData.breedId || null,
+      };
+
       if (isEdit && initialData?.id) {
-        await petService.updatePet(initialData.id, formData);
+        await petService.updatePet(initialData.id, payload);
       } else {
-        await petService.createPet(formData);
+        await petService.createPet(payload);
       }
 
       router.push("/admin/pets");
@@ -180,10 +203,12 @@ export function PetForm({ initialData, isEdit = false }: PetFormProps) {
                 id="breedId"
                 label={t("breed")}
                 icon={<Layers size={18} />}
-                options={filteredBreeds.map(b => ({ label: b.name, value: b.id }))}
+                options={[
+                  { label: commonT("unknown"), value: 0 },
+                  ...filteredBreeds.map(b => ({ label: b.name, value: b.id }))
+                ]}
                 value={formData.breedId}
-                onChange={e => setFormData({...formData, breedId: parseInt(e.target.value)})}
-                required
+                onChange={e => setFormData({...formData, breedId: parseInt(e.target.value) || 0})}
                 disabled={filteredBreeds.length === 0}
               />
 
@@ -314,6 +339,7 @@ export function PetForm({ initialData, isEdit = false }: PetFormProps) {
                 placeholder="e.g. White & Brown"
                 icon={<Palette size={18} />}
                 value={formData.color}
+                required
                 onChange={e => setFormData({...formData, color: e.target.value})}
               />
 
@@ -350,7 +376,7 @@ export function PetForm({ initialData, isEdit = false }: PetFormProps) {
               <div className="flex justify-between items-center text-xs">
                 <span className="text-orange-700/60 font-medium">Category</span>
                 <span className="text-orange-900 font-bold">
-                  {species.find(s => s.id === formData.speciesId)?.name} / {allBreeds.find(b => b.id === formData.breedId)?.name}
+                  {species.find(s => s.id === formData.speciesId)?.name} / {filteredBreeds.find(b => b.id === formData.breedId)?.name || commonT("unknown")}
                 </span>
               </div>
               <div className="flex justify-between items-center text-xs">
