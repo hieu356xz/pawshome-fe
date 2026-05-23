@@ -54,7 +54,7 @@ export function Hero() {
               </Link>
             </div>
 
-            <div className="flex items-center justify-center md:justify-start space-x-12 pt-8">
+            {/* <div className="flex items-center justify-center md:justify-start space-x-12 pt-8">
               <div>
                 <p className="text-3xl font-serif font-bold text-primary">
                   500+
@@ -71,7 +71,7 @@ export function Hero() {
                   {t("statsMembers")}
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div className="flex-1 w-full max-w-xl">
