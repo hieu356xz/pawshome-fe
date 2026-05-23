@@ -222,7 +222,7 @@ export default function BlogManagementPage() {
             {
               label: tCommon("edit"),
               icon: TableActionIcons.Edit,
-              href: `/admin/blog/${post.id}/edit`,
+              href: `/admin/blog/${post.slug}/edit`,
             },
             {
               label: tCommon("delete"),

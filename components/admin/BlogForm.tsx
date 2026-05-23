@@ -145,7 +145,7 @@ export function BlogForm({ initialData, isEdit = false }: BlogFormProps) {
       } else {
         const response = await blogService.createPost(submitData);
         // After create, redirect to edit to allow image upload
-        router.push(`/admin/blog/${response.data.id}/edit`);
+        router.push(`/admin/blog/${response.data.slug}/edit`);
         return;
       }
       router.push("/admin/blog");
