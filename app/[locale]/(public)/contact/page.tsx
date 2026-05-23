@@ -15,9 +15,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useToast } from "@/components/ui/toast";
+import { PageHeader } from "@/components/shared/PageHeader";
 
 export default function ContactPage() {
   const t = useTranslations("Contact");
+  const navbarT = useTranslations("Navbar");
   const { toast } = useToast();
   const [copied, setCopied] = useState<string | null>(null);
 
@@ -34,18 +36,13 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-[#faf9f6]">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-16 overflow-hidden bg-primary/5">
-        <div className="container mx-auto px-4 md:px-8 text-center relative">
-          <div className="max-w-3xl mx-auto space-y-6">
-            <h1 className="text-4xl md:text-6xl font-serif font-bold text-foreground leading-tight">
-              {t("title")}
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              {t("subtitle")}
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        title={t("title")}
+        description={t("subtitle")}
+        badgeIcon={Mail}
+        badgeText={navbarT("contact")}
+        variant="primary"
+      />
 
       {/* Main Content */}
       <div className="container mx-auto px-4 md:px-8 py-20">

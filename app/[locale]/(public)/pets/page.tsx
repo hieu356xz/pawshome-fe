@@ -14,6 +14,7 @@ import {
   Palette,
 } from "lucide-react";
 import { PetCard } from "@/components/shared/PetCard";
+import { PageHeader } from "@/components/shared/PageHeader";
 import { AppPagination } from "@/components/shared/AppPagination";
 import { petService } from "@/services/pet.service";
 import { speciesService } from "@/services/species.service";
@@ -33,6 +34,7 @@ import { cn } from "@/lib/utils";
 export default function PetListPage() {
   const t = useTranslations("PetList");
   const pt = useTranslations("PetManagement");
+  const navbarT = useTranslations("Navbar");
 
   // State for data
   const [pets, setPets] = useState<Pet[]>([]);
@@ -142,22 +144,13 @@ export default function PetListPage() {
   return (
     <div className="bg-[#faf9f6]">
       {/* Optimized Hero Section */}
-      <section className="relative pt-12 pb-8 overflow-hidden border-b border-border/10">
-        <div className="container mx-auto px-4 md:px-8 relative">
-          <div className="max-w-2xl mx-auto text-center space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-full text-primary text-[11px] font-bold uppercase tracking-widest">
-              <PawPrint className="h-3 w-3" />
-              {t("title")}
-            </div>
-            <h1 className="font-serif text-3xl md:text-4xl font-bold text-foreground leading-tight">
-              {t("title")}
-            </h1>
-            <p className="text-muted-foreground text-base leading-relaxed">
-              {t("subtitle")}
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        title={t("title")}
+        description={t("subtitle")}
+        badgeIcon={PawPrint}
+        badgeText={navbarT("pets")}
+        variant="primary"
+      />
 
       <div className="container mx-auto px-4 md:px-8 py-8 flex flex-col min-h-[800px]">
         <div className="flex flex-col lg:flex-row gap-8 flex-1">

@@ -11,6 +11,7 @@ import {
   X,
   ArrowUpDown,
   Calendar,
+  MessageSquare,
 } from "lucide-react";
 import { Link } from "@/lib/navigation";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -24,11 +25,13 @@ import { SortOrder } from "@/types/common";
 import { formatDistanceToNow } from "date-fns";
 import { vi, enUS } from "date-fns/locale";
 import { useParams } from "next/navigation";
+import { PageHeader } from "@/components/shared/PageHeader";
 
 export default function CommunityPostsPage() {
   const t = useTranslations("CommunityBoard");
   const commonT = useTranslations("Common");
   const plT = useTranslations("PetList");
+  const navbarT = useTranslations("Navbar");
   const params = useParams();
   const locale = params.locale as string;
 
@@ -101,30 +104,21 @@ export default function CommunityPostsPage() {
   return (
     <div className="min-h-screen bg-[#faf9f6] pb-24">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-16 bg-white border-b border-border/10 overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 translate-x-1/2" />
-        <div className="container mx-auto px-4 md:px-8 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
-            <div className="max-w-2xl space-y-4">
-              <h1 className="text-4xl md:text-6xl font-serif font-bold text-foreground leading-tight">
-                {t("title")}
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {t("description")}
-              </p>
-            </div>
-            <Link
-              href="/community-posts/create"
-              className={cn(
-                buttonVariants({ variant: "default", size: "lg" }),
-                "h-14 px-8 rounded-2xl shadow-xl shadow-primary/20",
-              )}>
-              <Plus className="mr-2 h-5 w-5" />
-              {t("createPost")}
-            </Link>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        title={t("title")}
+        description={t("description")}
+        badgeIcon={MessageSquare}
+        badgeText={navbarT("community")}
+        variant="primary"
+      >
+        <Link
+          href="/community-posts/create"
+          className="h-14 px-8 rounded-2xl bg-white text-primary hover:bg-white/95 text-sm font-bold flex items-center justify-center transition-all shadow-xl shadow-black/10 hover:shadow-black/20 hover:scale-[1.02] duration-200"
+        >
+          <Plus className="mr-2 h-5 w-5 text-primary" />
+          {t("createPost")}
+        </Link>
+      </PageHeader>
 
       <div className="container mx-auto px-4 md:px-8 mt-12">
         <div className="flex flex-col lg:flex-row gap-12">
