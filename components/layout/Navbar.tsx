@@ -2,7 +2,7 @@
 
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/lib/navigation";
-import { Search, Menu, Languages } from "lucide-react";
+import { Search, Menu, Languages, Heart } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
@@ -63,6 +63,18 @@ export function Navbar() {
 
         {/* Actions */}
         <div className="flex items-center space-x-4">
+          {/* Donate Button */}
+          <Link
+            href="/donate"
+            className={cn(
+              buttonVariants({ variant: "default" }),
+              "hidden md:flex rounded-xl font-bold cursor-pointer bg-primary text-white hover:bg-primary/90 gap-2 h-10 px-4"
+            )}
+          >
+            <Heart className="h-4 w-4 fill-current animate-pulse text-white" />
+            {t("donate")}
+          </Link>
+
           {/* Language Switcher */}
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-gray-50 transition-all text-gray-500 outline-none border-none cursor-pointer">

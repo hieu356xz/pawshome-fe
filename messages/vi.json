@@ -11,7 +11,8 @@
     "profile": "Trang cá nhân",
     "settings": "Cài đặt",
     "adminDashboard": "Trang quản trị",
-    "search": "Tìm kiếm"
+    "search": "Tìm kiếm",
+    "donate": "Ủng hộ"
   },
   "Hero": {
     "badge": "Tin cậy & Uy tín",
@@ -560,7 +561,10 @@
     "bankName": "Ngân hàng",
     "qrCode": "Mã QR chuyển khoản",
     "socialMedia": "Mạng xã hội",
-    "followUs": "Theo dõi chúng tôi để cập nhật tình hình các bé nhanh nhất."
+    "followUs": "Theo dõi chúng tôi để cập nhật tình hình các bé nhanh nhất.",
+    "donationBannerText": "Quyên góp trực tuyến nhanh chóng và an toàn",
+    "donationDescription": "Mỗi đóng góp của bạn đều giúp PawsHome duy trì hoạt động cứu hộ, cung cấp thức ăn, chăm sóc y tế và tìm kiếm mái ấm mới cho các bé chó mèo bị bỏ rơi. Sự chung tay của bạn mang lại cuộc sống tốt đẹp hơn cho các bạn nhỏ bốn chân.",
+    "donateNow": "Quyên góp ủng hộ ngay"
   },
   "Adoption": {
     "title": "Quy trình nhận nuôi",
@@ -654,5 +658,35 @@
     "resultsFound": "Tìm thấy {count} kết quả",
     "clearImage": "Xóa ảnh",
     "textAndImage": "Kết hợp văn bản và hình ảnh"
+  },
+  "Donate": {
+    "title": "Chung Tay Quyên Góp",
+    "subtitle": "Mọi đóng góp của bạn đều trực tiếp mang lại mái ấm, thức ăn và sự chăm sóc y tế tốt nhất cho các bé thú cưng.",
+    "formTitle": "Thông tin quyên góp",
+    "formSubtitle": "Nhập số tiền và thông tin của bạn để tạo mã chuyển khoản QR nhanh.",
+    "amountLabel": "Số tiền quyên góp (VND)",
+    "donorNameLabel": "Họ và tên người quyên góp",
+    "donorEmailLabel": "Địa chỉ Email (Không bắt buộc)",
+    "donorPhoneLabel": "Số điện thoại liên hệ (Không bắt buộc)",
+    "messageLabel": "Lời nhắn gửi đến các bé (Không bắt buộc)",
+    "isAnonymousLabel": "Quyên góp ẩn danh (Tên bạn sẽ hiển thị là 'Người ẩn danh')",
+    "submitButton": "Tiến hành chuyển khoản",
+    "submittingButton": "Đang xử lý...",
+    "quickAmount": "Chọn nhanh số tiền",
+    "statsTitle": "Thống kê đóng góp",
+    "totalAmount": "Tổng tiền đã nhận",
+    "donationCount": "Lượt quyên góp",
+    "leaderboardTitle": "Bảng vàng vinh danh",
+    "recentTitle": "Lượt quyên góp gần đây",
+    "anonymousUser": "Người ẩn danh",
+    "guestUser": "Mạnh thường quân",
+    "emptyStats": "Chưa có lượt quyên góp nào được ghi nhận.",
+    "successTitle": "Cảm ơn tấm lòng của bạn!",
+    "successDesc": "Giao dịch quyên góp đã được ghi nhận thành công trên hệ thống. PawsHome chân thành cảm ơn sự đồng hành và hỗ trợ của bạn!",
+    "cancelTitle": "Giao dịch đã bị hủy",
+    "cancelDesc": "Bạn đã hủy bỏ yêu cầu quyên góp. PawsHome luôn trân quý mọi tấm lòng, bạn có thể thử lại bất cứ lúc nào.",
+    "backToHome": "Quay lại trang chủ",
+    "backToDonate": "Tiếp tục quyên góp",
+    "securityNotice": "Cổng thanh toán được bảo mật an toàn bởi PayOS & VietQR"
   }
 }

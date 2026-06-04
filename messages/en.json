@@ -11,7 +11,8 @@
     "profile": "Profile",
     "settings": "Settings",
     "adminDashboard": "Admin Dashboard",
-    "search": "Search"
+    "search": "Search",
+    "donate": "Donate"
   },
   "Hero": {
     "badge": "Established & Trusted",
@@ -560,7 +561,10 @@
     "bankName": "Bank",
     "qrCode": "Transfer QR Code",
     "socialMedia": "Social Media",
-    "followUs": "Follow us to get the latest updates on our pets."
+    "followUs": "Follow us to get the latest updates on our pets.",
+    "donationBannerText": "Quick and secure online donation",
+    "donationDescription": "Every contribution you make helps PawsHome maintain rescue activities, provide food, medical care, and find new homes for abandoned dogs and cats. Your support brings a better life to our four-legged friends.",
+    "donateNow": "Donate Now"
   },
   "Adoption": {
     "title": "Adoption Process",
@@ -654,5 +658,35 @@
     "resultsFound": "Found {count} results",
     "clearImage": "Clear image",
     "textAndImage": "Combined text and image search"
+  },
+  "Donate": {
+    "title": "Support & Donate",
+    "subtitle": "Your contribution directly provides shelter, food, and medical care for our rescue pets.",
+    "formTitle": "Donation Details",
+    "formSubtitle": "Enter your donation amount and details to generate a payment QR code.",
+    "amountLabel": "Donation Amount (VND)",
+    "donorNameLabel": "Donor Full Name",
+    "donorEmailLabel": "Email Address (Optional)",
+    "donorPhoneLabel": "Phone Number (Optional)",
+    "messageLabel": "Message to our furry friends (Optional)",
+    "isAnonymousLabel": "Donate anonymously (Name will be hidden on the board)",
+    "submitButton": "Proceed to Payment",
+    "submittingButton": "Processing...",
+    "quickAmount": "Select Quick Amount",
+    "statsTitle": "Donation Dashboard",
+    "totalAmount": "Total Funds Raised",
+    "donationCount": "Donation Hits",
+    "leaderboardTitle": "Honor Board & Top Donors",
+    "recentTitle": "Recent Donations Feed",
+    "anonymousUser": "Anonymous Donor",
+    "guestUser": "Generous Donor",
+    "emptyStats": "No donation events recorded yet.",
+    "successTitle": "Thank You for Your Generosity!",
+    "successDesc": "Your donation has been verified successfully. PawsHome and the pets send our deepest gratitude for your support!",
+    "cancelTitle": "Donation Cancelled",
+    "cancelDesc": "The payment process has been cancelled. Every bit of support matters, and you can try again whenever you are ready.",
+    "backToHome": "Back to Home",
+    "backToDonate": "Try Donating Again",
+    "securityNotice": "The payment gateway is securely protected by PayOS & VietQR"
   }
 }
