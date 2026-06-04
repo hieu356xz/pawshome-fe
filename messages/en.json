@@ -666,7 +666,7 @@
     "formTitle": "Donation Details",
     "formSubtitle": "Enter your donation amount and details to generate a payment QR code.",
     "amountLabel": "Donation Amount (VND)",
-    "donorNameLabel": "Donor Full Name",
+    "donorNameLabel": "Donor Full Name (Optional)",
     "donorEmailLabel": "Email Address (Optional)",
     "donorPhoneLabel": "Phone Number (Optional)",
     "messageLabel": "Message to our furry friends (Optional)",

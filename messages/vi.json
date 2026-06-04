@@ -666,7 +666,7 @@
     "formTitle": "Thông tin quyên góp",
     "formSubtitle": "Nhập số tiền và thông tin của bạn để tạo mã chuyển khoản QR nhanh.",
     "amountLabel": "Số tiền quyên góp (VND)",
-    "donorNameLabel": "Họ và tên người quyên góp",
+    "donorNameLabel": "Họ và tên người quyên góp (Không bắt buộc)",
     "donorEmailLabel": "Địa chỉ Email (Không bắt buộc)",
     "donorPhoneLabel": "Số điện thoại liên hệ (Không bắt buộc)",
     "messageLabel": "Lời nhắn gửi đến các bé (Không bắt buộc)",
