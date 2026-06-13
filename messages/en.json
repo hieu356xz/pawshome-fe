@@ -495,7 +495,16 @@
       "active": "Active",
       "closed": "Closed"
     },
-    "status": "Status"
+    "status": "Status",
+    "imageLimitError": "You can only upload up to 5 images.",
+    "add": "Add",
+    "createPostWarning": "* Please only post notices related to finding pets. Any posts for other purposes will be removed.",
+    "postingTipsTitle": "Effective posting tips",
+    "postingTip1": "Use clear images showing the pet's face and identifying features.",
+    "postingTip2": "Provide detailed descriptions of personality, collar color, or scars (if any).",
+    "postingTip3": "Specify the last seen time and location.",
+    "postingTip4": "Leave the most accurate contact information.",
+    "descriptionPlaceholder": "Detailed description of the pet (features, lost/found circumstances...)"
   },
   "PetList": {
     "title": "Find Your New Best Friend",

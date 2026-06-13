@@ -495,7 +495,16 @@
       "active": "Đang hoạt động",
       "closed": "Đã đóng"
     },
-    "status": "Trạng thái"
+    "status": "Trạng thái",
+    "imageLimitError": "Bạn chỉ có thể tải lên tối đa 5 hình ảnh.",
+    "add": "Thêm",
+    "createPostWarning": "* Vui lòng chỉ đăng tin liên quan đến tìm thú cưng. Mọi tin đăng sai mục đích sẽ bị gỡ bỏ.",
+    "postingTipsTitle": "Mẹo đăng tin hiệu quả",
+    "postingTip1": "Sử dụng hình ảnh rõ mặt và các đặc điểm nhận dạng của bé.",
+    "postingTip2": "Mô tả chi tiết về tính cách, màu vòng cổ hoặc các vết sẹo (nếu có).",
+    "postingTip3": "Ghi rõ thời gian và địa điểm cuối cùng nhìn thấy bé.",
+    "postingTip4": "Để lại thông tin liên lạc chính xác nhất.",
+    "descriptionPlaceholder": "Mô tả chi tiết về bé (đặc điểm, hoàn cảnh đi lạc/tìm thấy...)"
   },
   "PetList": {
     "title": "Tìm người bạn bốn chân mới của bạn",

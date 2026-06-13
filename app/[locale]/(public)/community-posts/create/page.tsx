@@ -6,7 +6,6 @@ import { useTranslations } from "next-intl";
 import {
   ArrowLeft,
   Camera,
-  Send,
   X,
   MapPin,
   Phone,
@@ -16,7 +15,7 @@ import {
   Plus,
 } from "lucide-react";
 import { Link } from "@/lib/navigation";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
@@ -48,7 +47,7 @@ export default function CreatePostPage() {
       if (images.length + files.length > 5) {
         toast({
           type: "error",
-          message: "You can only upload up to 5 images.",
+          message: t("imageLimitError"),
         });
         return;
       }
@@ -197,7 +196,7 @@ export default function CreatePostPage() {
                 <textarea
                   id="description"
                   required
-                  placeholder="..."
+                  placeholder={t("descriptionPlaceholder")}
                   className="w-full min-h-[200px] p-6 rounded-[2rem] bg-muted/20 border-transparent focus:bg-white transition-all text-lg leading-relaxed resize-none outline-none ring-primary/20 focus:ring-1"
                   value={formData.description}
                   onChange={(e) =>
@@ -282,7 +281,7 @@ export default function CreatePostPage() {
                   <label className="aspect-square rounded-2xl border-2 border-dashed border-border flex flex-col items-center justify-center cursor-pointer hover:bg-muted/50 transition-all space-y-2">
                     <Camera className="h-6 w-6 text-muted-foreground" />
                     <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
-                      Add
+                      {t("add")}
                     </span>
                     <input
                       type="file"
@@ -308,8 +307,7 @@ export default function CreatePostPage() {
                   {isSubmitting ? t("submitting") : t("createPost")}
                 </Button>
                 <p className="text-[11px] text-center text-muted-foreground mt-6 italic">
-                  * Vui lòng chỉ đăng tin liên quan đến tìm thú cưng. Mọi tin
-                  đăng sai mục đích sẽ bị gỡ bỏ.
+                  {t("createPostWarning")}
                 </p>
               </div>
             </div>
@@ -318,18 +316,13 @@ export default function CreatePostPage() {
             <div className="bg-primary/5 rounded-[2rem] border border-primary/10 p-8 space-y-4">
               <div className="flex items-center gap-3 text-primary">
                 <ImageIcon className="h-5 w-5" />
-                <h4 className="font-bold text-sm">Mẹo đăng tin hiệu quả</h4>
+                <h4 className="font-bold text-sm">{t("postingTipsTitle")}</h4>
               </div>
               <ul className="space-y-2 text-xs text-muted-foreground leading-relaxed list-disc pl-4">
-                <li>
-                  Sử dụng hình ảnh rõ mặt và các đặc điểm nhận dạng của bé.
-                </li>
-                <li>
-                  Mô tả chi tiết về tính cách, màu vòng cổ hoặc các vết sẹo (nếu
-                  có).
-                </li>
-                <li>Ghi rõ thời gian và địa điểm cuối cùng nhìn thấy bé.</li>
-                <li>Để lại thông tin liên lạc chính xác nhất.</li>
+                <li>{t("postingTip1")}</li>
+                <li>{t("postingTip2")}</li>
+                <li>{t("postingTip3")}</li>
+                <li>{t("postingTip4")}</li>
               </ul>
             </div>
           </div>
