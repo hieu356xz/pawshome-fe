@@ -531,7 +531,8 @@
     "next": "Tiếp",
     "unknown": "Không xác định",
     "showing": "Đang hiển thị",
-    "back": "Quay lại"
+    "back": "Quay lại",
+    "of": "trên tổng số"
   },
   "PetDetail": {
     "backToList": "Quay lại danh sách",

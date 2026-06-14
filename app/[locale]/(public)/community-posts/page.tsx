@@ -230,7 +230,13 @@ export default function CommunityPostsPage() {
             <div className="flex items-center justify-between">
               <p className="text-sm text-muted-foreground">
                 {plT("showing")}{" "}
-                <span className="font-bold text-foreground">{totalItems}</span>{" "}
+                <span className="font-bold text-foreground">
+                  {posts.length}
+                </span>
+                {" " + plT("of") + " "}
+                <span className="font-bold text-foreground">
+                  {totalItems}
+                </span>{" "}
                 {t("posts")}
               </p>
               <Button
@@ -272,19 +278,17 @@ export default function CommunityPostsPage() {
                   ))}
                 </div>
 
-                {/* Pagination */}
-                {totalPages > 1 && (
-                  <div className="pt-8 border-t border-border/20">
-                    <AppPagination
-                      currentPage={page}
-                      totalPages={totalPages}
-                      onPageChange={(p) => {
-                        setPage(p);
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }}
-                    />
-                  </div>
-                )}
+                {/* Pagination pushed to the bottom */}
+                <div className="pt-8 border-t border-border/20">
+                  <AppPagination
+                    currentPage={page}
+                    totalPages={totalPages}
+                    onPageChange={(p) => {
+                      setPage(p);
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                  />
+                </div>
               </div>
             ) : (
               <div className="h-[500px] bg-white rounded-3xl border border-dashed border-border flex flex-col items-center justify-center text-center p-8 space-y-4">

@@ -531,7 +531,8 @@
     "next": "Next",
     "unknown": "Unknown",
     "showing": "Showing",
-    "back": "Back"
+    "back": "Back",
+    "of": "of"
   },
   "PetDetail": {
     "backToList": "Back to List",

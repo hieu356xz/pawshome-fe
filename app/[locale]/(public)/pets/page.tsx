@@ -53,7 +53,7 @@ export default function PetListPage() {
   const [selectedStatus, setSelectedStatus] = useState<string>("all");
   const [selectedColor, setSelectedColor] = useState("");
   const [page, setPage] = useState(1);
-  const pageSize = 8; // Changed to 8 to fit 2 full rows of 4 cards
+  const pageSize = 8;
 
   const fetchPets = useCallback(async () => {
     setLoading(true);
@@ -142,7 +142,7 @@ export default function PetListPage() {
   const totalPages = Math.ceil(totalCount / pageSize);
 
   return (
-    <div className="bg-[#faf9f6]">
+    <div className="min-h-screen bg-[#faf9f6] pb-24">
       {/* Optimized Hero Section */}
       <PageHeader
         title={t("title")}
@@ -152,11 +152,11 @@ export default function PetListPage() {
         variant="primary"
       />
 
-      <div className="container mx-auto px-4 md:px-8 py-8 flex flex-col min-h-[800px]">
-        <div className="flex flex-col lg:flex-row gap-8 flex-1">
+      <div className="container mx-auto px-4 md:px-8 mt-12 flex flex-col min-h-[800px]">
+        <div className="flex flex-col lg:flex-row gap-12 flex-1">
           {/* Sidebar */}
-          <aside className="w-full lg:w-72 flex-shrink-0">
-            <div className="bg-white rounded-[1.5rem] border border-border/30 shadow-sm p-5 sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto custom-scrollbar">
+          <aside className="w-full lg:w-80 flex-shrink-0">
+            <div className="bg-white rounded-[1.5rem] border border-border/30 shadow-sm p-8 sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto custom-scrollbar">
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-border/40">
                 <div className="flex items-center gap-2.5">
                   <SlidersHorizontal className="h-4 w-4 text-primary" />
@@ -180,7 +180,7 @@ export default function PetListPage() {
                 )}
               </div>
 
-              <div className="space-y-5">
+              <div className="space-y-8">
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground/80 px-1 flex items-center gap-2">
                     <Hash className="h-3 w-3" />
@@ -327,6 +327,19 @@ export default function PetListPage() {
               </div>
             ) : pets.length > 0 ? (
               <div className="flex-1 flex flex-col justify-between">
+                <div className="flex items-center justify-between mb-8">
+                  <p className="text-sm text-muted-foreground">
+                    {t("showing")}{" "}
+                    <span className="font-bold text-foreground">
+                      {pets.length}
+                    </span>
+                    {" " + t("of") + " "}
+                    <span className="font-bold text-foreground">
+                      {totalCount}
+                    </span>{" "}
+                    {pt("pets").toLowerCase()}
+                  </p>
+                </div>
                 {/* Fixed min-height container for the grid to keep layout stable */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 mb-12">
                   {pets.map((pet, index) => (
