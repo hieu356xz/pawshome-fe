@@ -52,4 +52,20 @@ export const userService = {
   unbanUser: async (id: string): Promise<ApiResponse<void>> => {
     return apiClient.post(`/user/${id}/unban`);
   },
+
+  getProfile: async (): Promise<ApiResponse<User>> => {
+    return apiClient.get('/profile');
+  },
+
+  updateProfile: async (data: UpdateUserDto): Promise<ApiResponse<User>> => {
+    return apiClient.patch('/profile', data);
+  },
+
+  uploadAvatar: async (file: File): Promise<ApiResponse<{ avatarUrl: string }>> => {
+    const formData = new FormData();
+    formData.append('avatar', file);
+    return apiClient.post('/profile/avatar', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+  },
 };

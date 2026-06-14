@@ -21,7 +21,10 @@
   --color-card-foreground: #2c1e1a;
   --color-popover: #ffffff;
   --color-popover-foreground: #2c1e1a;
-  
+
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #ffffff;
+
   --font-serif: var(--font-playfair), serif;
   --font-sans: var(--font-lato), sans-serif;
 
@@ -37,7 +40,12 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-serif font-bold;
   }
 }
@@ -84,4 +92,4 @@
 
 .blog-content a {
   @apply text-primary font-bold underline decoration-primary/30 hover:decoration-primary transition-all;
-}
+}
