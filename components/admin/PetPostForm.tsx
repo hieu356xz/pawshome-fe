@@ -61,7 +61,7 @@ export function PetPostForm({ initialData, isEdit = false }: PetPostFormProps) {
     }
   };
 
-  const handleRemoveImage = async (imageId: number) => {
+  const handleRemoveImage = async (imageId: string) => {
     if (!initialData?.id) return;
     try {
       await petPostService.deleteImage(initialData.id, imageId);

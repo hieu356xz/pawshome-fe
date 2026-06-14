@@ -56,7 +56,7 @@ export const petPostService = {
     });
   },
 
-  deleteImage: async (postId: string | number, imageId: number): Promise<ApiResponse<void>> => {
+  deleteImage: async (postId: string | number, imageId: string | number): Promise<ApiResponse<void>> => {
     return apiClient.delete(`/pet-posts/${postId}/images/${imageId}`);
   },
 
@@ -65,15 +65,15 @@ export const petPostService = {
     return apiClient.get(`/pet-posts/${postId}/comments`);
   },
 
-  addComment: async (postId: number | string, content: string, parentId?: number): Promise<ApiResponse<Comment>> => {
+  addComment: async (postId: number | string, content: string, parentId?: string | number): Promise<ApiResponse<Comment>> => {
     return apiClient.post(`/pet-posts/${postId}/comments`, { content, parentId });
   },
 
-  updateComment: async (postId: number | string, commentId: number, content: string): Promise<ApiResponse<Comment>> => {
+  updateComment: async (postId: number | string, commentId: string | number, content: string): Promise<ApiResponse<Comment>> => {
     return apiClient.put(`/pet-posts/${postId}/comments/${commentId}`, { content });
   },
 
-  deleteComment: async (postId: number | string, commentId: number): Promise<ApiResponse<void>> => {
+  deleteComment: async (postId: number | string, commentId: string | number): Promise<ApiResponse<void>> => {
     return apiClient.delete(`/pet-posts/${postId}/comments/${commentId}`);
   },
 };

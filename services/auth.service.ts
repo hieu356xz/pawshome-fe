@@ -4,7 +4,7 @@ import { ApiResponse } from "@/types/common";
 
 export const authService = {
   login: async (data: LoginDto): Promise<ApiResponse<AuthResponse>> => {
-    const response = await apiClient.post("/auth/login", data, {
+    const response = await apiClient.post<any, ApiResponse<AuthResponse>>("/auth/login", data, {
       skipToast: true,
     });
     if (response.data.tokens?.accessToken) {
@@ -18,7 +18,7 @@ export const authService = {
   },
 
   logout: async (): Promise<ApiResponse<void>> => {
-    const response = await apiClient.post("/auth/logout");
+    const response = await apiClient.post<any, ApiResponse<void>>("/auth/logout");
     localStorage.removeItem("access_token");
     return response;
   },
