@@ -2,7 +2,13 @@
 
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/lib/navigation";
-import { User as UserIcon, LogOut, Settings, UserCircle, ShieldCheck } from "lucide-react";
+import {
+  User as UserIcon,
+  LogOut,
+  Settings,
+  UserCircle,
+  ShieldCheck,
+} from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { useAuth } from "@/providers/AuthContext";
 import { cn } from "@/lib/utils";
@@ -15,7 +21,11 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 
-export default function UserMenu() {
+export default function UserMenu({
+  showAdminLink = true,
+}: {
+  showAdminLink?: boolean;
+}) {
   const t = useTranslations("Navbar");
   const router = useRouter();
   const { user, logout, isLoading } = useAuth();
@@ -59,43 +69,59 @@ export default function UserMenu() {
               </span>
             </div>
           </DropdownMenuTrigger>
+
           <DropdownMenuContent
             align="end"
             className="w-56 p-2 bg-background border-border">
-            <div className="px-2 py-1.5 text-xs text-muted-foreground font-medium uppercase tracking-wider">
-              {user.email}
+            <div className="px-3 py-3 mb-1">
+              <p className="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">
+                {t("myAccount")}
+              </p>
+              <p className="text-sm font-bold text-gray-900">
+                {user?.fullName}
+              </p>
+              <p className="text-xs text-gray-500 truncate mt-0.5">
+                {user?.email}
+              </p>
             </div>
+
+            <DropdownMenuSeparator />
             <DropdownMenuItem className="p-0 cursor-pointer">
-              <Link href="/profile" className="flex items-center gap-2 px-3 py-2.5 w-full outline-none transition-colors">
+              <Link
+                href="/profile"
+                className="flex items-center gap-2 px-3 py-2.5 w-full outline-none transition-colors">
                 <UserIcon className="h-4 w-4" />
                 <span className="text-sm font-medium">{t("profile")}</span>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="p-0 cursor-pointer">
-              <Link href="/settings" className="flex items-center gap-2 px-3 py-2.5 w-full outline-none transition-colors">
+              <Link
+                href="/settings"
+                className="flex items-center gap-2 px-3 py-2.5 w-full outline-none transition-colors">
                 <Settings className="h-4 w-4" />
                 <span className="text-sm font-medium">{t("settings")}</span>
               </Link>
             </DropdownMenuItem>
 
-            {user && hasAnyRole(user, ["admin", "manager", "staff"]) && (
-              <DropdownMenuItem className="p-0 cursor-pointer">
-                <Link
-                  href="/admin"
-                  className="flex items-center gap-2 px-3 py-2.5 w-full outline-none transition-colors text-orange-600 focus:bg-orange-50">
-                  <ShieldCheck className="h-4 w-4" />
-                  <span className="text-sm font-bold">
-                    {t("adminDashboard")}
-                  </span>
-                </Link>
-              </DropdownMenuItem>
-            )}
+            {showAdminLink &&
+              user &&
+              hasAnyRole(user, ["admin", "manager", "staff"]) && (
+                <DropdownMenuItem className="p-0 cursor-pointer">
+                  <Link
+                    href="/admin"
+                    className="flex items-center gap-2 px-3 py-2.5 w-full outline-none transition-colors text-orange-600 focus:bg-orange-50">
+                    <ShieldCheck className="h-4 w-4" />
+                    <span className="text-sm font-bold">
+                      {t("adminDashboard")}
+                    </span>
+                  </Link>
+                </DropdownMenuItem>
+              )}
 
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={handleLogout}
-              className="flex items-center gap-2 px-3 py-2.5 cursor-pointer text-destructive focus:text-destructive focus:bg-destructive/10 transition-colors"
-            >
+              className="flex items-center gap-2 px-3 py-2.5 cursor-pointer text-destructive focus:text-destructive focus:bg-destructive/10 transition-colors">
               <LogOut className="h-4 w-4" />
               <span className="text-sm font-medium">{t("logout")}</span>
             </DropdownMenuItem>

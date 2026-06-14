@@ -12,7 +12,8 @@
     "settings": "Settings",
     "adminDashboard": "Admin Dashboard",
     "search": "Search",
-    "donate": "Donate"
+    "donate": "Donate",
+    "myAccount": "My Account"
   },
   "Hero": {
     "badge": "Established & Trusted",

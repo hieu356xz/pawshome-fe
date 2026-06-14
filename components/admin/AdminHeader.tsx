@@ -3,7 +3,7 @@
 import { useTranslations, useLocale } from "next-intl";
 import { Bell, Search, Languages } from "lucide-react";
 import { usePathname, useRouter } from "@/lib/navigation";
-import { AdminUserMenu } from "./AdminUserMenu";
+import UserMenu from "../layout/UserMenu";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -66,9 +66,7 @@ export function AdminHeader() {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <div className="h-10 w-[1px] bg-gray-100 mx-2"></div>
-
-        <AdminUserMenu />
+        <UserMenu showAdminLink={false} />
       </div>
     </header>
   );
