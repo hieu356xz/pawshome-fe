@@ -764,5 +764,33 @@
     "deactivateDesc": "Tạm thời vô hiệu hóa hoặc xóa tài khoản của bạn. Điều này sẽ gỡ bỏ các bài đăng cộng đồng của bạn khỏi danh sách công khai và thu hồi quyền truy cập trang quản trị.",
     "deactivateButton": "Vô hiệu hóa",
     "deactivateAdminNotice": "Vô hiệu hóa tài khoản yêu cầu sự xác minh của quản trị viên."
+  },
+  "MedicalRecord": {
+    "title": "Hồ sơ y tế",
+    "manageDesc": "Quản lý lịch sử tiêm phòng, điều trị và thăm khám của thú cưng.",
+    "addRecord": "Thêm bệnh án",
+    "editRecord": "Chỉnh sửa bệnh án",
+    "deleteRecord": "Xóa bệnh án",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa bệnh án này không? Thao tác này không thể hoàn tác.",
+    "noRecords": "Chưa có hồ sơ y tế nào cho thú cưng này.",
+    "recordTitle": "Tiêu đề bệnh án",
+    "recordType": "Loại bệnh án",
+    "recordDate": "Ngày khám",
+    "nextDueDate": "Hẹn tái khám",
+    "cost": "Chi phí",
+    "currency": "Tiền tệ",
+    "veterinarian": "Bác sĩ thú y",
+    "selectVeterinarian": "Chọn bác sĩ thú y...",
+    "diagnosis": "Chẩn đoán",
+    "treatment": "Điều trị",
+    "notes": "Ghi chú thêm",
+    "upcoming": "Lịch hẹn sắp tới",
+    "Types": {
+      "vaccination": "Tiêm phòng",
+      "medication": "Dùng thuốc",
+      "checkup": "Khám sức khỏe",
+      "surgery": "Phẫu thuật",
+      "other": "Khác"
+    }
   }
 }
