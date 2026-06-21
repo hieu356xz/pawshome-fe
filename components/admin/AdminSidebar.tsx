@@ -8,12 +8,10 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/providers/AuthContext";
 import { hasPermission } from "@/lib/permissions";
 import {
-  LayoutDashboard,
   Users,
   ShieldCheck,
   Key,
   PawPrint,
-  Settings,
   LogOut,
   Home,
   FileText,

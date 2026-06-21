@@ -7,14 +7,12 @@ import {
   Camera,
   X,
   Loader2,
-  AlertCircle,
   PawPrint,
   MessageSquare,
   ImageIcon,
   Sparkles,
   SlidersHorizontal,
   MapPin,
-  Filter,
 } from "lucide-react";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { AppPagination } from "@/components/shared/AppPagination";
@@ -28,7 +26,6 @@ import { petPostService } from "@/services/pet-post.service";
 import { speciesService } from "@/services/species.service";
 import { breedService } from "@/services/breed.service";
 import {
-  Pet,
   PetSearchResult,
   Species,
   Breed,
@@ -36,7 +33,7 @@ import {
   PetAgeGroup,
   AdoptionStatus,
 } from "@/types/pet";
-import { PetPost, PostSearchResult, PostType, PostStatus } from "@/types/post";
+import { PostSearchResult, PostType, PostStatus } from "@/types/post";
 
 enum SearchTarget {
   PETS = "pets",
