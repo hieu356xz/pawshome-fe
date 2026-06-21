@@ -27,6 +27,14 @@ export const petService = {
     return apiClient.post('/pets/search', data);
   },
 
+  detectSpecies: async (file: File): Promise<ApiResponse<{ speciesId: number | null; name: string | null }>> => {
+    const formData = new FormData();
+    formData.append('image', file);
+    return apiClient.post('/pets/detect-species', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+  },
+
   // Management
   createPet: async (data: any): Promise<ApiResponse<Pet>> => {
     return apiClient.post('/pets', data);

@@ -669,6 +669,7 @@
     "noResultsDesc": "Try changing your keywords or use a clearer image.",
     "resultsFound": "Found {count} results",
     "clearImage": "Clear image",
+    "selectedImage": "Selected image",
     "textAndImage": "Combined text and image search"
   },
   "Donate": {

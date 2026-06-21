@@ -669,6 +669,7 @@
     "noResultsDesc": "Hãy thử thay đổi từ khóa hoặc sử dụng một hình ảnh khác rõ nét hơn.",
     "resultsFound": "Tìm thấy {count} kết quả",
     "clearImage": "Xóa ảnh",
+    "selectedImage": "Hình ảnh tìm kiếm",
     "textAndImage": "Kết hợp văn bản và hình ảnh"
   },
   "Donate": {
